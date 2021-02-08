@@ -11,4 +11,20 @@ class Unit extends Model
     use HasFactory, SoftDeletes;
 
     protected $primaryKey = "unit_id";
+
+    /**
+     * @var mixed
+     */
+    public $display_sign;
+    /**
+     * @var mixed
+     */
+    public $display_name;
+
+    protected $fillable = [
+        'display_name',
+        'display_sign'
+    ];
+
+    protected $hidden = ['deleted_at', 'created_at', 'updated_at'];
 }
