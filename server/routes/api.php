@@ -73,7 +73,7 @@ Route::name('accounts')->prefix('accounts')->group(function() {
     // Update Employees
     Route::name('.update')->put('{id}', [AccountController::class, 'update']);
 
-    // Set Permissions Employees
+    // Set Permission Employees
     Route::name('.updatePermissions')->patch('{id}/permissions', [AccountController::class, 'updateAccountPermissions']);
 
     // Delete Employees
