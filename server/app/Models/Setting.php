@@ -10,9 +10,8 @@ class Setting extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public $key;
-    public $value;
-    public $setting_name;
+    protected $primaryKey = 'key';
+    public $incrementing = false;
 
     protected $fillable = ['key', 'value', 'setting_name'];
 
