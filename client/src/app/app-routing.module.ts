@@ -7,14 +7,18 @@ import { HomeComponent } from './pages/home/home.component';
 
 const ROUTES: Routes = [
   {
-    path: "",
-    component: HomeComponent
+    path: "_auth",
+    loadChildren: () => import('../_auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: "examination",
+    loadChildren: () => import('./examination/examination.module').then(m => m.ExaminationModule)
   },
   {
     path: "demo",
     component: DemoComponent
   }
-]
+];
 
 @NgModule({
   declarations: [],
