@@ -55,7 +55,7 @@ class SettingController extends Controller
         return response()->json($entity, JsonResponse::HTTP_CREATED);
     }
 
-    public function update($key, UpdateSettingRequest $request) {
+    public function update($key, UpdateSettingRequest $request): JsonResponse {
         $entity = $this->settingRepository->update($key ,[
             'key' => $request->post('key'),
             'value' => $request->post('value'),
