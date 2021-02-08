@@ -6,8 +6,8 @@ namespace App\Http\Responses\Common;
 
 class RequestErrorDetails
 {
-    private $message;
-    private $errors;
+    public $message;
+    public $errors;
 
     public function __construct($message = "", $errors = [])
     {
