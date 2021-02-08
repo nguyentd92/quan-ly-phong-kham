@@ -4,6 +4,7 @@
 namespace App\Http\Requests\Common;
 
 
+use App\Http\Responses\Common\RequestErrorDetails;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -16,9 +17,6 @@ class ApiRequest extends FormRequest
     {
         $errors = (new ValidationException($validator))->errors();
         throw new HttpResponseException(response()->json(
-            [
-                'error' => $errors,
-                'status_code' => 422,
-            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
+            new RequestErrorDetails("Validation Errors", $errors), JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
     }
 }
