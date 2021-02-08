@@ -12,8 +12,9 @@ class Setting extends Model
 
     public $key;
     public $value;
+    public $setting_name;
 
-    protected $fillable = ['key', 'value'];
+    protected $fillable = ['key', 'value', 'setting_name'];
 
     protected $hidden = ['deleted_at'];
 }
