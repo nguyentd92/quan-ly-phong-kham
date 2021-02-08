@@ -41,7 +41,7 @@ abstract class AbstractEloquentBaseRepository implements BaseRepositoryInterface
      */
     function getSingle($id)
     {
-        return $this->model->findOrFail($id);
+        return $this->model->find($id);
     }
 
     /**
@@ -63,6 +63,7 @@ abstract class AbstractEloquentBaseRepository implements BaseRepositoryInterface
     function update($id, $attributes)
     {
         $result = $this->getSingle($id);
+
         if ($result) {
             $result->update($attributes);
             return $result;
@@ -80,6 +81,7 @@ abstract class AbstractEloquentBaseRepository implements BaseRepositoryInterface
     function delete($id)
     {
         $result = $this->getSingle($id);
+
         if ($result) {
             $result->delete();
 
