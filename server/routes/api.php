@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiControllers\UnitController;
 use App\Http\Controllers\ApiControllers\AccountController;
 use App\Http\Controllers\ApiControllers\SettingController;
 use App\Http\Controllers\ApiControllers\MedicineController;
+use App\Http\Controllers\ApiControllers\SymptomController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -137,4 +138,19 @@ Route::name('storage')->prefix('storage')->group(function() {
         // Get Medicine Details
         Route::name('.details')->put('{id}', [MedicineController::class, 'getDetails']);
     });
+});
+
+// Symptoms Routes
+Route::name('symptoms')->prefix('symptoms')->group(function() {
+    // Create symptom
+    Route::name('.store')->post('/', [SymptomController::class, 'store']);
+
+    // List symptom
+    Route::name('.list')->get('/', [SymptomController::class, 'getAll']);
+
+    // Update symptom
+    Route::name('.update')->put('{id}', [SymptomController::class, 'update']);
+
+    // Delete symptom
+    Route::name('.delete')->delete('{id}', [SymptomController::class, 'delete']);
 });
