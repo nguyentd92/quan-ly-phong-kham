@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ApiControllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\CreateSettingRequest;
 use App\Http\Requests\Settings\UpdateSettingRequest;
+use App\Http\Responses\Common\RequestErrorDetails;
 use App\Repositories\Contracts\SettingRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -35,8 +36,18 @@ class SettingController extends Controller
     }
 
     public function store(CreateSettingRequest $request) {
+        // Check if setting key is existed, throw error
+        $key = $request->post('key');
+
+        $current = $this->settingRepository->getSingle($key);
+
+        if($current) {
+            return response()->json(new RequestErrorDetails("Setting with key: $key is already existed"), JsonResponse::HTTP_CONFLICT);
+        }
+
+        // Store Entity Into DB
         $entity = $this->settingRepository->store([
-            'key' => $request->post('key'),
+            'key' => $key,
             'value' => $request->post('value'),
             'setting_name' => $request->post('display_name')
         ]);
