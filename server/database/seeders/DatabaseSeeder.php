@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\Account::factory(10)->create();
         $this->call([
+            SettingSeeder::class,
             AccountSeeder::class,
             UnitSeeder::class,
             MedicationSeeder::class,
