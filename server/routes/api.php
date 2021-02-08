@@ -85,6 +85,9 @@ Route::name('units')->prefix('units')->group(function() {
     // List Units
     Route::name('.list')->get('/', [UnitController::class, 'getList']);
 
+    // Unit Details
+    Route::name('.details')->get('{id}', [UnitController::class, 'getSingle']);
+
     // Create Unit
     Route::name('.create')->post('/', [UnitController::class, 'store']);
 
