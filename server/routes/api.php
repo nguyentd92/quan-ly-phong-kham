@@ -17,11 +17,11 @@ use App\Http\Controllers\ApiControllers\MedicineController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('_auth:api')->get('user', function (Request $request) {
     return $request->user();
 });
 
-Route::name('auth')->prefix('/auth')->group(function() {
+Route::name('_auth')->prefix('_auth')->group(function() {
     //
     Route::name('.login')->post('login', function() {
         return "Login";
@@ -34,7 +34,7 @@ Route::name('auth')->prefix('/auth')->group(function() {
 });
 
 // Examination Routes
-Route::name('examination')->prefix('/examination')->group(function() {
+Route::name('examination')->prefix('examination')->group(function() {
 
     Route::name('.list')->get('/', function(Request $request) {
         return response()->json($request);
