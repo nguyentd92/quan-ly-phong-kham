@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             AccountSeeder::class,
             UnitSeeder::class,
             MedicationSeeder::class,
-            MedicineSeeder::class
+            MedicineSeeder::class,
+            SymptomSeeder::class
         ]);
     }
 }
