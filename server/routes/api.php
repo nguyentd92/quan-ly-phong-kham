@@ -34,8 +34,8 @@ Route::name('_auth')->prefix('_auth')->group(function() {
     });
 });
 
-// Examination Routes
-Route::name('examination')->prefix('examination')->group(function() {
+// Prescriptions Routes
+Route::name('prescriptions')->prefix('prescriptions')->group(function() {
 
     Route::name('.list')->get('/', function(Request $request) {
         return response()->json($request);
