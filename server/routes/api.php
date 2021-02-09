@@ -66,7 +66,7 @@ Route::name('accounts')->prefix('accounts')->group(function() {
     Route::name('.details')->get('{id}', [AccountController::class, 'getById']);
 
     // Create Account
-    Route::name('.create')->post('/', [AccountController::class, 'store']);
+    Route::name('.create')->post('/', [AccountController::class, 'create']);
 
     // Reset Password
     Route::name('.resetPassword')->post('{id}/reset-password', [AccountController::class, 'resetPassword']);

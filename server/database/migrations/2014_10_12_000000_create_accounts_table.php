@@ -16,11 +16,11 @@ class CreateAccountsTable extends Migration
     {
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->id('account_id');
-            $table->string('f_name');
-            $table->string('l_name')->nullable();
-            $table->string('m_name')->nullable();
-            $table->string('pre_name')->nullable();
-            $table->string('phone')->nullable();
+            $table->string('f_name', 50);
+            $table->string('l_name', 50)->nullable();
+            $table->string('m_name', 50)->nullable();
+            $table->string('pre_name', 50)->nullable();
+            $table->string('phone',20)->nullable();
             $table->string('address')->nullable();
 
             $table->string('email')->unique();

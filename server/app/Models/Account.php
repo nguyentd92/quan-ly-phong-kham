@@ -12,13 +12,20 @@ class Account extends Authenticatable
 {
     use HasFactory, Notifiable, SoftDeletes;
 
+    protected $primaryKey = "account_id";
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name',
+        'f_name',
+        'l_name',
+        'm_name',
+        'pre_name',
+        'phone_name',
+        'address_name',
         'email',
         'password',
     ];
