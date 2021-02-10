@@ -7,6 +7,10 @@ use App\Http\Controllers\ApiControllers\AccountController;
 use App\Http\Controllers\ApiControllers\SettingController;
 use App\Http\Controllers\ApiControllers\MedicineController;
 use App\Http\Controllers\ApiControllers\SymptomController;
+use App\Http\Controllers\ApiControllers\AuthController;
+
+use App\Enums\Permissions\AccountPermissions;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,67 +26,73 @@ Route::middleware('_auth:api')->get('user', function (Request $request) {
     return $request->user();
 });
 
-Route::name('_auth')->prefix('_auth')->group(function() {
+Route::name('_auth')->prefix('_auth')->group(function () {
     //
-    Route::name('.login')->post('login', function() {
-        return "Login";
-    });
+    Route::name('.login')->post('login', [AuthController::class, 'login']);
 
     // Forgot Password
-    Route::name('.forgotPassword')->post('forgot-password', function(Request $request) {
+    Route::name('.forgotPassword')->post('forgot-password', function (Request $request) {
         return response()->json($request);
     });
 });
 
 // Prescriptions Routes
-Route::name('prescriptions')->prefix('prescriptions')->group(function() {
+Route::name('prescriptions')->prefix('prescriptions')->group(function () {
 
-    Route::name('.list')->get('/', function(Request $request) {
+    Route::name('.list')->get('/', function (Request $request) {
         return response()->json($request);
     });
 
-    Route::name('.store')->post('store', function() {
+    Route::name('.store')->post('store', function () {
         return response()->json("Stored");
     });
 
-    Route::name('.delete')->delete('{id}', function(String $id) {
+    Route::name('.delete')->delete('{id}', function (string $id) {
         return response()->json([
-            'id'=>$id
+            'id' => $id
         ]);
     });
 
-    Route::name('.bill')->get('{id}/bill', function(String $id) {
+    Route::name('.bill')->get('{id}/bill', function (string $id) {
         return $id;
     });
 });
 
 
 // Accounts Management Routes
-Route::name('accounts')->prefix('accounts')->group(function() {
-    // List Accounts
-    Route::name('.list')->get('/', [AccountController::class, 'getList']);
+Route::name('accounts')
+    ->middleware('_auth:api')
+    ->prefix('accounts')->group(function () {
+        // List Accounts
+        Route::name('.list')
+            ->middleware('can:' . AccountPermissions::GET_ACCOUNT)
+            ->get('/', [AccountController::class, 'getList']);
 
-    // Get Employee Details
-    Route::name('.details')->get('{id}', [AccountController::class, 'getById']);
+        // Get Employee Details
+        Route::name('.details')
+            ->middleware('can:' . AccountPermissions::GET_ACCOUNT)
+            ->get('{id}', [AccountController::class, 'getById']);
 
-    // Create Account
-    Route::name('.create')->post('/', [AccountController::class, 'create']);
+        // Create Account
+        Route::name('.create')
+            ->middleware('can:' . AccountPermissions::CREATE_ACCOUNT)
+            ->post('/', [AccountController::class, 'create']);
 
-    // Reset Password
-    Route::name('.resetPassword')->post('{id}/reset-password', [AccountController::class, 'resetPassword']);
+        // Reset Password
+        Route::name('.resetPassword')->post('{id}/reset-password', [AccountController::class, 'resetPassword']);
 
-    // Update Employees
-    Route::name('.update')->put('{id}', [AccountController::class, 'update']);
+        // Update Employees
+        Route::name('.update')->put('{id}', [AccountController::class, 'update']);
 
-    // Set Permission Employees
-    Route::name('.updatePermissions')->patch('{id}/permissions', [AccountController::class, 'updateAccountPermissions']);
+        // Set Permission Employees
+        Route::name('.updatePermissions')->patch('{id}/permissions', [AccountController::class, 'updateAccountPermissions']);
 
-    // Delete Employees
-    Route::name('.delete')->delete('{id}', [AccountController::class, 'delete']);
-});
+        // Delete Employees
+        Route::name('.delete')->delete('{id}', [AccountController::class, 'delete']);
+    });
 
 // Units Management Routes
-Route::name('units')->prefix('units')->group(function() {
+Route::name('units')->prefix('units')->group(function () {
     // List Units
     Route::name('.list')->get('/', [UnitController::class, 'getList']);
 
@@ -100,7 +110,7 @@ Route::name('units')->prefix('units')->group(function() {
 });
 
 // Application Settings Routes
-Route::name('settings')->prefix('settings')->group(function() {
+Route::name('settings')->prefix('settings')->group(function () {
     // Get List Settings
     Route::name('.list')->get('/', [SettingController::class, 'list']);
 
@@ -112,7 +122,7 @@ Route::name('settings')->prefix('settings')->group(function() {
 });
 
 // Medicines Management Routes
-Route::name('medicines')->prefix('medicines')->group(function() {
+Route::name('medicines')->prefix('medicines')->group(function () {
     // Get List Settings
     Route::name('.list')->get('/', [MedicineController::class, 'list']);
 
@@ -127,8 +137,8 @@ Route::name('medicines')->prefix('medicines')->group(function() {
 });
 
 // Storage Management Routes
-Route::name('storage')->prefix('storage')->group(function() {
-    Route::name('.medicines')->prefix('medicines')->group(function() {
+Route::name('storage')->prefix('storage')->group(function () {
+    Route::name('.medicines')->prefix('medicines')->group(function () {
         // Import medicine
         Route::name('.import')->post('{medicineId}', [MedicineController::class, 'importMedicine']);
 
@@ -141,7 +151,7 @@ Route::name('storage')->prefix('storage')->group(function() {
 });
 
 // Symptoms Routes
-Route::name('symptoms')->prefix('symptoms')->group(function() {
+Route::name('symptoms')->prefix('symptoms')->group(function () {
     // Create symptom
     Route::name('.store')->post('/', [SymptomController::class, 'store']);
 

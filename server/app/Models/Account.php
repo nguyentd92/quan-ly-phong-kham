@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Account extends Authenticatable
+class Account extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable, SoftDeletes;
 
@@ -28,6 +29,7 @@ class Account extends Authenticatable
         'address_name',
         'email',
         'password',
+        'permissions'
     ];
 
     /**
@@ -47,5 +49,32 @@ class Account extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'permissions' => 'json'
     ];
+
+    protected function hasPermission($permissionKey): bool {
+        return isset($this->permissions[$permissionKey]) && $this->permissions[$permissionKey];
+    }
+
+    public function hasAccess(array $permissionKeys): bool {
+        if($this->permissions == "*")
+            return true;
+
+        foreach ($permissionKeys as $permissionKey) {
+            if($this->hasPermission($permissionKey))
+                return true;
+        }
+
+        return false;
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }

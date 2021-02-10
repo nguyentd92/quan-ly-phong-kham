@@ -114,6 +114,9 @@
       <excludeFolder url="file://$MODULE_DIR$/server/vendor/laravel/tinker" />
       <excludeFolder url="file://$MODULE_DIR$/server/vendor/sebastian/environment" />
       <excludeFolder url="file://$MODULE_DIR$/server/vendor/sebastian/diff" />
+      <excludeFolder url="file://$MODULE_DIR$/server/vendor/tymon/jwt-auth" />
+      <excludeFolder url="file://$MODULE_DIR$/server/vendor/namshi/jose" />
+      <excludeFolder url="file://$MODULE_DIR$/server/vendor/lcobucci/jwt" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
