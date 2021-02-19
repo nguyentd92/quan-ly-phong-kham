@@ -1,0 +1,65 @@
+<div class="send-request">
+  <nz-space>
+    <nz-space-item>
+      <button
+        (click)="openCreatePrescriptionDrawer()"
+        nz-button
+        nzType="primary"
+        [nzLoading]="isRequesting">
+        Tạo phiếu khám
+      </button>
+    </nz-space-item>
+
+    <nz-space-item>
+      <button
+        (click)="onOpenSearchPrescriptionModal()"
+        nz-button
+        nzType="primary"
+        [nzLoading]="isRequesting">
+        Tìm kiếm
+      </button>
+    </nz-space-item>
+  </nz-space>
+</div>
+<nz-table
+  #rowSelectionTable
+  nzShowPagination
+  nzShowSizeChanger
+  [nzData]="listOfData"
+  (nzCurrentPageDataChange)="onCurrentPageDataChange($event)"
+>
+  <thead>
+  <tr>
+    <th>Họ tên</th>
+    <th>Tuổi</th>
+    <th>Điện thoại</th>
+    <th>Địa chỉ</th>
+    <th>Chuẩn đoán</th>
+    <th>Ngày khám</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of rowSelectionTable.data">
+    <td>{{ data.name }}</td>
+    <td>{{ data.age }}</td>
+    <td>0935.418.749</td>
+    <td>{{ data.address }}</td>
+    <td>Sốt siêu vi</td>
+    <td>25/2/2021 </td>
+    <td><button nz-button nz-popover
+                [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover">
+      Tác vụ
+    </button></td>
+  </tr>
+  </tbody>
+</nz-table>
+
+<ng-template #contentTemplate>
+  <div>
+    <ul nz-menu>
+      <li nz-menu-item>Menu 1</li>
+      <li nz-menu-item>Menu 2</li>
+    </ul>
+  </div>
+</ng-template>

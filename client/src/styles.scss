@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+
+nz-table {
+  margin: .5rem;
+
+  th {
+    padding: 1rem .5rem !important;
+  }
+
+  tr {
+    &:nth-child(odd) {
+      background-color: #FFFFDD;
+    }
+
+    &:hover {
+      background-color: #FFDDFF !important;
+
+      td {
+        background-color: #FFDDFF !important;
+      }
+    }
+  }
+
+  td {
+    padding: .5rem !important;
+  }
+}
+

@@ -2,7 +2,7 @@
 
 /***/ "CbUj":
 /*!**********************************************************************************!*\
-  !*** ./src/app/examination/pages/list-examination/list-examination.component.ts ***!
+  !*** ./src/app/prescription/pages/list-prescription/list-prescription.component.ts ***!
   \**********************************************************************************/
 /*! exports provided: ListExaminationComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -19,17 +19,17 @@ class ListExaminationComponent {
     }
 }
 ListExaminationComponent.ɵfac = function ListExaminationComponent_Factory(t) { return new (t || ListExaminationComponent)(); };
-ListExaminationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ListExaminationComponent, selectors: [["app-list-examination"]], decls: 2, vars: 0, template: function ListExaminationComponent_Template(rf, ctx) { if (rf & 1) {
+ListExaminationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ListExaminationComponent, selectors: [["app-list-prescription"]], decls: 2, vars: 0, template: function ListExaminationComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "list-examination works!");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "list-prescription works!");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJsaXN0LWV4YW1pbmF0aW9uLmNvbXBvbmVudC5zY3NzIn0= */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ListExaminationComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
-                selector: 'app-list-examination',
-                templateUrl: './list-examination.component.html',
-                styleUrls: ['./list-examination.component.scss']
+                selector: 'app-list-prescription',
+                templateUrl: './list-prescription.component.html',
+                styleUrls: ['./list-prescription.component.scss']
             }]
     }], function () { return []; }, null); })();
 
@@ -38,9 +38,9 @@ ListExaminationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵ�
 
 /***/ "QBcV":
 /*!***************************************************!*\
-  !*** ./src/app/examination/examination.module.ts ***!
+  !*** ./src/app/prescription/prescription.module.ts ***!
   \***************************************************/
-/*! exports provided: ExaminationModule */
+/*! exports provided: PrescriptionModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48,9 +48,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ExaminationModule", function() { return ExaminationModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _pages_create_examination_create_examination_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/create-examination/create-examination.component */ "nj6G");
-/* harmony import */ var _pages_bill_examination_bill_examination_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/bill-examination/bill-examination.component */ "lGF6");
-/* harmony import */ var _pages_list_examination_list_examination_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/list-examination/list-examination.component */ "CbUj");
+/* harmony import */ var _pages_create_examination_create_examination_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/create-prescription/create-prescription.component */ "nj6G");
+/* harmony import */ var _pages_bill_examination_bill_examination_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/bill-prescription/bill-prescription.component */ "lGF6");
+/* harmony import */ var _pages_list_examination_list_examination_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/list-prescription/list-prescription.component */ "CbUj");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "tyNb");
 
 
@@ -98,7 +98,7 @@ ExaminationModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
 
 /***/ "lGF6":
 /*!**********************************************************************************!*\
-  !*** ./src/app/examination/pages/bill-examination/bill-examination.component.ts ***!
+  !*** ./src/app/prescription/pages/bill-prescription/bill-prescription.component.ts ***!
   \**********************************************************************************/
 /*! exports provided: BillExaminationComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -115,17 +115,17 @@ class BillExaminationComponent {
     }
 }
 BillExaminationComponent.ɵfac = function BillExaminationComponent_Factory(t) { return new (t || BillExaminationComponent)(); };
-BillExaminationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: BillExaminationComponent, selectors: [["app-bill-examination"]], decls: 2, vars: 0, template: function BillExaminationComponent_Template(rf, ctx) { if (rf & 1) {
+BillExaminationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: BillExaminationComponent, selectors: [["app-bill-prescription"]], decls: 2, vars: 0, template: function BillExaminationComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "bill-examination works!");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "bill-prescription works!");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJiaWxsLWV4YW1pbmF0aW9uLmNvbXBvbmVudC5zY3NzIn0= */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](BillExaminationComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
-                selector: 'app-bill-examination',
-                templateUrl: './bill-examination.component.html',
-                styleUrls: ['./bill-examination.component.scss']
+                selector: 'app-bill-prescription',
+                templateUrl: './bill-prescription.component.html',
+                styleUrls: ['./bill-prescription.component.scss']
             }]
     }], function () { return []; }, null); })();
 
@@ -134,7 +134,7 @@ BillExaminationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵ�
 
 /***/ "nj6G":
 /*!**************************************************************************************!*\
-  !*** ./src/app/examination/pages/create-examination/create-examination.component.ts ***!
+  !*** ./src/app/prescription/pages/create-prescription/create-prescription.component.ts ***!
   \**************************************************************************************/
 /*! exports provided: CreateExaminationComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -151,17 +151,17 @@ class CreateExaminationComponent {
     }
 }
 CreateExaminationComponent.ɵfac = function CreateExaminationComponent_Factory(t) { return new (t || CreateExaminationComponent)(); };
-CreateExaminationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CreateExaminationComponent, selectors: [["app-create-examination"]], decls: 2, vars: 0, template: function CreateExaminationComponent_Template(rf, ctx) { if (rf & 1) {
+CreateExaminationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CreateExaminationComponent, selectors: [["app-create-prescription"]], decls: 2, vars: 0, template: function CreateExaminationComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "create-examination works!");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "create-prescription works!");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjcmVhdGUtZXhhbWluYXRpb24uY29tcG9uZW50LnNjc3MifQ== */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](CreateExaminationComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
-                selector: 'app-create-examination',
-                templateUrl: './create-examination.component.html',
-                styleUrls: ['./create-examination.component.scss']
+                selector: 'app-create-prescription',
+                templateUrl: './create-prescription.component.html',
+                styleUrls: ['./create-prescription.component.scss']
             }]
     }], function () { return []; }, null); })();
 
@@ -169,4 +169,4 @@ CreateExaminationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["�
 /***/ })
 
 }]);
-//# sourceMappingURL=examination-examination-module.js.map
+//# sourceMappingURL=prescription-prescription-module.js.map

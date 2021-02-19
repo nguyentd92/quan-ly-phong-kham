@@ -1,0 +1,38 @@
+<script src="search-prescription.component.ts"></script>
+<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label nzSpan="6" nzFor="name">Họ và tên</nz-form-label>
+        <nz-form-control>
+          <input nz-input placeholder="Từ 3 - 50 ký tự" formControlName="name"/>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label nzSpan="6">Ngày sinh</nz-form-label>
+        <nz-form-control>
+          <nz-date-picker nzPlaceHolder="DD/MM/YYYY" formControlName="dob" nzFormat="dd/MM/yyyy"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label nzSpan="6" nzFor="phone">Số điện thoại</nz-form-label>
+        <nz-form-control>
+          <input nz-input placeholder="Tối thiểu 3 chữ số cuối" formControlName="phone"/>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label nzSpan="6" nzFor="address">Địa chỉ</nz-form-label>
+        <nz-form-control>
+          <input nz-input placeholder="Số nhà, phường, TP/Huyện" formControlName="address"/>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+</form>

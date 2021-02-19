@@ -4,6 +4,8 @@ import {LoginComponent} from './pages/login/login.component';
 import {ForgotPasswordComponent} from './pages/forgot-password/forgot-password.component';
 import {RouterModule, Routes} from "@angular/router";
 import {AuthComponent} from './auth.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {CookieService} from "ngx-cookie-service";
 
 const AUTH_ROUTES: Routes = [
   {
@@ -26,7 +28,11 @@ const AUTH_ROUTES: Routes = [
   declarations: [LoginComponent, ForgotPasswordComponent, AuthComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild(AUTH_ROUTES)
+  ],
+  providers: [
+    CookieService
   ]
 })
 export class AuthModule {

@@ -1,22 +1,35 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { DemoComponent } from './pages/demo/demo.component';
-import { HomeComponent } from './pages/home/home.component';
+import {AppLayoutComponent} from "./shared/components/app-layout/app-layout.component";
 
 const ROUTES: Routes = [
-  {
-    path: "",
-    component: DemoComponent
-  },
   {
     path: "_auth",
     loadChildren: () => import('../_auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: "examination",
-    loadChildren: () => import('./examination/examination.module').then(m => m.ExaminationModule)
+    path: "",
+    component: AppLayoutComponent,
+    children: [
+      {
+        path: "",
+        component: DemoComponent
+      },
+      {
+        path: "kham-benh",
+        loadChildren: () => import('./prescription/prescription.module').then(m => m.PrescriptionModule)
+      },
+      {
+        path: "kho-thuoc",
+        loadChildren: () => import('./medicine-storage/medicine-storage.module').then(m => m.MedicineStorageModule)
+      },
+      {
+        path: "thong-ke",
+        loadChildren: () => import('./statistic/statistic.module').then(m => m.StatisticModule)
+      }
+    ]
   }
 ];
 

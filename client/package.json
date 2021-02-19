@@ -5,8 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build-dev": "nodemon -e ts,html,scss -w ./src -x 'ng build && gulp dist'",
-    "build-prod": "ng build --prod && gulp dist",
+    "build-dev": "nodemon -e ts,html,scss -w ./src -x 'ng build --deploy-url=client/ && gulp dist'",
+    "build-prod": "ng build --prod --deploy-url=client/ && gulp dist",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -24,6 +24,7 @@
     "bootstrap": "^4.6.0",
     "gulp": "^4.0.2",
     "ng-zorro-antd": "^11.1.0",
+    "ngx-cookie-service": "^11.0.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

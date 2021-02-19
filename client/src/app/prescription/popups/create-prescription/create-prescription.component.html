@@ -1,0 +1,352 @@
+<nz-form [formGroup]="createPrescriptionForm" nz-col nzGutter="20">
+  <div class="form-combine" nz-row formGroupName="patient">
+    <div class="form-combine__title">
+      Thông tin bệnh nhân
+    </div>
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">Họ và tên</nz-form-label>
+        <nz-form-control nzHasFeedback [nzSpan]="14"
+                         nzErrorTip="Tên phải hơn 3 ký tự">
+          <input nz-input
+                 name="maxlength"
+                 maxlength="50"
+                 minlength="3"
+                 placeholder="3-50 ký tự"
+                 formControlName="name"/>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">Ngày sinh</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <nz-date-picker nzShowToday="false" nzMax="" nzPlaceHolder="DD/MM/YYYY"
+                          nzFormat="dd/MM/yyyy" formControlName="dob"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">Giới tính</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <nz-radio-group formControlName="gender">
+            <label nz-radio [nzValue]="true">Nam</label>
+            <label nz-radio [nzValue]="false">Nữ</label>
+          </nz-radio-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">Người giám hộ</nz-form-label>
+        <nz-form-control nzHasFeedback [nzSpan]="14">
+          <input formControlName="guardian" nz-input name="maxlength" maxlength="6"/>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">Số điện thoại</nz-form-label>
+        <nz-form-control nzHasFeedback [nzSpan]="14">
+          <input formControlName="phone" nz-input name="maxlength" maxlength="6"/>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">Địa chỉ</nz-form-label>
+        <nz-form-control nzHasFeedback [nzSpan]="14" nzErrorTip="Tối thiểu 3 ký tự">
+          <input formControlName="address" nz-input name="maxlength" maxlength="50" minlength="3"/>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <div class="form-combine" nz-row>
+    <div class="form-combine__title">
+      Triệu chứng & Chuẩn đoán
+    </div>
+
+    <div nz-col nzSpan="24">
+      <div nz-col nzOffset="2">
+        <div nz-row nzOffset="3">
+          <label nz-col nzSpan="4" nz-checkbox>Ho</label>
+          <label nz-col nzSpan="4" nz-checkbox>Sốt</label>
+          <label nz-col nzSpan="4" nz-checkbox>Tiêu chảy</label>
+          <label nz-col nzSpan="4" nz-checkbox>Phát ban</label>
+        </div>
+
+        <nz-form-item style="margin-top: 1rem">
+          <textarea nz-input nz-col nzSpan="21" placeholder="Triệu chứng lâm sàng"
+                    [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+        </nz-form-item>
+
+        <nz-form-item nz-col style="margin-top: 1rem; flex-direction: column">
+          <nz-form-label>Chuẩn đoán bệnh</nz-form-label>
+
+          <nz-form-control nz-col nzSpan="21">
+            <textarea nz-input placeholder="Bệnh lý" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-combine" nz-row>
+    <div class="form-combine__title">
+      Kê toa thuốc
+    </div>
+
+    <div nz-col nzOffset="2" nzSpan="22" class="medicine-list">
+      <div class="medicine" *ngFor="let item of [].constructor(3); index as idx">
+        <div class="medicine__title">
+          {{ idx + 1 }}. Paracetamol 1g x 15v
+        </div>
+
+        <div class="medicine__take">
+          Sáng 1 sau khi ăn, Trưa 1 sau khi ăn, Tối 1 sau khi ăn
+        </div>
+
+        <div class="medicine__price">
+          {{ 70000 | currency: 'VND' }}
+        </div>
+
+        <button class="medicine__remove">
+          Xóa
+        </button>
+      </div>
+    </div>
+
+    <div nz-col nzOffset="2" nzSpan="20" style="margin-top: 1rem;">
+      <button
+        (click)="isFormMedicineCollapsed = !isFormMedicineCollapsed"
+        class="btn-add-medicine">
+        <span class="btn-add-medicine__icon">
+          <i nz-icon nzType="{{ isFormMedicineCollapsed ? 'plus' : 'minus' }}" nzTheme="outline"></i>
+        </span>
+
+        Thêm thuốc mới
+      </button>
+    </div>
+
+    <!--    Begin Form Add Medicine-->
+    <div class="add-medicine-form" [hidden]="isFormMedicineCollapsed" nz-col nzOffset="2" nzSpan="20">
+      <div nz-row>
+        <div nz-col nzSpan="16">
+          <nz-form-item nz-col>
+            <nz-form-label nz-col nzSpan="3">Tên thuốc</nz-form-label>
+
+            <nz-form-control nz-col nzSpan="13">
+              <nz-input-group nzSearch nzSize="default" [nzAddOnAfter]="suffixIconButton">
+                <input placeholder="Nhập để chọn tên thuốc" nz-input (input)="onChange($event)"
+                       [nzAutocomplete]="auto"/>
+              </nz-input-group>
+              <ng-template #suffixIconButton>
+                <button nz-button nzType="primary" nzSize="default" nzSearch>
+                  <i nz-icon nzType="search" nzTheme="outline"></i>
+                </button>
+              </ng-template>
+              <nz-autocomplete #auto>
+                <nz-auto-option class="global-search-item" *ngFor="let option of [].constructor(10)">
+                  Hello
+                </nz-auto-option>
+              </nz-autocomplete>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div nz-col nzSpan="8">
+          <nz-form-item>
+            <nz-form-label>Số ngày</nz-form-label>
+
+            <nz-form-control>
+              <nz-input-number nzPlaceHolder="Min 0.5" [nzMin]="0.5" [nzStep]="0.5"></nz-input-number>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <div class="medicine-take-container">
+        <div nz-row class="medicine-take">
+          <div nz-col nzSpan="2">
+            Sáng
+          </div>
+
+          <div nz-col nzSpan="1">
+            <label nz-checkbox></label>
+          </div>
+
+          <div nz-col nzSpan="3">
+            <nz-input-number class="medicine-take-amount" nzSize="small"
+                             [nzMin]="0"
+                             [nzMax]="5"
+                             [nzStep]="0.5"></nz-input-number>
+
+            viên
+          </div>
+
+          <div nz-col nzSpan="8">
+            <input nzSize="small" nz-input placeholder="* Lưu ý"/>
+          </div>
+        </div>
+
+        <div nz-row class="medicine-take">
+          <div nz-col nzSpan="2">
+            Trưa
+          </div>
+
+          <div nz-col nzSpan="1">
+            <label nz-checkbox></label>
+          </div>
+
+          <div nz-col nzSpan="3">
+            <nz-input-number class="medicine-take-amount" nzSize="small"
+                             [nzMin]="0"
+                             [nzMax]="5"
+                             [nzStep]="0.5"></nz-input-number>
+
+            viên
+          </div>
+
+          <div nz-col nzSpan="8">
+            <input nzSize="small" nz-input placeholder="* Lưu ý"/>
+          </div>
+        </div>
+
+        <div nz-row class="medicine-take">
+          <div nz-col nzSpan="2">
+            Chiều
+          </div>
+
+          <div nz-col nzSpan="1">
+            <label nz-checkbox></label>
+          </div>
+
+          <div nz-col nzSpan="3">
+            <nz-input-number class="medicine-take-amount" nzSize="small"
+                             [nzMin]="0"
+                             [nzMax]="5"
+                             [nzStep]="0.5"></nz-input-number>
+
+            viên
+          </div>
+
+          <div nz-col nzSpan="8">
+            <input nzSize="small" nz-input placeholder="* Lưu ý"/>
+          </div>
+        </div>
+
+        <div nz-row class="medicine-take">
+          <div nz-col nzSpan="2">
+            Tối
+          </div>
+
+          <div nz-col nzSpan="1">
+            <label nz-checkbox></label>
+          </div>
+
+          <div nz-col nzSpan="3">
+            <nz-input-number class="medicine-take-amount" nzSize="small"
+                             [nzMin]="0"
+                             [nzMax]="5"
+                             [nzStep]="0.5"></nz-input-number>
+
+            viên
+          </div>
+
+          <div nz-col nzSpan="8">
+            <input nzSize="small" nz-input placeholder="* Lưu ý"/>
+          </div>
+        </div>
+      </div>
+
+      <div nz-col nzSpan="24">
+        <div nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label nz-col nzSpan="5">Số lượng</nz-form-label>
+
+            <nz-form-control>
+              <nz-input-number [nzMin]="1" [nzStep]="1"></nz-input-number>
+              viên x
+              <nz-input-number [nzMin]="100" [nzStep]="100"></nz-input-number>
+
+              <button style="margin-left: .5rem" nz-button nzType="default" nzShape="circle">
+                <i nz-icon nzType="edit" nzTheme="outline"></i></button>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div nz-col nzSpan="12">
+          <div nz-col nzSpan="3"></div>
+        </div>
+      </div>
+
+      <div nz-col nzSpan="24">
+        <div nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label nz-col nzSpan="5">Thành tiền</nz-form-label>
+
+            <nz-form-control>
+              <nz-input-number [nzMin]="1" [nzStep]="1"></nz-input-number>
+
+              <button style="margin-left: .5rem" nz-button nzType="default" nzShape="circle">
+                <i nz-icon nzType="edit" nzTheme="outline"></i></button>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <div nz-col nzSpan="24">
+        <button nz-button nzType="primary" nzSize="small"> + Thêm vào toa thuốc</button>
+      </div>
+    </div>
+    <!--    Begin Form Add Medicine-->
+  </div>
+
+  <div class="form-combine" nz-row>
+    <div class="form-combine__title">
+      Hoàn tất phiếu khám bệnh
+    </div>
+
+    <div nz-col nzSpan="24">
+      <div nz-col nzOffset="2">
+        <nz-form-item nz-col style="flex-direction: column">
+          <nz-form-label>Tiền khám</nz-form-label>
+
+          <nz-form-control nz-col nzSpan="21">
+            <nz-input-number style="width: 200px" [nzMin]="0" [nzStep]="10000"></nz-input-number>
+
+            <button style="margin-left: .5rem" nz-button nzType="default" nzShape="circle">
+              <i nz-icon nzType="edit" nzTheme="outline"></i></button>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-col nzSpan="24">
+      <div nz-col nzOffset="2">
+        <nz-form-item nz-col style="flex-direction: column">
+          <nz-form-label>Lưu ý cho bệnh nhân</nz-form-label>
+
+          <nz-form-control nz-col nzSpan="21">
+            <textarea nz-input placeholder="..." [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-col nzOffset="2" nzSpan="20" style="padding-bottom: 1rem">
+      <nz-space>
+        <nz-space-item>
+          <button nz-button nzSize="large" nzType="primary" nzBlock>Lưu phiếu: {{ 300000 | currency: 'VND' }}</button>
+        </nz-space-item>
+
+        <nz-space-item>
+          <button nz-button nzSize="large" nzType="default" nzBlock>Lưu phiếu & In toa</button>
+        </nz-space-item>
+      </nz-space>
+    </div>
+  </div>
+
+
+  <pre>
+    {{ createPrescriptionForm.value | json }}
+  </pre>
