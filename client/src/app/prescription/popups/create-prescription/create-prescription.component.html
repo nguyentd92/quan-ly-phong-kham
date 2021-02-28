@@ -144,7 +144,7 @@
           {{ item.med_s_price | currency: "VND" }}
         </div>
 
-        <button class="medicine__remove">Xóa</button>
+        <button class="medicine__remove" (click)="onRemoveMedicine(idx)">Xóa</button>
       </div>
     </div>
     <!-- END PRES MEDICINE LIST -->

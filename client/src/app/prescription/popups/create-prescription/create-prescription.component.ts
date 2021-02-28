@@ -178,6 +178,10 @@ export class CreatePrescriptionComponent implements OnInit {
     this.addMedicineForm.enable();
   }
 
+  onRemoveMedicine(idx: number) {
+    this.presMedList.splice(idx, 1);
+  }
+
   onSelectMedicine(med: Medicine) {
     this.addMedicineForm.enable();
 
