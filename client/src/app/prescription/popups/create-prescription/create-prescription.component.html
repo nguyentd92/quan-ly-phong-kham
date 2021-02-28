@@ -132,7 +132,7 @@
     <div nz-col nzOffset="2" nzSpan="22" class="medicine-list">
       <div class="medicine" *ngFor="let item of presMedList; index as idx">
         <div class="medicine__title">
-          {{ idx + 1 }}.
+          <span class="medicine__no">{{ idx + 1 }}.</span>
           <span class="medicine__name">{{ item.med_title }}</span> __
           {{ item.med_amount_str }}
         </div>
@@ -148,6 +148,10 @@
         <button class="medicine__remove" (click)="onRemoveMedicine(idx)">
           Xóa
         </button>
+      </div>
+
+      <div class="medicine-list-total" *ngIf="presMedList.length">
+        {{ predMedTotal | vndCurrency }}
       </div>
     </div>
     <!-- END PRES MEDICINE LIST -->
@@ -475,7 +479,7 @@
       <nz-space>
         <nz-space-item>
           <button nz-button nzSize="large" nzType="primary" nzBlock>
-            Lưu phiếu: {{ 300000 | currency: "VND" }}
+            Lưu phiếu: {{ predMedTotal + createPrescriptionForm.value.pres_price | currency: "VND" }}
           </button>
         </nz-space-item>
 

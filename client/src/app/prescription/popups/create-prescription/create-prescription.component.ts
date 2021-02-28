@@ -7,6 +7,7 @@ import { DaySession } from 'src/app/shared/constants/day-session.constant';
 import { Medicine } from 'src/app/shared/models/medicine.model';
 import { VndCurrencyPipe } from 'src/app/shared/pipes/vnd-currency-pipe/vnd-currency.pipe';
 import { MedicinesService } from 'src/app/shared/services/states/medicines.service';
+import { StringUltility } from 'src/app/shared/ultilites/string.ultitity';
 import { PrescriptionService } from '../../prescription.service';
 import { CalculateMedicineResponse } from '../../responses/calculate-medicine.response';
 
@@ -75,14 +76,18 @@ export class CreatePrescriptionComponent implements OnInit {
     private vndCurrencyPipe: VndCurrencyPipe
   ) { }
 
-  daySessionVi(enKey: string) {
-    return DaySession.transToVi(enKey);
+  daySessionVi(enKey: string): string {
+    return StringUltility.upperFirstLetter(DaySession.transToVi(enKey));
   }
 
   get medicines$(): Observable<Medicine[]> {
     return this.medicinesService.medicines$.pipe(
       map(l => l.filter(i => i.name.toLocaleLowerCase().includes(this.medKeyword.toLocaleLowerCase())))
     );
+  }
+
+  get predMedTotal(): number {
+    return this.presMedList.reduce((t, c) => t + c.med_s_price, 0)
   }
 
   ngOnInit(): void {
