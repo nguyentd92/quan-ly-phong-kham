@@ -111,7 +111,9 @@ export class CreatePrescriptionComponent implements OnInit {
       pres_price: [0],
       medicationPrice: [0],
       billPrice: [0],
-      reExamTo: [null]
+      reExamTo: [null],
+
+      is_c_pres_price: false
     });
 
     // Cancel select medicine in form medicine
@@ -256,11 +258,17 @@ export class CreatePrescriptionComponent implements OnInit {
     this.addMedicineForm.patchValue({ is_c_s_price: !is_c_s_price })
   }
 
+  toggleChangePresPrice() {
+    const { is_c_pres_price } = this.createPrescriptionForm.value;
+    this.createPrescriptionForm.patchValue({
+      is_c_pres_price: !is_c_pres_price
+    });
+  }
+
   // Formatter
   formatterVnd = (value: string) => this.vndCurrencyPipe.transform(value);
-  parserVnd = (value: string) => value.replace(/\D/g, '');;
+  parserVnd = (value: string) => value.replace(/\D/g, '');
 }
 
 const medAnyTimeValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null =>
-  DaySession.listEn.every(t => !control.get(`c_${t}`).value) ? { medAnyTime: true } : null
-  ;
+  DaySession.listEn.every(t => !control.get(`c_${t}`).value) ? { medAnyTime: true } : null;
