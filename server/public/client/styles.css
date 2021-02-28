@@ -25305,5 +25305,23 @@ nz-space-item {
 }
 
 /* You can add global styles to this file, and also import other style files */
+nz-table {
+  margin: 0.5rem;
+}
+nz-table th {
+  padding: 1rem 0.5rem !important;
+}
+nz-table tr:nth-child(odd) {
+  background-color: #FFFFDD;
+}
+nz-table tr:hover {
+  background-color: #FFDDFF !important;
+}
+nz-table tr:hover td {
+  background-color: #FFDDFF !important;
+}
+nz-table td {
+  padding: 0.5rem !important;
+}
 
 /*# sourceMappingURL=styles.css.map*/

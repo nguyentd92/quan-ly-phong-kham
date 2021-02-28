@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"_auth-auth-module":"_auth-auth-module","examination-examination-module":"examination-examination-module"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"_auth-auth-module":"_auth-auth-module","medicine-storage-medicine-storage-module":"medicine-storage-medicine-storage-module","prescription-prescription-module":"prescription-prescription-module","statistic-statistic-module":"statistic-statistic-module"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function

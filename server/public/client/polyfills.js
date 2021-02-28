@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Projects\ClinicManagement\client\src\polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! /Users/nguyendanh/Projects/quan-ly-phong-kham/client/src/polyfills.ts */"hN/g");
 
 
 /***/ }),
