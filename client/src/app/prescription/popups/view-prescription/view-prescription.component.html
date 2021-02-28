@@ -1,0 +1,90 @@
+<h1 class="title">Phiếu khám bệnh</h1>
+
+<div class="section pres-info">
+  <div class="col">
+    <p>
+      <span class="pres-info__title">Họ và tên</span>
+      Nguyễn Văn A</p>
+    <p>
+      <span class="pres-info__title">Ngày sinh</span>
+      10/10/2020 (10 tuổi 2 tháng 2 ngày)</p>
+    <p>
+      <span class="pres-info__title">Giới tính</span>
+      Nam</p>
+  </div>
+
+  <div class="col">
+    <p>
+      <span class="pres-info__title">Người giám hộ</span>
+      Ba Tuấn</p>
+    <p>
+      <span class="pres-info__title">Số điện thoại</span>
+      0987222xxx</p>
+    <p>
+      <span class="pres-info__title">Địa chỉ</span>
+      20 Hùng Vương, phường 5, TP Cà Mau</p>
+  </div>
+</div>
+
+<div class="section pres-diagnosis">
+  <p>
+    <span class="pres-diagnosis__title">Triệu chứng bệnh</span>
+    <span>Ho, sốt, buồn nôn</span></p>
+  <p>
+    <span class="pres-diagnosis__title">Chuẩn đoán bệnh</span>
+    <span class="pres-diagnosis__sick">Cảm cúm</span></p>
+</div>
+
+<div class="section recipience">
+  <div class="recipience__title">
+    <p>Toa thuốc: </p>
+  </div>
+
+  <!-- RECIPIENCE LIST -->
+  <div class="section recipience__list">
+    <div class="recipience__item">
+      <div class="recipience__item-top">
+        <span class="recipience__medicine-name">Paracetamol</span>
+        <span>10 viên / 5 ngày</span>
+      </div>
+
+      <div class="recipience__item-bottom">
+        Sáng 1v trước ăn 30p, Trưa 1 viên trước ăn 30p, Tối 1v trước ăn 30p
+      </div>
+    </div>
+
+    <div class="recipience__item">
+      <div class="recipience__item-top">
+        <span class="recipience__medicine-name">Paracetamol</span>
+        <span >10 viên / 5 ngày</span>
+      </div>
+
+      <div class="recipience__item-bottom">
+        Sáng 1v trước ăn 30p, Trưa 1 viên trước ăn 30p, Tối 1v trước ăn 30p
+      </div>
+    </div>
+  </div>
+  <!-- END RECIPIENCE LIST -->
+</div>
+
+<div class="section bill-total">
+  <span class="bill-total__title">Tổng chi phí</span>
+  <span class="bill-total__price">{{ 2000000 | currency: 'VND'}}</span>
+</div>
+
+<div class="section sign">
+  <div class="sign__wrapper">
+    <div class="sign__date">TP Cà Mau, ngày 20 tháng 12 năm 2021</div>
+    <div class="sign__label">Người chuẩn đoán & kê toa</div>
+    <div class="sign__signer"></div>
+    <div class="sign__doctor">Ths.Bs. Nguyễn Duy Quang</div>
+  </div>
+</div>
+
+<div class="section note">
+  <div class="note__title">* Ghi chú</div>
+  <p class="note__content">
+    - Kiêng ăn ... <br/>
+    - Tái khám vào ngày 20/2/2020
+  </p>
+</div>

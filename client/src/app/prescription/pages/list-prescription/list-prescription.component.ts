@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {PrescriptionService} from "../../prescription.service";
 
 @Component({
-  selector: 'app-list-examination',
-  templateUrl: './list-examination.component.html',
-  styleUrls: ['./list-examination.component.scss']
+  selector: 'app-list-prescription',
+  templateUrl: './list-prescription.component.html',
+  styleUrls: ['./list-prescription.component.scss']
 })
-export class ListExaminationComponent implements OnInit {
+export class ListPrescriptionComponent implements OnInit {
   listOfData!: any[];
   indeterminate: any;
   isRequesting = false;

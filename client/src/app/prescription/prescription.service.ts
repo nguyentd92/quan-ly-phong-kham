@@ -4,6 +4,7 @@ import {SearchPrescriptionComponent} from "./popups/search-prescription/search-p
 import {Observable} from "rxjs";
 import {NzDrawerService} from "ng-zorro-antd/drawer";
 import {CreatePrescriptionComponent} from "./popups/create-prescription/create-prescription.component";
+import { ViewPrescriptionComponent } from './popups/view-prescription/view-prescription.component';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,20 @@ export class PrescriptionService {
       nzContent: CreatePrescriptionComponent,
       nzPlacement: 'bottom',
       nzHeight: '98vh',
+      nzContentParams: {
+        value: 'Hello'
+      }
+    });
+
+    return drawerRef.afterClose;
+  }
+
+  openViewPrescriptionDrawer(): Observable<any> {
+    const drawerRef = this.nzDrawerService.create<ViewPrescriptionComponent, { value: string }, string>({
+      nzTitle: 'Phiếu khám bệnh',
+      nzContent: ViewPrescriptionComponent,
+      nzPlacement: 'bottom',
+      nzHeight: '100vn',
       nzContentParams: {
         value: 'Hello'
       }

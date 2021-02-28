@@ -1,0 +1,108 @@
+:host {
+  display: block;
+  max-width: 1000px;
+
+  margin: auto;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.section {
+  margin-bottom: 1em;
+}
+
+.pres-diagnosis {
+  &__title {
+    display: inline-block;
+    width: 10em;
+    &::after {
+      content: ":";
+    }
+  }
+
+  &__sick {
+    font-weight: 500;
+  }
+}
+
+.pres-info {
+  display: flex;
+
+  .col {
+    flex: 1;
+  }
+
+  &__title {
+    display: inline-block;
+    width: 8em;
+    &::after {
+      content: ":"
+    }
+  }
+}
+
+.recipience {
+  display: flex;
+
+  &__title {
+    padding-right: 1.4em;
+  }
+
+  &__medicine-name {
+    font-weight: 500;
+    margin-right: .5em;
+  }
+
+  &__item-bottom {
+    margin-bottom: .5em;
+  }
+
+  &__item-bottom {
+    font-size: .9em;
+  }
+}
+
+.bill-total {
+  &__title {
+    padding-right: 1.4em;
+    text-decoration: underline;
+
+    &::after {
+      content: ":";
+    }
+  }
+
+  &__price {
+  }
+}
+
+.sign {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20%;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__date {
+    font-style: italic;
+  }
+
+  &__label {
+    font-weight: 500;
+  }
+
+  &__signer {
+    height: 6rem;
+  }
+
+  &__doctor {
+    font-weight: 500;
+  }
+}

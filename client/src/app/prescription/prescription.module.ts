@@ -1,8 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {CreateExaminationComponent} from './pages/create-examination/create-examination.component';
-import {BillExaminationComponent} from './pages/bill-examination/bill-examination.component';
-import {ListExaminationComponent} from './pages/list-examination/list-examination.component';
+import {ListPrescriptionComponent} from './pages/list-prescription/list-prescription.component';
 import {RouterModule, Routes} from '@angular/router';
 import {NzTableModule} from "ng-zorro-antd/table";
 import {NzButtonModule} from "ng-zorro-antd/button";
@@ -22,30 +20,22 @@ import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 import { AddMedicineComponent } from './popups/add-medicine/add-medicine.component';
 import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
+import { ViewPrescriptionComponent } from './popups/view-prescription/view-prescription.component';
 
 const PRESCRIPTION_ROUTES: Routes = [
   {
     path: '',
-    component: ListExaminationComponent
-  },
-  {
-    path: 'tao-phieu-kham',
-    component: CreateExaminationComponent
-  },
-  {
-    path: 'toa-kham-benh/:id',
-    component: BillExaminationComponent
+    component: ListPrescriptionComponent
   }
 ];
 
 @NgModule({
   declarations: [
-    CreateExaminationComponent,
-    BillExaminationComponent,
-    ListExaminationComponent,
+    ListPrescriptionComponent,
     SearchPrescriptionComponent,
     CreatePrescriptionComponent,
-    AddMedicineComponent
+    AddMedicineComponent,
+    ViewPrescriptionComponent
   ],
   imports: [
     CommonModule,
