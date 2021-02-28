@@ -22,6 +22,7 @@ import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 import { ViewPrescriptionComponent } from './popups/view-prescription/view-prescription.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { VndCurrencyPipeModule } from '../shared/pipes/vnd-currency-pipe/vnd-currency-pipe.module';
 
 const PRESCRIPTION_ROUTES: Routes = [
   {
@@ -57,7 +58,8 @@ const PRESCRIPTION_ROUTES: Routes = [
     NzAutocompleteModule,
     NzInputNumberModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    VndCurrencyPipeModule
   ]
 })
 export class PrescriptionModule {

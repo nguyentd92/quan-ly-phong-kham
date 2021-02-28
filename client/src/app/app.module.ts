@@ -7,7 +7,7 @@ import { DemoComponent } from './pages/demo/demo.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { vi_VN } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
+import { CurrencyPipe, registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -24,6 +24,8 @@ import { NzInputNumberModule } from "ng-zorro-antd/input-number";
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ApiInterceptor } from './shared/interceptors/api.interceptor';
+import { NgxCurrencyModule } from 'ngx-currency';
+import { VndCurrencyPipeModule } from './shared/pipes/vnd-currency-pipe/vnd-currency-pipe.module';
 
 registerLocaleData(vi);
 
@@ -50,7 +52,9 @@ registerLocaleData(vi);
     NzAutocompleteModule,
     NzInputNumberModule,
     NzIconModule,
-    FontAwesomeModule
+    NgxCurrencyModule,
+    FontAwesomeModule,
+    VndCurrencyPipeModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: vi_VN },

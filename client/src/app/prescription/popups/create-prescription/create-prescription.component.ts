@@ -1,9 +1,11 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
-import { merge, Observable } from 'rxjs';
+import { combineLatest, merge, Observable } from 'rxjs';
 import { debounce, debounceTime, filter, map, switchMap } from 'rxjs/operators';
 import { DaySession } from 'src/app/shared/constants/day-session.constant';
 import { Medicine } from 'src/app/shared/models/medicine.model';
+import { VndCurrencyPipe } from 'src/app/shared/pipes/vnd-currency-pipe/vnd-currency.pipe';
 import { MedicinesService } from 'src/app/shared/services/states/medicines.service';
 import { PrescriptionService } from '../../prescription.service';
 import { CalculateMedicineResponse } from '../../responses/calculate-medicine.response';
@@ -16,7 +18,7 @@ const ADD_MEDICINE_FORM = {
   days: [1, [Validators.required, Validators.min(1)]],
   is_c_u_price: false,
   u_price: 0,
-  is_s_u_price: false,
+  is_c_s_price: false,
   s_price: 0
 };
 
@@ -69,7 +71,8 @@ export class CreatePrescriptionComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private medicinesService: MedicinesService,
-    private presService: PrescriptionService
+    private presService: PrescriptionService,
+    private vndCurrencyPipe: VndCurrencyPipe
   ) { }
 
   daySessionVi(enKey: string) {
@@ -124,14 +127,12 @@ export class CreatePrescriptionComponent implements OnInit {
     })
 
     // Watching and keep s_price on updated
-    merge(
+    combineLatest(
       this.addMedicineForm.controls['u_price'].valueChanges,
       this.addMedicineForm.controls['amount'].valueChanges,
     ).subscribe((res) => {
-      const { u_price, amount } = this.addMedicineForm.value;
-
       this.addMedicineForm.patchValue({
-        s_price: (u_price * amount) || 0
+        s_price: (res[0] * res[1]) || 0
       })
     })
 
@@ -141,17 +142,17 @@ export class CreatePrescriptionComponent implements OnInit {
       ...DaySession.listEn.map(t => this.addMedicineForm.controls[`a_${t}`].valueChanges),
       this.addMedicineForm.controls["days"].valueChanges
     )
-    .pipe(
-      debounceTime(100)
-    )
-    .subscribe(() => {
-      const amountPerDay = DaySession.listEn.filter(t => this.addMedicineForm.controls[`c_${t}`].value)
-        .reduce((t, c) => t + +this.addMedicineForm.controls[`a_${c}`].value,0);
+      .pipe(
+        debounceTime(100)
+      )
+      .subscribe(() => {
+        const amountPerDay = DaySession.listEn.filter(t => this.addMedicineForm.controls[`c_${t}`].value)
+          .reduce((t, c) => t + +this.addMedicineForm.controls[`a_${c}`].value, 0);
 
-      // Must ceil if amount is decimal
-      const amount = Math.ceil(amountPerDay * this.addMedicineForm.controls["days"].value);
-      this.addMedicineForm.controls[`amount`].setValue(amount);
-    })
+        // Must ceil if amount is decimal
+        const amount = Math.ceil(amountPerDay * this.addMedicineForm.controls["days"].value);
+        this.addMedicineForm.controls[`amount`].setValue(amount);
+      })
 
     // Patch Default Pres Wage
     this.presService.presWage$.subscribe(res => this.createPrescriptionForm.patchValue({ pres_price: res })).unsubscribe();
@@ -233,15 +234,26 @@ export class CreatePrescriptionComponent implements OnInit {
   }
 
   onCancelMedicine() {
-    this.addMedicineForm.patchValue({
-      med_id: null,
-      med_name: null
-    })
+    this.addMedicineForm.patchValue(DEFAULT_ADD_MEDICINE_FORM)
 
     this.medKeyword = "";
 
     this.addMedicineForm.disable();
   }
+
+  toggleChangeUnitPrice() {
+    const { is_c_u_price } = this.addMedicineForm.value;
+    this.addMedicineForm.patchValue({ is_c_u_price: !is_c_u_price })
+  }
+
+  toggleChangeSellPrice() {
+    const { is_c_s_price } = this.addMedicineForm.value;
+    this.addMedicineForm.patchValue({ is_c_s_price: !is_c_s_price })
+  }
+
+  // Formatter
+  formatterVnd = (value: string) => this.vndCurrencyPipe.transform(value);
+  parserVnd = (value: string) => value.replace(/\D/g, '');;
 }
 
 const medAnyTimeValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null =>
