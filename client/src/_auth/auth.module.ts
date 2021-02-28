@@ -19,6 +19,11 @@ const AUTH_ROUTES: Routes = [
       {
         path: "forgot-password",
         component: ForgotPasswordComponent
+      },
+      {
+        path: "**",
+        redirectTo: "login",
+        pathMatch: "full"
       }
     ]
   }
