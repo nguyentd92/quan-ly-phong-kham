@@ -39,12 +39,13 @@ export class PrescriptionService {
 
       note_str: DaySession.listEn.reduce((cur, t, idx) => {
         const checkKey = `c_${t}`;
-        console.log(checkKey);
+
         if(data[checkKey]) {
           let str = idx > 0 ? `${cur}, ` : cur;
           let daySessionVi = DaySession.transToVi(t);
-          str += `${StringUltility.upperFirstLetter(daySessionVi)} ${data[`a_${t}`]}v ${data[`n_${t}`]}`
-          console.log(cur);
+
+          str += `${StringUltility.upperFirstLetter(daySessionVi)} ${data[`a_${t}`]}v ${data[`n_${t}`]}`;
+
           return str;
         }
 

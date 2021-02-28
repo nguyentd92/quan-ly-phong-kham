@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { merge, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { debounce, debounceTime, filter, map, switchMap } from 'rxjs/operators';
 import { DaySession } from 'src/app/shared/constants/day-session.constant';
 import { Medicine } from 'src/app/shared/models/medicine.model';
 import { MedicinesService } from 'src/app/shared/services/states/medicines.service';
@@ -123,15 +123,34 @@ export class CreatePrescriptionComponent implements OnInit {
       )
     })
 
-    //
+    // Watching and keep s_price on updated
     merge(
       this.addMedicineForm.controls['u_price'].valueChanges,
       this.addMedicineForm.controls['amount'].valueChanges,
-    ).subscribe(() => {
+    ).subscribe((res) => {
       const { u_price, amount } = this.addMedicineForm.value;
+
       this.addMedicineForm.patchValue({
-        s_price: u_price * amount
+        s_price: (u_price * amount) || 0
       })
+    })
+
+    // Watching and keep amount on updated
+    merge(
+      ...DaySession.listEn.map(t => this.addMedicineForm.controls[`c_${t}`].valueChanges),
+      ...DaySession.listEn.map(t => this.addMedicineForm.controls[`a_${t}`].valueChanges),
+      this.addMedicineForm.controls["days"].valueChanges
+    )
+    .pipe(
+      debounceTime(100)
+    )
+    .subscribe(() => {
+      const amountPerDay = DaySession.listEn.filter(t => this.addMedicineForm.controls[`c_${t}`].value)
+        .reduce((t, c) => t + +this.addMedicineForm.controls[`a_${c}`].value,0);
+
+      // Must ceil if amount is decimal
+      const amount = Math.ceil(amountPerDay * this.addMedicineForm.controls["days"].value);
+      this.addMedicineForm.controls[`amount`].setValue(amount);
     })
 
     // Patch Default Pres Wage
