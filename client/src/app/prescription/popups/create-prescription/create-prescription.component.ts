@@ -6,12 +6,11 @@ import { DaySession } from 'src/app/shared/constants/day-session.constant';
 import { Medicine } from 'src/app/shared/models/medicine.model';
 import { MedicinesService } from 'src/app/shared/services/states/medicines.service';
 import { PrescriptionService } from '../../prescription.service';
-import { CalculateMedicineRequest } from '../../requests/calculate-medicine.request';
 import { CalculateMedicineResponse } from '../../responses/calculate-medicine.response';
 
 const ADD_MEDICINE_FORM = {
-  med_id: null,
-  med_name: null,
+  med_id: [null, [Validators.required]],
+  med_name: [null],
 
   amount: DaySession.listEn.length,
   days: [1, [Validators.required, Validators.min(1)]],
@@ -21,10 +20,25 @@ const ADD_MEDICINE_FORM = {
   s_price: 0
 };
 
+const DEFAULT_ADD_MEDICINE_FORM = {
+  med_id: null,
+  med_name: null,
+  amount: DaySession.listEn.length,
+  days: 1,
+  is_c_u_price: false,
+  u_price: 0,
+  is_s_u_price: false,
+  s_price: 0
+}
+
 DaySession.listEn.forEach(t => {
   ADD_MEDICINE_FORM[`c_${t}`] = [true];
   ADD_MEDICINE_FORM[`a_${t}`] = [1];
   ADD_MEDICINE_FORM[`n_${t}`] = [""];
+
+  DEFAULT_ADD_MEDICINE_FORM[`c_${t}`] = [true];
+  DEFAULT_ADD_MEDICINE_FORM[`a_${t}`] = [1];
+  DEFAULT_ADD_MEDICINE_FORM[`n_${t}`] = [""];
 });
 
 @Component({
@@ -172,10 +186,13 @@ export class CreatePrescriptionComponent implements OnInit {
           med_s_price: s_price,
           med_note: note_str
         })
+
+        // Reset Add Medicine Form
+        this.addMedicineForm.reset(DEFAULT_ADD_MEDICINE_FORM);
+        this.addMedicineForm.disable();
+        this.medKeyword = "";
       }
     )
-
-    this.addMedicineForm.enable();
   }
 
   onRemoveMedicine(idx: number) {
