@@ -1,58 +1,55 @@
 import { Injectable } from '@angular/core';
-import {NzModalService} from "ng-zorro-antd/modal";
-import {SearchPrescriptionComponent} from "./popups/search-prescription/search-prescription.component";
-import {Observable} from "rxjs";
-import {NzDrawerService} from "ng-zorro-antd/drawer";
-import {CreatePrescriptionComponent} from "./popups/create-prescription/create-prescription.component";
-import { ViewPrescriptionComponent } from './popups/view-prescription/view-prescription.component';
-
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { pluck } from 'rxjs/operators';
+import { DaySession } from '../shared/constants/day-session.constant';
+import { StringUltility } from '../shared/ultilites/string.ultitity';
+import { CalculateMedicineRequest } from './requests/calculate-medicine.request';
+import { CalculateMedicineResponse } from './responses/calculate-medicine.response';
+interface PrescriptionConfig {
+  pres_wage: number;
+}
 @Injectable({
   providedIn: 'root'
 })
 export class PrescriptionService {
 
-  constructor(
-    private nzModalService: NzModalService,
-    private nzDrawerService: NzDrawerService
-  ) { }
+  constructor() { }
 
-  openSearchPrescriptionsModal(): Observable<any> {
-    const modal = this.nzModalService.create(
-      {
-        nzTitle: 'Tìm thông tin khám bệnh',
-        nzContent: SearchPrescriptionComponent,
-        nzOnOk: () => {}
-      }
-    );
+  private configSj = new BehaviorSubject<PrescriptionConfig>({
+    pres_wage: 100000
+  });
 
-    return modal.afterClose;
+  get presWage$() {
+    return this.configSj.pipe(pluck('pres_wage'));
   }
 
-  openCreatePrescriptionDrawer(): Observable<any> {
-    const drawerRef = this.nzDrawerService.create<CreatePrescriptionComponent, { value: string }, string>({
-      nzTitle: 'Tạo phiếu khám bệnh',
-      nzContent: CreatePrescriptionComponent,
-      nzPlacement: 'bottom',
-      nzHeight: '98vh',
-      nzContentParams: {
-        value: 'Hello'
-      }
+  // HTTP
+  sendCalculateMedicine(data: CalculateMedicineRequest): Observable<CalculateMedicineResponse> {
+
+
+    console.log(data);
+
+    return of({
+      med_id: data.med_id,
+      med_title: "Medicine " + data.med_id,
+
+      amount_str: `${data.amount} v / ${data.days} ngày`,
+      u_price: data.u_price,
+      s_price: data.amount * data.u_price,
+
+      note_str: DaySession.listEn.reduce((cur, t, idx) => {
+        const checkKey = `c_${t}`;
+        console.log(checkKey);
+        if(data[checkKey]) {
+          let str = idx > 0 ? `${cur}, ` : cur;
+          let daySessionVi = DaySession.transToVi(t);
+          str += `${StringUltility.upperFirstLetter(daySessionVi)} ${data[`a_${t}`]}v ${data[`n_${t}`]}`
+          console.log(cur);
+          return str;
+        }
+
+        return t;
+      }, "")
     });
-
-    return drawerRef.afterClose;
-  }
-
-  openViewPrescriptionDrawer(id: number): Observable<any> {
-    const drawerRef = this.nzDrawerService.create<ViewPrescriptionComponent, { value: string }, string>({
-      nzTitle: 'Phiếu khám bệnh',
-      nzContent: ViewPrescriptionComponent,
-      nzPlacement: 'bottom',
-      nzHeight: '100vn',
-      nzContentParams: {
-        value: 'Hello'
-      }
-    });
-
-    return drawerRef.afterClose;
   }
 }

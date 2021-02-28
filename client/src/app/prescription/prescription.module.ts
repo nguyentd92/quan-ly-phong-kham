@@ -8,7 +8,7 @@ import {NzSpaceModule} from "ng-zorro-antd/space";
 import {NzModalModule} from "ng-zorro-antd/modal";
 import { SearchPrescriptionComponent } from './popups/search-prescription/search-prescription.component';
 import {NzPopoverModule} from "ng-zorro-antd/popover";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzFormModule} from "ng-zorro-antd/form";
@@ -56,7 +56,8 @@ const PRESCRIPTION_ROUTES: Routes = [
     NzCheckboxModule,
     NzAutocompleteModule,
     NzInputNumberModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule
   ]
 })
 export class PrescriptionModule {

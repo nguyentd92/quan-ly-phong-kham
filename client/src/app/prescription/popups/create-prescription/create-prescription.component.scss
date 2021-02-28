@@ -30,8 +30,11 @@
   padding-top: .5rem;
 
   &__title {
-    font-weight: 500;
     color: rgb(3,3,3);
+  }
+
+  &__name {
+    font-weight: 500;
   }
 
   &__price {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {PrescriptionService} from "../../prescription.service";
+import {PrescriptionUIService} from "../../prescription-ui.service";
 
 @Component({
   selector: 'app-list-prescription',
@@ -12,7 +12,7 @@ export class ListPrescriptionComponent implements OnInit {
   isRequesting = false;
 
   constructor(
-    private prescriptionService: PrescriptionService
+    private prescriptionUIService: PrescriptionUIService
   ) { }
 
   ngOnInit(): void {
@@ -36,14 +36,14 @@ export class ListPrescriptionComponent implements OnInit {
   }
 
   openViewPrescription(id: number): void {
-    this.prescriptionService.openViewPrescriptionDrawer(id);
+    this.prescriptionUIService.openViewPrescriptionDrawer(id);
   }
 
   onOpenSearchPrescriptionModal(): void {
-    this.prescriptionService.openSearchPrescriptionsModal();
+    this.prescriptionUIService.openSearchPrescriptionsModal();
   }
 
   openCreatePrescriptionDrawer(): void {
-    this.prescriptionService.openCreatePrescriptionDrawer();
+    this.prescriptionUIService.openCreatePrescriptionDrawer();
   }
 }

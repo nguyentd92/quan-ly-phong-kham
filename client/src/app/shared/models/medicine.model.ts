@@ -1,7 +1,7 @@
 import {MedicineUnit} from "./medicine-unit.model";
 import {Medication} from "./medication.model";
 
-export interface Medicine {
+export class Medicine {
   id: number;
   name: string;
   unit_sell_price: number;
