@@ -21,6 +21,7 @@ import { AddMedicineComponent } from './popups/add-medicine/add-medicine.compone
 import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 import { ViewPrescriptionComponent } from './popups/view-prescription/view-prescription.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const PRESCRIPTION_ROUTES: Routes = [
   {
@@ -54,7 +55,8 @@ const PRESCRIPTION_ROUTES: Routes = [
     NzRadioModule,
     NzCheckboxModule,
     NzAutocompleteModule,
-    NzInputNumberModule
+    NzInputNumberModule,
+    FontAwesomeModule
   ]
 })
 export class PrescriptionModule {

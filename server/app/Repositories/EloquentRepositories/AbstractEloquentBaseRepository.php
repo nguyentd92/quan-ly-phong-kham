@@ -21,7 +21,7 @@ abstract class AbstractEloquentBaseRepository implements BaseRepositoryInterface
         $this->setModel();
     }
 
-    abstract public function getModel(): string;
+    abstract public function getModel();
 
     public function setModel() {
         $this->model = app()->make(

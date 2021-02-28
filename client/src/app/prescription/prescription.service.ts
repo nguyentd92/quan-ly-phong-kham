@@ -42,7 +42,7 @@ export class PrescriptionService {
     return drawerRef.afterClose;
   }
 
-  openViewPrescriptionDrawer(): Observable<any> {
+  openViewPrescriptionDrawer(id: number): Observable<any> {
     const drawerRef = this.nzDrawerService.create<ViewPrescriptionComponent, { value: string }, string>({
       nzTitle: 'Phiếu khám bệnh',
       nzContent: ViewPrescriptionComponent,

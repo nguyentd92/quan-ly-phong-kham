@@ -124,7 +124,7 @@ Route::name('settings')->prefix('settings')->group(function () {
 // Medicines Management Routes
 Route::name('medicines')->prefix('medicines')->group(function () {
     // Get List Settings
-    Route::name('.list')->get('/', [MedicineController::class, 'list']);
+    Route::name('.list')->get('/', [MedicineController::class, 'getAll']);
 
     // Create value
     Route::name('.create')->post('/', [MedicineController::class, 'store']);

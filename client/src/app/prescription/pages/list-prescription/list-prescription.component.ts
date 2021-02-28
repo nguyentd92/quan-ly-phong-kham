@@ -35,6 +35,10 @@ export class ListPrescriptionComponent implements OnInit {
 
   }
 
+  openViewPrescription(id: number): void {
+    this.prescriptionService.openViewPrescriptionDrawer(id);
+  }
+
   onOpenSearchPrescriptionModal(): void {
     this.prescriptionService.openSearchPrescriptionsModal();
   }

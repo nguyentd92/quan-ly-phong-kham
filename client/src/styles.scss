@@ -9,16 +9,16 @@ nz-table {
 
   tr {
     &:nth-child(odd) {
-      background-color: #FFFFDD;
+      background-color: #fff8f8;
     }
 
-    &:hover {
-      background-color: #FFDDFF !important;
+    // &:hover {
+    //   background-color: tomato !important;
 
-      td {
-        background-color: #FFDDFF !important;
-      }
-    }
+    //   td {
+    //     background-color: tomato !important;
+    //   }
+    // }
   }
 
   td {
