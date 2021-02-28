@@ -21,6 +21,8 @@ import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzDrawerModule} from "ng-zorro-antd/drawer";
 import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 registerLocaleData(vi);
 
@@ -45,7 +47,9 @@ registerLocaleData(vi);
     NzDatePickerModule,
     NzDrawerModule,
     NzAutocompleteModule,
-    NzInputNumberModule
+    NzInputNumberModule,
+    NzIconModule,
+    FontAwesomeModule
   ],
   providers: [{provide: NZ_I18N, useValue: vi_VN}],
   bootstrap: [AppComponent]
