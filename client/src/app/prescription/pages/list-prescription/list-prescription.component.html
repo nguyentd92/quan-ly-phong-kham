@@ -46,7 +46,7 @@
     <td>{{ data.address }}</td>
     <td>25/2/2021 </td>
     <td>
-      <a nz-button nzType="link" nzDanger (click)="openViewPrescription(1)">
+      <a nz-button nzType="link" nzDanger [routerLink]="['benh-nhan', data.id]">
         <i nz-icon nzType="file-text" nzTheme="outline"></i>
       </a>
 
