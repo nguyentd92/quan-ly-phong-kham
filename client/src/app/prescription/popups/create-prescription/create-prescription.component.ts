@@ -38,9 +38,9 @@ DaySession.listEn.forEach(t => {
   ADD_MEDICINE_FORM[`a_${t}`] = [1];
   ADD_MEDICINE_FORM[`n_${t}`] = [""];
 
-  DEFAULT_ADD_MEDICINE_FORM[`c_${t}`] = [true];
-  DEFAULT_ADD_MEDICINE_FORM[`a_${t}`] = [1];
-  DEFAULT_ADD_MEDICINE_FORM[`n_${t}`] = [""];
+  DEFAULT_ADD_MEDICINE_FORM[`c_${t}`] = true;
+  DEFAULT_ADD_MEDICINE_FORM[`a_${t}`] = 1;
+  DEFAULT_ADD_MEDICINE_FORM[`n_${t}`] = "";
 });
 
 @Component({
