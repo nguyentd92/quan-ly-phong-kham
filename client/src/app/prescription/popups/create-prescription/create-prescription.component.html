@@ -134,6 +134,10 @@
 
     <!-- PRES MEDICINE LIST -->
     <div nz-col nzOffset="2" nzSpan="22" class="medicine-list">
+      <!-- Show if empty list -->
+      <nz-alert *ngIf="!presMedList.length" nzType="warning" nzMessage="Chưa có thuốc trong toa"></nz-alert>
+      <!-- End Show if empty list -->
+
       <div class="medicine" *ngFor="let item of presMedList; index as idx">
         <div class="medicine__title">
           <span class="medicine__no">{{ idx + 1 }}.</span>

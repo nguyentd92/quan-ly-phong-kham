@@ -26,6 +26,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ApiInterceptor } from './shared/interceptors/api.interceptor';
 import { NgxCurrencyModule } from 'ngx-currency';
 import { VndCurrencyPipeModule } from './shared/pipes/vnd-currency-pipe/vnd-currency-pipe.module';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 
 registerLocaleData(vi);
 
