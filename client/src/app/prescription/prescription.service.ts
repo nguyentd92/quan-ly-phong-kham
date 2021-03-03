@@ -26,6 +26,8 @@ export class PrescriptionService {
 
   // HTTP
   sendCalculateMedicine(data: CalculateMedicineRequest): Observable<CalculateMedicineResponse> {
+    console.log(data);
+
     return of({
       med_id: data.med_id,
       med_title: "Medicine " + data.med_id,
@@ -38,15 +40,15 @@ export class PrescriptionService {
         const checkKey = `c_${t}`;
 
         if (data[checkKey]) {
-          let str = idx > 0 ? `${cur}, ` : cur;
+          if(cur) {
+            cur = `${cur}, `;
+          }
           let daySessionVi = DaySession.transToVi(t);
 
-          str += `${StringUltility.upperFirstLetter(daySessionVi)} ${data[`a_${t}`]}v ${data[`n_${t}`]}`;
-
-          return str;
+          cur += `${StringUltility.upperFirstLetter(daySessionVi)} ${data[`a_${t}`]}v ${data[`n_${t}`]}`;
         }
 
-        return t;
+        return cur;
       }, "")
     });
   }
