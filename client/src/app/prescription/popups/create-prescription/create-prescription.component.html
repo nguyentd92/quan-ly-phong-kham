@@ -25,11 +25,15 @@
         <nz-form-control [nzSpan]="14">
           <nz-date-picker
             nzShowToday="false"
-            nzMax=""
+            nzMax="2021-03-01"
             nzPlaceHolder="DD/MM/YYYY"
             nzFormat="dd/MM/yyyy"
             formControlName="dob"
           ></nz-date-picker>
+
+          <span style="margin-left: 1em; font-size: 0.9em">{{
+            ageStr$ | async
+          }}</span>
         </nz-form-control>
       </nz-form-item>
 
@@ -296,6 +300,7 @@
             <nz-form-label nz-col nzSpan="5">Số lượng</nz-form-label>
 
             <nz-form-control>
+              <!-- Amount & Unit Price Value -->
               <span
                 *ngIf="!addMedicineForm.value.is_c_u_price"
                 style="font-weight: 500"
@@ -321,8 +326,10 @@
                 [nzParser]="parserVnd"
                 *ngIf="addMedicineForm.value.is_c_u_price"
               ></nz-input-number>
+              <!-- End Amount & Unit Price Value -->
 
               <ng-container *ngIf="addMedicineForm.enabled">
+                <!-- Button Edit Unit Price -->
                 <button
                   *ngIf="
                     !addMedicineForm.value.is_c_u_price;
@@ -331,26 +338,32 @@
                   style="margin-left: 0.5rem"
                   nz-button
                   nzType="link"
-                  (click)="toggleChangeUnitPrice()"
+                  (click)="onEditUnitPriceAndAmount()"
                 >
                   <i nz-icon nzType="edit" nzTheme="outline"></i>
                 </button>
+                <!-- End Button Edit Unit Price -->
 
                 <ng-template #changeUnitPriceActions>
+                  <!-- Button Accept Change Unit Price -->
                   <button
                     nz-button
                     nzType="link"
-                    (click)="toggleChangeUnitPrice()"
+                    (click)="onChangeUnitPriceAndAmount()"
                   >
                     <i nz-icon nzType="check" nzTheme="outline"></i>
                   </button>
+                  <!-- End Accept Change Edit Unit Price -->
+
+                  <!-- Button Cancel Change Edit Unit Price -->
                   <button
                     nz-button
                     nzType="link"
-                    (click)="toggleChangeUnitPrice()"
+                    (click)="onCancelEditUnitPriceAndAmount()"
                   >
                     <i nz-icon nzType="close" nzTheme="outline"></i>
                   </button>
+                  <!-- End Button Cancel Change Edit Unit Price -->
                 </ng-template>
               </ng-container>
             </nz-form-control>
@@ -368,6 +381,7 @@
             <nz-form-label nz-col nzSpan="5">Thành tiền</nz-form-label>
 
             <nz-form-control>
+              <!-- Sell Price Value -->
               <span
                 *ngIf="!addMedicineForm.value.is_c_s_price"
                 style="font-weight: 500"
@@ -381,8 +395,10 @@
                 [nzFormatter]="formatterVnd"
                 [nzParser]="parserVnd"
               ></nz-input-number>
+              <!-- End Sell Price Value -->
 
               <ng-container *ngIf="addMedicineForm.enabled">
+                <!-- Button Edit Sell Price -->
                 <button
                   *ngIf="
                     !addMedicineForm.value.is_c_s_price;
@@ -391,26 +407,28 @@
                   style="margin-left: 0.5rem"
                   nz-button
                   nzType="link"
-                  (click)="toggleChangeSellPrice()"
+                  (click)="onEditSellPrice()"
                 >
                   <i nz-icon nzType="edit" nzTheme="outline"></i>
                 </button>
+                <!-- End Button Edit Sell Price -->
 
                 <ng-template #changeSellPriceActions>
-                  <button
-                    nz-button
-                    nzType="link"
-                    (click)="toggleChangeSellPrice()"
-                  >
+                  <!-- Button Accept Change Sell Price -->
+                  <button nz-button nzType="link" (click)="onChangeSellPrice()">
                     <i nz-icon nzType="check" nzTheme="outline"></i>
                   </button>
+                  <!-- End Button Accept Change Sell Price -->
+
+                  <!-- Button Cancel Change Sell Price -->
                   <button
                     nz-button
                     nzType="link"
-                    (click)="toggleChangeSellPrice()"
+                    (click)="onCancelEditSellPrice()"
                   >
                     <i nz-icon nzType="close" nzTheme="outline"></i>
                   </button>
+                  <!-- End Button Cancel Change Sell Price -->
                 </ng-template>
               </ng-container>
             </nz-form-control>
@@ -442,42 +460,59 @@
           <nz-form-label>Tiền khám</nz-form-label>
 
           <nz-form-control nz-col nzSpan="21">
-            <span style="font-weight: 500;" *ngIf="!createPrescriptionForm.value.is_c_pres_price">{{ createPrescriptionForm.value.pres_price | vndCurrency }}</span>
-            <nz-input-number
-              *ngIf="createPrescriptionForm.value.is_c_pres_price"
-              style="width: 200px"
-              [nzMin]="0"
-              [nzStep]="10000"
-              [nzFormatter]="formatterVnd"
-              [nzParser]="parserVnd"
-              formControlName="pres_price"
-            ></nz-input-number>
+            <!-- Pres value -->
+            <ng-container>
+              <span
+                style="font-weight: 500"
+                *ngIf="!createPrescriptionForm.value.is_c_pres_price"
+                >{{
+                  createPrescriptionForm.value.pres_price | vndCurrency
+                }}</span
+              >
+              <nz-input-number
+                *ngIf="createPrescriptionForm.value.is_c_pres_price"
+                style="width: 200px"
+                [nzMin]="0"
+                [nzStep]="10000"
+                [nzFormatter]="formatterVnd"
+                [nzParser]="parserVnd"
+                formControlName="pres_price"
+              ></nz-input-number>
+            </ng-container>
+            <!-- End Pres Value -->
 
             <ng-container>
+              <!-- Edit Pres Price -->
               <button
-                *ngIf="!createPrescriptionForm.value.is_c_pres_price; else changeUnitPriceActions"
+                *ngIf="
+                  !createPrescriptionForm.value.is_c_pres_price;
+                  else changeUnitPriceActions
+                "
                 style="margin-left: 0.5rem"
                 nz-button
                 nzType="link"
-                (click)="toggleChangePresPrice()"
+                (click)="onEditPresPrice()"
               >
                 <i nz-icon nzType="edit" nzTheme="outline"></i>
               </button>
+              <!-- End Edit Pres Price -->
+
               <ng-template #changeUnitPriceActions>
-                <button
-                  nz-button
-                  nzType="link"
-                  (click)="toggleChangePresPrice()"
-                >
+                <!-- Accept Change Pres Price Button -->
+                <button nz-button nzType="link" (click)="onChangePresPrice()">
                   <i nz-icon nzType="check" nzTheme="outline"></i>
                 </button>
+                <!-- End Accept Change Pres Price Button -->
+
+                <!-- Cancel Change Pres Price Button -->
                 <button
                   nz-button
                   nzType="link"
-                  (click)="toggleChangePresPrice()"
+                  (click)="onCancelChangePresPrice()"
                 >
                   <i nz-icon nzType="close" nzTheme="outline"></i>
                 </button>
+                <!-- End Cancel Change Pres Price Button -->
               </ng-template>
             </ng-container>
           </nz-form-control>
@@ -514,7 +549,9 @@
         </nz-space-item>
 
         <nz-space-item>
-          <button nz-button nzSize="large" nzType="default" nzBlock>
+          <button nz-button
+            [disabled]="!createPrescriptionForm.valid"
+            nzSize="large" nzType="default" nzBlock>
             Lưu phiếu & In toa
           </button>
         </nz-space-item>

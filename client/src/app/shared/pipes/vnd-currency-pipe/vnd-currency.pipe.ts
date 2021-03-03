@@ -7,6 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class VndCurrencyPipe extends CurrencyPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
+    value = value || 0;
     return super.transform(value, 'VND').replace(/,/g, '.');
   }
 }

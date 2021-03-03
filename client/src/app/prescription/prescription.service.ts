@@ -5,6 +5,7 @@ import { DaySession } from '../shared/constants/day-session.constant';
 import { StringUltility } from '../shared/ultilites/string.ultitity';
 import { CalculateMedicineRequest } from './requests/calculate-medicine.request';
 import { CalculateMedicineResponse } from './responses/calculate-medicine.response';
+import { differenceInDays, differenceInMonths, differenceInYears, addMonths, addYears } from 'date-fns';
 interface PrescriptionConfig {
   pres_wage: number;
 }
@@ -25,10 +26,6 @@ export class PrescriptionService {
 
   // HTTP
   sendCalculateMedicine(data: CalculateMedicineRequest): Observable<CalculateMedicineResponse> {
-
-
-    console.log(data);
-
     return of({
       med_id: data.med_id,
       med_title: "Medicine " + data.med_id,
@@ -40,7 +37,7 @@ export class PrescriptionService {
       note_str: DaySession.listEn.reduce((cur, t, idx) => {
         const checkKey = `c_${t}`;
 
-        if(data[checkKey]) {
+        if (data[checkKey]) {
           let str = idx > 0 ? `${cur}, ` : cur;
           let daySessionVi = DaySession.transToVi(t);
 
@@ -52,5 +49,30 @@ export class PrescriptionService {
         return t;
       }, "")
     });
+  }
+
+  sendCalculateAge(dob: Date): Observable<string> {
+    const result = [];
+    const now = Date.now();
+    let age = dob;
+
+    const years = differenceInYears(now, age);
+    if (years > 0) {
+      result.push(`${years} tuổi`);
+      age = addYears(age, years);
+    }
+
+    const months = differenceInMonths(now, age);
+    if (months > 0) {
+      result.push(`${months} tháng`);
+      age = addMonths(age, months);
+    }
+
+    const days = differenceInDays(now, age);
+    if (days > 0) {
+      result.push(`${days} ngày`);
+    }
+
+    return of(result.join(' '));
   }
 }

@@ -1,8 +1,7 @@
-import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { combineLatest, merge, Observable } from 'rxjs';
-import { debounce, debounceTime, filter, map, switchMap } from 'rxjs/operators';
+import { debounceTime, map } from 'rxjs/operators';
 import { DaySession } from 'src/app/shared/constants/day-session.constant';
 import { Medicine } from 'src/app/shared/models/medicine.model';
 import { VndCurrencyPipe } from 'src/app/shared/pipes/vnd-currency-pipe/vnd-currency.pipe';
@@ -28,10 +27,10 @@ const DEFAULT_ADD_MEDICINE_FORM = {
   med_name: null,
   amount: DaySession.listEn.length,
   days: 1,
-  is_c_u_price: false,
   u_price: 0,
-  is_s_u_price: false,
-  s_price: 0
+  is_c_u_price: false,
+  s_price: 0,
+  is_c_s_price: false
 }
 
 DaySession.listEn.forEach(t => {
@@ -57,7 +56,14 @@ export class CreatePrescriptionComponent implements OnInit {
 
   medKeyword = "";
 
-  medDaySessions = DaySession.listEn
+  medDaySessions = DaySession.listEn;
+
+  oldValue = {
+    u_price: 0,
+    s_price: 0,
+    pres_price: 0,
+    amount: 0
+  };
 
   presMedList: {
     med_id: number;
@@ -90,6 +96,10 @@ export class CreatePrescriptionComponent implements OnInit {
     return this.presMedList.reduce((t, c) => t + c.med_s_price, 0)
   }
 
+  get ageStr$(): Observable<string> {
+    return this.presService.sendCalculateAge(this.createPrescriptionForm.value.patient.dob);
+  }
+
   ngOnInit(): void {
     // Init Form
     this.addMedicineForm = this.fb.group(ADD_MEDICINE_FORM, { validators: medAnyTimeValidator });
@@ -113,7 +123,7 @@ export class CreatePrescriptionComponent implements OnInit {
       billPrice: [0],
       reExamTo: [null],
 
-      is_c_pres_price: false
+      is_c_pres_price: [false]
     });
 
     // Cancel select medicine in form medicine
@@ -248,22 +258,82 @@ export class CreatePrescriptionComponent implements OnInit {
     this.addMedicineForm.disable();
   }
 
-  toggleChangeUnitPrice() {
-    const { is_c_u_price } = this.addMedicineForm.value;
-    this.addMedicineForm.patchValue({ is_c_u_price: !is_c_u_price })
+  // Edit Unit Price & Amount
+  onEditUnitPriceAndAmount() {
+    const { is_c_u_price, u_price, amount } = this.addMedicineForm.value;
+    this.addMedicineForm.patchValue({ is_c_u_price: !is_c_u_price });
+    this.oldValue = { ...this.oldValue, u_price, amount };
   }
 
-  toggleChangeSellPrice() {
-    const { is_c_s_price } = this.addMedicineForm.value;
+  onChangeUnitPriceAndAmount() {
+    const { is_c_u_price } = this.addMedicineForm.value;
+
+    this.addMedicineForm.patchValue({
+      is_c_u_price: !is_c_u_price
+    });
+  }
+
+  onCancelEditUnitPriceAndAmount() {
+    const { is_c_u_price } = this.addMedicineForm.value;
+
+    this.addMedicineForm.patchValue({
+      is_c_u_price: !is_c_u_price,
+      u_price: this.oldValue.u_price,
+      amount: this.oldValue.amount
+    });
+  }
+
+  // Edit Sell Price
+  onEditSellPrice() {
+    const { is_c_s_price, s_price } = this.addMedicineForm.value;
+    this.oldValue = {...this.oldValue, s_price};
     this.addMedicineForm.patchValue({ is_c_s_price: !is_c_s_price })
   }
 
-  toggleChangePresPrice() {
-    const { is_c_pres_price } = this.createPrescriptionForm.value;
+  onChangeSellPrice() {
+    const { is_c_s_price } = this.addMedicineForm.value;
+
+    this.addMedicineForm.patchValue({
+      is_c_s_price: !is_c_s_price
+    });
+  }
+
+  onCancelEditSellPrice() {
+    const { is_c_s_price } = this.addMedicineForm.value;
+
+    this.addMedicineForm.patchValue({
+      is_c_s_price: !is_c_s_price,
+      s_price: this.oldValue.s_price
+    });
+  }
+
+  // Edit Pres Price
+  onEditPresPrice() {
+    const { is_c_pres_price, pres_price } = this.createPrescriptionForm.value;
+    this.oldValue.pres_price = pres_price;
     this.createPrescriptionForm.patchValue({
       is_c_pres_price: !is_c_pres_price
     });
   }
+
+  onChangePresPrice() {
+    const { is_c_pres_price } = this.createPrescriptionForm.value;
+
+    this.createPrescriptionForm.patchValue({
+      is_c_pres_price: !is_c_pres_price
+    });
+  }
+
+  onCancelChangePresPrice() {
+    const { is_c_pres_price } = this.createPrescriptionForm.value;
+
+    this.createPrescriptionForm.patchValue({
+      is_c_pres_price: !is_c_pres_price,
+      pres_price: this.oldValue.pres_price
+    });
+  }
+
+
 
   // Formatter
   formatterVnd = (value: string) => this.vndCurrencyPipe.transform(value);
