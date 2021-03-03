@@ -6,23 +6,14 @@
 }
 
 nz-table {
-  margin: .5rem;
 
   th {
     padding: 1rem .5rem !important;
   }
 
   tr {
-    &:nth-child(odd) {
-      background-color: #fff8f8;
-    }
-
-    // &:hover {
-    //   background-color: tomato !important;
-
-    //   td {
-    //     background-color: tomato !important;
-    //   }
+    // &:nth-child(odd) {
+    //   background-color: #fff8f8;
     // }
   }
 

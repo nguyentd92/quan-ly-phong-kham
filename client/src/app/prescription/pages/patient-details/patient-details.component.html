@@ -1,3 +1,7 @@
+<div class="page-header">
+  <a nz-button nzSize="small" nzType="link" (click)="back()">< Quay lại</a>
+</div>
+
 <nz-descriptions nzTitle="Nguyễn Văn A">
   <nz-descriptions-item nzTitle="Giới tính">Nam</nz-descriptions-item>
   <nz-descriptions-item nzTitle="Ngày sinh">20/10/2018 (3 tuổi)</nz-descriptions-item>
@@ -7,3 +11,32 @@
     28 Hùng Vương, phường 5, TP Cà Mau
   </nz-descriptions-item>
 </nz-descriptions>
+
+<div class="actions">
+  <button nz-button nzType="link" (click)="openCreatePrescriptionDrawer()">+ Tạo phiếu khám</button>
+</div>
+
+<nz-divider class="split-block"></nz-divider>
+
+<nz-table [nzShowPagination]="false" #basicTable [nzData]="examHistory">
+  <thead>
+    <tr>
+      <th class="exam-history-th">Ngày khám</th>
+      <th class="exam-history-th">Chuẩn đoán</th>
+      <th class="exam-history-th">Thanh toán</th>
+      <th class="exam-history-th">Thao tác</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.exam_at | date: 'dd/MM/YYYY' }}</td>
+      <td>{{ data.pathology }}</td>
+      <td>{{ data.pres_price | currency: 'VND' }}</td>
+      <td>
+        <a>Tái khám</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a>Xóa</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

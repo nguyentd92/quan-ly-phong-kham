@@ -1,0 +1,23 @@
+nz-descriptions {
+  margin: 1rem .5rem 0;
+}
+
+nz-divider.split-block {
+  margin: .5rem 0;
+}
+
+:host {
+  padding-top: 1rem;
+}
+
+$examHistoryCellPadding: .5rem;
+.exam-history-th {
+  background: white !important;
+  padding: $examHistoryCellPadding !important;
+}
+
+.actions {
+  button {
+    padding: 0 0.5rem;
+  }
+}
