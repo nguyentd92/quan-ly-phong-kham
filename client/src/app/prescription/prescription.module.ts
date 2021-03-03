@@ -24,11 +24,17 @@ import { ViewPrescriptionComponent } from './popups/view-prescription/view-presc
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { VndCurrencyPipeModule } from '../shared/pipes/vnd-currency-pipe/vnd-currency-pipe.module';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { PatientDetailsComponent } from './pages/patient-details/patient-details.component';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 
 const PRESCRIPTION_ROUTES: Routes = [
   {
     path: '',
     component: ListPrescriptionComponent
+  },
+  {
+    path: 'benh-nhan/:id',
+    component: PatientDetailsComponent
   }
 ];
 
@@ -38,7 +44,8 @@ const PRESCRIPTION_ROUTES: Routes = [
     SearchPrescriptionComponent,
     CreatePrescriptionComponent,
     AddMedicineComponent,
-    ViewPrescriptionComponent
+    ViewPrescriptionComponent,
+    PatientDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -61,7 +68,8 @@ const PRESCRIPTION_ROUTES: Routes = [
     FontAwesomeModule,
     FormsModule,
     VndCurrencyPipeModule,
-    NzAlertModule
+    NzAlertModule,
+    NzDescriptionsModule
   ]
 })
 export class PrescriptionModule {
