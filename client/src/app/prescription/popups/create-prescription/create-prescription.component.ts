@@ -46,7 +46,10 @@ DaySession.listEn.forEach(t => {
 @Component({
   selector: 'app-create-prescription',
   templateUrl: './create-prescription.component.html',
-  styleUrls: ['./create-prescription.component.scss']
+  styleUrls: ['./create-prescription.component.scss'],
+  host: {
+    "class": "container"
+  }
 })
 export class CreatePrescriptionComponent implements OnInit {
   createPrescriptionForm: FormGroup;
