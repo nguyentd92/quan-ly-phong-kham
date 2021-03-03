@@ -331,6 +331,7 @@
               <ng-container *ngIf="addMedicineForm.enabled">
                 <!-- Button Edit Unit Price -->
                 <button
+                  type="button"
                   *ngIf="
                     !addMedicineForm.value.is_c_u_price;
                     else changeUnitPriceActions
@@ -347,6 +348,7 @@
                 <ng-template #changeUnitPriceActions>
                   <!-- Button Accept Change Unit Price -->
                   <button
+                    type="button"
                     nz-button
                     nzType="link"
                     (click)="onChangeUnitPriceAndAmount()"
@@ -357,6 +359,7 @@
 
                   <!-- Button Cancel Change Edit Unit Price -->
                   <button
+                    type="button"
                     nz-button
                     nzType="link"
                     (click)="onCancelEditUnitPriceAndAmount()"
@@ -404,6 +407,7 @@
                     !addMedicineForm.value.is_c_s_price;
                     else changeSellPriceActions
                   "
+                  type="button"
                   style="margin-left: 0.5rem"
                   nz-button
                   nzType="link"
@@ -415,13 +419,14 @@
 
                 <ng-template #changeSellPriceActions>
                   <!-- Button Accept Change Sell Price -->
-                  <button nz-button nzType="link" (click)="onChangeSellPrice()">
+                  <button type="button" nz-button nzType="link" (click)="onChangeSellPrice()">
                     <i nz-icon nzType="check" nzTheme="outline"></i>
                   </button>
                   <!-- End Button Accept Change Sell Price -->
 
                   <!-- Button Cancel Change Sell Price -->
                   <button
+                    type="button"
                     nz-button
                     nzType="link"
                     (click)="onCancelEditSellPrice()"
