@@ -109,8 +109,25 @@
   </div>
   <!-- End Patient Details -->
 
-  <div class="form-combine" nz-row>
+  <!-- Symptoms & Diagnosis -->
+  <div class="form-combine symptoms-diagnosis" nz-row>
     <div class="form-combine__title">Triệu chứng & Chuẩn đoán</div>
+
+    <div
+      class="symptoms-diagnosis__last-pathology"
+      nz-col
+      nzSpan="24"
+      *ngIf="fromPrescription"
+    >
+      <div nz-col nzOffset="2" nzSpan="19">
+        <span
+          >Chuẩn đoán lần khám trước:
+          <b>{{ fromPrescription?.diagnosis }}</b></span
+        >
+
+        <nz-divider></nz-divider>
+      </div>
+    </div>
 
     <div nz-col nzSpan="24">
       <div nz-col nzOffset="2">
@@ -145,6 +162,7 @@
       </div>
     </div>
   </div>
+  <!-- End Symptoms & Diagnosis -->
 
   <div class="form-combine" nz-row>
     <div class="form-combine__title">Kê toa thuốc</div>

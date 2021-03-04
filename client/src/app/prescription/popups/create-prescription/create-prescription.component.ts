@@ -5,6 +5,7 @@ import { debounceTime, map } from 'rxjs/operators';
 import { DaySession } from 'src/app/shared/constants/day-session.constant';
 import { Medicine } from 'src/app/shared/models/medicine.model';
 import { Patient } from 'src/app/shared/models/patient.model';
+import { Prescription } from 'src/app/shared/models/prescription.model';
 import { VndCurrencyPipe } from 'src/app/shared/pipes/vnd-currency-pipe/vnd-currency.pipe';
 import { MedicinesService } from 'src/app/shared/services/states/medicines.service';
 import { StringUltility } from 'src/app/shared/ultilites/string.ultitity';
@@ -54,6 +55,7 @@ DaySession.listEn.forEach(t => {
 })
 export class CreatePrescriptionComponent implements OnInit {
   @Input() patient: Partial<Patient>
+  @Input() fromPrescription: Partial<Prescription>
 
   createPrescriptionForm: FormGroup;
   addMedicineForm: FormGroup;
