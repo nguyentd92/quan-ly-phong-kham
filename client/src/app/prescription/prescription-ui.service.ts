@@ -31,10 +31,10 @@ export class PrescriptionUIService {
   }
 
   openCreatePrescriptionDrawer(patient: Partial<Patient> = null): Observable<any> {
+    const patientInfo: string = patient ? `${patient?.full_name} - Tel: ${patient?.phone} - Đc: ${patient?.address}` : "";
     const drawerRef = this.nzDrawerService.create<CreatePrescriptionComponent, { value: string }, string>({
-      nzTitle: `
-        <div class="container">
-          Tạo phiếu khám bệnh: ${patient?.full_name} - Tel: ${patient?.phone} - Đc: ${patient?.address}
+      nzTitle: `<div class="container">
+          Tạo phiếu khám bệnh: ${patientInfo}
         </div>
       `,
       nzContent: CreatePrescriptionComponent,
