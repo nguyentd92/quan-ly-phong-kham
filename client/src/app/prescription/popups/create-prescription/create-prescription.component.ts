@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { combineLatest, merge, Observable } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { DaySession } from 'src/app/shared/constants/day-session.constant';
 import { Medicine } from 'src/app/shared/models/medicine.model';
+import { Patient } from 'src/app/shared/models/patient.model';
 import { VndCurrencyPipe } from 'src/app/shared/pipes/vnd-currency-pipe/vnd-currency.pipe';
 import { MedicinesService } from 'src/app/shared/services/states/medicines.service';
 import { StringUltility } from 'src/app/shared/ultilites/string.ultitity';
@@ -52,6 +53,8 @@ DaySession.listEn.forEach(t => {
   }
 })
 export class CreatePrescriptionComponent implements OnInit {
+  @Input() patient: Partial<Patient>
+
   createPrescriptionForm: FormGroup;
   addMedicineForm: FormGroup;
 

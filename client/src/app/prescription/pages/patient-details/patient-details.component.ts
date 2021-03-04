@@ -47,6 +47,7 @@ export class PatientDetailsComponent implements OnInit {
 
   constructor(
     private presUIService: PrescriptionUIService,
+    private presService: PrescriptionService,
     private location: Location
   ) { }
 
@@ -54,7 +55,7 @@ export class PatientDetailsComponent implements OnInit {
   }
 
   openCreatePrescriptionDrawer() {
-    this.presUIService.openCreatePrescriptionDrawer();
+    this.presUIService.openCreatePrescriptionDrawer(this.patient);
   }
 
   back() {

@@ -1,15 +1,12 @@
-import { Injectable } from '@angular/core';
-import {NzModalService} from "ng-zorro-antd/modal";
-import {SearchPrescriptionComponent} from "./popups/search-prescription/search-prescription.component";
-import {BehaviorSubject, Observable, of} from "rxjs";
-import {NzDrawerService} from "ng-zorro-antd/drawer";
-import {CreatePrescriptionComponent} from "./popups/create-prescription/create-prescription.component";
-import { ViewPrescriptionComponent } from './popups/view-prescription/view-prescription.component';
 import { HttpClient } from '@angular/common/http';
-import { CalculateMedicineRequest } from './requests/calculate-medicine.request';
-import { CalculateMedicineResponse } from './responses/calculate-medicine.response';
-import { DaySession } from 'src/app/shared/constants/day-session.constant';
-import { pluck } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { NzDrawerService } from "ng-zorro-antd/drawer";
+import { NzModalService } from "ng-zorro-antd/modal";
+import { Observable } from "rxjs";
+import { Patient } from '../shared/models/patient.model';
+import { CreatePrescriptionComponent } from "./popups/create-prescription/create-prescription.component";
+import { SearchPrescriptionComponent } from "./popups/search-prescription/search-prescription.component";
+import { ViewPrescriptionComponent } from './popups/view-prescription/view-prescription.component';
 
 @Injectable({
   providedIn: 'root'
@@ -26,21 +23,25 @@ export class PrescriptionUIService {
       {
         nzTitle: 'Tìm thông tin khám bệnh',
         nzContent: SearchPrescriptionComponent,
-        nzOnOk: () => {}
+        nzOnOk: () => { }
       }
     );
 
     return modal.afterClose;
   }
 
-  openCreatePrescriptionDrawer(): Observable<any> {
+  openCreatePrescriptionDrawer(patient: Partial<Patient> = null): Observable<any> {
     const drawerRef = this.nzDrawerService.create<CreatePrescriptionComponent, { value: string }, string>({
-      nzTitle: 'Tạo phiếu khám bệnh',
+      nzTitle: `
+        <div class="container">
+          Tạo phiếu khám bệnh: ${patient?.full_name} - Tel: ${patient?.phone} - Đc: ${patient?.address}
+        </div>
+      `,
       nzContent: CreatePrescriptionComponent,
       nzPlacement: 'bottom',
       nzHeight: '98vh',
       nzContentParams: {
-        value: 'Hello'
+        patient
       }
     });
 
