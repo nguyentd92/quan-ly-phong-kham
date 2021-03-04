@@ -27,6 +27,7 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { PatientDetailsComponent } from './pages/patient-details/patient-details.component';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { PatientDescriptionsComponent } from './components/patient-descriptions/patient-descriptions.component';
 
 const PRESCRIPTION_ROUTES: Routes = [
   {
@@ -46,7 +47,8 @@ const PRESCRIPTION_ROUTES: Routes = [
     CreatePrescriptionComponent,
     AddMedicineComponent,
     ViewPrescriptionComponent,
-    PatientDetailsComponent
+    PatientDetailsComponent,
+    PatientDescriptionsComponent
   ],
   imports: [
     CommonModule,
