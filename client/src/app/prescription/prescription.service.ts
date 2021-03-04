@@ -6,6 +6,7 @@ import { StringUltility } from '../shared/ultilites/string.ultitity';
 import { CalculateMedicineRequest } from './requests/calculate-medicine.request';
 import { CalculateMedicineResponse } from './responses/calculate-medicine.response';
 import { differenceInDays, differenceInMonths, differenceInYears, addMonths, addYears } from 'date-fns';
+import { Patient } from '../shared/models/patient.model';
 interface PrescriptionConfig {
   pres_wage: number;
 }
@@ -76,5 +77,19 @@ export class PrescriptionService {
     }
 
     return of(result.join(' '));
+  }
+
+  getPatientDetails(patientId: number | string): Observable<Patient> {
+    // Mock Patient
+    let patient = new Patient();
+    patient.id = +patientId;
+    patient.full_name = "Nguyễn Văn A";
+    patient.dob = new Date(2017,10,10);
+    patient.phone = "0935.222.xxx";
+    patient.address = "70A Hùng Vương, phường 5, TP Cà Mau";
+    patient.age_str = "8 tuổi 2 tháng 3 ngày";
+    patient.guardian = "Nguyễn B";
+
+    return of(patient);
   }
 }
