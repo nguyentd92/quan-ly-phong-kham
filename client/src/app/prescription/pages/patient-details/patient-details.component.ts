@@ -72,6 +72,10 @@ export class PatientDetailsComponent implements OnInit {
     this.presUIService.openCreatePrescriptionDrawer(this.patient, prescription)
   }
 
+  openViewPrescriptionDrawer(prescription: Prescription) {
+    this.presUIService.openViewPrescriptionDrawer(prescription.id);
+  }
+
   back() {
     this.location.back();
   }

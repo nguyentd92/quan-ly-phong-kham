@@ -27,6 +27,8 @@
       <td>{{ data.diagnosis }}</td>
       <td>{{ data.pres_price | currency: 'VND' }}</td>
       <td>
+        <a (click)="openViewPrescriptionDrawer(data)">Xem toa</a>
+        <nz-divider nzType="vertical"></nz-divider>
         <a (click)="openRePrescriptionDrawer(data)">Tái khám</a>
         <nz-divider nzType="vertical"></nz-divider>
         <a>Xóa</a>
