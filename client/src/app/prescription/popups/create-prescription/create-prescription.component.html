@@ -1,5 +1,11 @@
 <nz-form [formGroup]="createPrescriptionForm" nz-col nzGutter="20">
-  <div class="form-combine" nz-row formGroupName="patient">
+  <!-- Form Patient Info -->
+  <div
+    class="form-combine"
+    nz-row
+    formGroupName="patient"
+    *ngIf="!this.patient"
+  >
     <div class="form-combine__title">Thông tin bệnh nhân</div>
     <div nz-col nzSpan="12">
       <nz-form-item>
@@ -91,6 +97,17 @@
       </nz-form-item>
     </div>
   </div>
+  <!-- End Form Patient Info -->
+
+  <!-- Patient Details -->
+  <div class="form-combine" *ngIf="this.patient">
+    <div class="form-combine__title">Thông tin bệnh nhân</div>
+
+    <div nz-col nzOffset="2" nzSpan="20">
+      <app-patient-descriptions [patient]="patient"></app-patient-descriptions>
+    </div>
+  </div>
+  <!-- End Patient Details -->
 
   <div class="form-combine" nz-row>
     <div class="form-combine__title">Triệu chứng & Chuẩn đoán</div>
@@ -135,7 +152,11 @@
     <!-- PRES MEDICINE LIST -->
     <div nz-col nzOffset="2" nzSpan="22" class="medicine-list">
       <!-- Show if empty list -->
-      <nz-alert *ngIf="!presMedList.length" nzType="warning" nzMessage="Chưa có thuốc trong toa"></nz-alert>
+      <nz-alert
+        *ngIf="!presMedList.length"
+        nzType="warning"
+        nzMessage="Chưa có thuốc trong toa"
+      ></nz-alert>
       <!-- End Show if empty list -->
 
       <div class="medicine" *ngFor="let item of presMedList; index as idx">
@@ -423,7 +444,12 @@
 
                 <ng-template #changeSellPriceActions>
                   <!-- Button Accept Change Sell Price -->
-                  <button type="button" nz-button nzType="link" (click)="onChangeSellPrice()">
+                  <button
+                    type="button"
+                    nz-button
+                    nzType="link"
+                    (click)="onChangeSellPrice()"
+                  >
                     <i nz-icon nzType="check" nzTheme="outline"></i>
                   </button>
                   <!-- End Button Accept Change Sell Price -->
@@ -558,9 +584,13 @@
         </nz-space-item>
 
         <nz-space-item>
-          <button nz-button
+          <button
+            nz-button
             [disabled]="!createPrescriptionForm.valid"
-            nzSize="large" nzType="default" nzBlock>
+            nzSize="large"
+            nzType="default"
+            nzBlock
+          >
             Lưu phiếu & In toa
           </button>
         </nz-space-item>
