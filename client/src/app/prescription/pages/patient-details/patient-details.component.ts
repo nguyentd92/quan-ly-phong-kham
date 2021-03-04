@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Patient } from 'src/app/shared/models/patient.model';
 import { PrescriptionUIService } from '../../prescription-ui.service';
 import { PrescriptionService } from '../../prescription.service';
@@ -48,10 +49,17 @@ export class PatientDetailsComponent implements OnInit {
   constructor(
     private presUIService: PrescriptionUIService,
     private presService: PrescriptionService,
-    private location: Location
+    private location: Location,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.fetchPatientDetails();
+  }
+
+  private fetchPatientDetails() {
+    const patientId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.presService.getPatientDetails(patientId).subscribe(res => this.patient = res)
   }
 
   openCreatePrescriptionDrawer() {
