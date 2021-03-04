@@ -1,4 +1,4 @@
-export interface Patient {
+export class Patient {
   id: number;
   full_name: string;
   dob: string;
