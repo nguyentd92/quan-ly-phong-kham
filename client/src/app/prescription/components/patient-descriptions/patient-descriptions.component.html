@@ -1,0 +1,10 @@
+<nz-descriptions nzTitle="Nguyễn Văn A">
+  <nz-descriptions-item nzTitle="Giới tính">{{ patient?.gender_str }}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Ngày sinh">{{ patient?.dob | date: "dd/MM/yyyy"}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Tuổi">{{ patient?.age_str }}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Số điện thoại">{{ patient?.phone }}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Địa chỉ">
+    {{ patient?.address }}
+  </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Người giám hộ">{{ patient?.guardian }}</nz-descriptions-item>
+</nz-descriptions>
