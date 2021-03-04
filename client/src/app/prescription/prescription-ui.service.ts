@@ -31,6 +31,9 @@ export class PrescriptionUIService {
     return modal.afterClose;
   }
 
+  // If not pass param patient, open CreatePrescriptionDrawer with Create New Patient Mode
+  // If has param patient, open CreatePrescriptionDrawer with Create new Prescription for existed Patient
+  // If has param fromPrescription, open CreatePrescriptionDrawer with Re Exam for there Prescription
   openCreatePrescriptionDrawer(patient: Partial<Patient> = null, fromPrescription: Partial<Prescription> = null): Observable<any> {
     const patientInfo: string = patient ? `${patient?.full_name} - Tel: ${patient?.phone} - Đc: ${patient?.address}` : "";
     const drawerRef = this.nzDrawerService.create<CreatePrescriptionComponent, { value: string }, string>({
