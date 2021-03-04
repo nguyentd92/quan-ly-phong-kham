@@ -2,33 +2,34 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Patient } from 'src/app/shared/models/patient.model';
+import { Prescription } from 'src/app/shared/models/prescription.model';
 import { PrescriptionUIService } from '../../prescription-ui.service';
 import { PrescriptionService } from '../../prescription.service';
 import { ExamHistoryResponse } from '../../responses/exam-history.response';
 
-const EXAM_HISTORY: ExamHistoryResponse = [
+const EXAM_HISTORY: Partial<Prescription>[] = [
   {
-    exam_id: 1,
-    exam_at: new Date(2020,10,20),
-    pathology: "Sốt siêu vi",
+    id: 1,
+    created_at: new Date(2020,10,20),
+    diagnosis: "Sốt siêu vi",
     pres_price: 150000
   },
   {
-    exam_id: 2,
-    exam_at: new Date(2020,6,12),
-    pathology: "Tiêu chảy cấp",
+    id: 2,
+    created_at: new Date(2020,6,12),
+    diagnosis: "Tiêu chảy cấp",
     pres_price: 150000
   },
   {
-    exam_id: 3,
-    exam_at: new Date(2020,5,14),
-    pathology: "Sốt phát ban",
+    id: 3,
+    created_at: new Date(2020,5,14),
+    diagnosis: "Sốt phát ban",
     pres_price: 200000
   },
   {
-    exam_id: 4,
-    exam_at: new Date(2020,1,15),
-    pathology: "Cảm thông thường",
+    id: 4,
+    created_at: new Date(2020,1,15),
+    diagnosis: "Cảm thông thường",
     pres_price: 150000
   }
 ]
@@ -44,7 +45,7 @@ const EXAM_HISTORY: ExamHistoryResponse = [
 export class PatientDetailsComponent implements OnInit {
   patient: Patient = null;
 
-  examHistory: ExamHistoryResponse = EXAM_HISTORY;
+  examHistory: Partial<Prescription>[] = EXAM_HISTORY;
 
   constructor(
     private presUIService: PrescriptionUIService,
@@ -64,6 +65,11 @@ export class PatientDetailsComponent implements OnInit {
 
   openCreatePrescriptionDrawer() {
     this.presUIService.openCreatePrescriptionDrawer(this.patient);
+  }
+
+  openRePrescriptionDrawer(fromPrescription: Prescription) {
+    const prescription: Partial<Prescription> = fromPrescription;
+    this.presUIService.openCreatePrescriptionDrawer(this.patient, prescription)
   }
 
   back() {

@@ -23,11 +23,11 @@
   </thead>
   <tbody>
     <tr *ngFor="let data of basicTable.data">
-      <td>{{ data.exam_at | date: 'dd/MM/YYYY' }}</td>
-      <td>{{ data.pathology }}</td>
+      <td>{{ data.created_at | date: 'dd/MM/YYYY' }}</td>
+      <td>{{ data.diagnosis }}</td>
       <td>{{ data.pres_price | currency: 'VND' }}</td>
       <td>
-        <a>Tái khám</a>
+        <a (click)="openRePrescriptionDrawer(data)">Tái khám</a>
         <nz-divider nzType="vertical"></nz-divider>
         <a>Xóa</a>
       </td>
