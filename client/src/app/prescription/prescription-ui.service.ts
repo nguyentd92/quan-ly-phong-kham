@@ -55,7 +55,7 @@ export class PrescriptionUIService {
 
   openViewPrescriptionDrawer(id: number): Observable<any> {
     const drawerRef = this.nzDrawerService.create<ViewPrescriptionComponent, { value: string }, string>({
-      nzTitle: 'Phiếu khám bệnh',
+      nzTitle: '<span class="container">Phiếu khám bệnh</span>',
       nzContent: ViewPrescriptionComponent,
       nzPlacement: 'bottom',
       nzHeight: '100vn',
