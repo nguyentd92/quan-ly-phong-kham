@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { pluck } from 'rxjs/operators';
+import { delay, pluck } from 'rxjs/operators';
 import { DaySession } from '../shared/constants/day-session.constant';
 import { StringUltility } from '../shared/ultilites/string.ultitity';
 import { CalculateMedicineRequest } from './requests/calculate-medicine.request';
 import { CalculateMedicineResponse } from './responses/calculate-medicine.response';
 import { differenceInDays, differenceInMonths, differenceInYears, addMonths, addYears } from 'date-fns';
 import { Patient } from '../shared/models/patient.model';
+import { GetPrescriptionsRequest } from './requests/get-prescriptions.request';
+import { GetPrescriptionsResponse } from './responses/get-prescriptions.response';
 interface PrescriptionConfig {
   pres_wage: number;
 }
@@ -91,5 +93,58 @@ export class PrescriptionService {
     patient.guardian = "Nguyễn B";
 
     return of(patient);
+  }
+
+  getPatients(request: GetPrescriptionsRequest): Observable<Patient[]> {
+    const response: GetPrescriptionsResponse = {
+      pageIndex: request.pageIndex,
+      pageSize: request.pageSize,
+      queryParams: request.queryParams,
+      data: [
+        {
+          id: 1,
+          full_name: "Nguyễn Văn A",
+          last_exam_at: new Date(2020,12,15),
+          age_int: 1,
+          phone: "0932.223.223",
+          address: "28 Nguyen Tri Phuong, TP Huế",
+        },
+        {
+          id: 2,
+          full_name: "Nguyễn Văn B",
+          last_exam_at: new Date(2020,9,12),
+          age_int: 1,
+          phone: "0932.777.223",
+          address: "25 Nguyen Tri Phuong, TP Huế",
+        },
+        {
+          id: 3,
+          full_name: "Nguyễn Văn C",
+          last_exam_at: new Date(2020,12,21),
+          age_int: 1,
+          phone: "0932.223.222",
+          address: "28 Nguyen Tri Phuong, TP Cà Mau",
+        },
+        {
+          id: 4,
+          full_name: "Nguyễn Văn D",
+          last_exam_at: new Date(2020,10,12),
+          age_int: 1,
+          phone: "0932.223.444",
+          address: "28 Nguyen Hue, TP Huế",
+        },
+        {
+          id: 5,
+          full_name: "Nguyễn Văn E",
+          last_exam_at: new Date(2019,12,12),
+          age_int: 1,
+          phone: "0932.223.111",
+          address: "28 Nguyen Cong Tru, TP Huế",
+        }
+      ]
+    }
+
+    return of(response.data as Patient[])
+      // .pipe(delay(2));
   }
 }
