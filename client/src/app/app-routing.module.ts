@@ -28,6 +28,10 @@ const ROUTES: Routes = [
       {
         path: "thong-ke",
         loadChildren: () => import('./statistic/statistic.module').then(m => m.StatisticModule)
+      },
+      {
+        path: "cai-dat",
+        loadChildren: () => import('./config/config.module').then(m => m.ConfigModule)
       }
     ]
   }
