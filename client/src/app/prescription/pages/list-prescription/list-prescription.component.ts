@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Patients } from 'src/app/shared/models/patient.model';
+import { Patient, Patients } from 'src/app/shared/models/patient.model';
 import { ObjectUltility } from 'src/app/shared/ultilites/object.ultility';
 import { PrescriptionUIService } from "../../prescription-ui.service";
 import { PrescriptionService } from '../../prescription.service';
@@ -54,8 +54,14 @@ export class ListPrescriptionComponent implements OnInit {
     this.prescriptionUIService.openSearchPrescriptionsModal();
   }
 
-  openCreatePrescriptionDrawer(): void {
-    this.prescriptionUIService.openCreatePrescriptionDrawer();
+  // If has param patient, create prescription for existed patient
+  // else, create prescription for absolutely new patient
+  openCreatePrescriptionDrawer(patient: Patient = null): void {
+    this.prescriptionUIService.openCreatePrescriptionDrawer(patient);
+  }
+
+  goToPatientDetailsPage(patient: Patient) {
+    this.router.navigate(['benh-nhan', patient.id], { state: { patient }, relativeTo: this.activatedRoute });
   }
 
   protected subscribeParamsFromUrl(): void {

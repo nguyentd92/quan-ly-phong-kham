@@ -41,13 +41,13 @@
   </thead>
   <tbody>
   <tr *ngFor="let data of patientsTable.data">
-    <td><a [routerLink]="['benh-nhan', data.id]">{{ data.full_name }}</a></td>
+    <td><a (click)="goToPatientDetailsPage(data)">{{ data.full_name }}</a></td>
     <td>{{ data.age_int }}</td>
     <td>{{ data.phone }}</td>
     <td>{{ data.address }}</td>
     <td>{{ data.last_exam_at | date: 'dd/MM/yyyy' }} </td>
     <td>
-      <a [routerLink]="['benh-nhan', data.id]">
+      <a (click)="openCreatePrescriptionDrawer(data)">
         Khám
       </a>
 
