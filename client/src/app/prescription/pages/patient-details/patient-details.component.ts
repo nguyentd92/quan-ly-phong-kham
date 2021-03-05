@@ -55,7 +55,8 @@ export class PatientDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.fetchPatientDetails();
+    this.patient = window.history.state.patient;
+    // this.fetchPatientDetails();
   }
 
   private fetchPatientDetails() {
