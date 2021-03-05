@@ -58,17 +58,20 @@ export class ListPrescriptionComponent implements OnInit {
     this.prescriptionUIService.openCreatePrescriptionDrawer();
   }
 
-  subscribeParamsFromUrl(): void {
+  protected subscribeParamsFromUrl(): void {
     // Subscribe Query Params Change
+    const { pageIndex, pageSize } = this.queryPrescriptionsParams;
+    const { name, dob, phone, address } = this.queryPrescriptionsParams.queryParams;
     this.activatedRoute.queryParams.subscribe(params => {
+      console.log(params)
       this.queryPrescriptionsParams = {
-        pageIndex: params.pageIndex,
-        pageSize: params.pageSize,
+        pageIndex: params.pageIndex || pageIndex,
+        pageSize: params.pageSize || pageSize,
         queryParams: {
-          name: params.name,
-          dob: params.dob,
-          phone: params.phone,
-          address: params.address
+          name: params.name || name,
+          dob: params.dob || dob,
+          phone: params.phone || phone,
+          address: params.address || address
         }
       }
 
