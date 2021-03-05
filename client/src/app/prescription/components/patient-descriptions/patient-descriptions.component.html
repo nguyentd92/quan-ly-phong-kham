@@ -1,4 +1,4 @@
-<nz-descriptions nzTitle="Nguyễn Văn A">
+<nz-descriptions [nzTitle]="patient?.full_name">
   <nz-descriptions-item nzTitle="Giới tính">{{ patient?.gender_str }}</nz-descriptions-item>
   <nz-descriptions-item nzTitle="Ngày sinh">{{ patient?.dob | date: "dd/MM/yyyy"}}</nz-descriptions-item>
   <nz-descriptions-item nzTitle="Tuổi">{{ patient?.age_str }}</nz-descriptions-item>
