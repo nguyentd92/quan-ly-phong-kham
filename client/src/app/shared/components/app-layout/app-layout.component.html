@@ -1,13 +1,47 @@
 <nz-layout>
   <nz-header>
-    <div class="logo">
-    </div>
-    <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu container">
-      <li nz-menu-item routerLink="/kham-benh" routerLinkActive="ant-menu-item-selected"><fa-icon [icon]="faStethoscope"></fa-icon>Khám bệnh</li>
-      <li nz-menu-item routerLink="/kho-thuoc" routerLinkActive="ant-menu-item-selected"><i nz-icon nzType="medicine-box" nzTheme="fill"></i>Kho thuốc</li>
-      <li nz-menu-item routerLink="/thong-ke" routerLinkActive="ant-menu-item-selected"><fa-icon [icon]="faChartPie"></fa-icon>Thống kê</li>
+    <div class="logo"></div>
+    <ul
+      nz-menu
+      nzTheme="dark"
+      nzMode="horizontal"
+      class="header-menu container"
+    >
+      <li
+        nz-menu-item
+        routerLink="/kham-benh"
+        routerLinkActive="ant-menu-item-selected"
+      >
+        <fa-icon [icon]="faStethoscope"></fa-icon>Khám bệnh
+      </li>
+      <li
+        nz-menu-item
+        routerLink="/kho-thuoc"
+        routerLinkActive="ant-menu-item-selected"
+      >
+        <i nz-icon nzType="medicine-box" nzTheme="fill"></i>Kho thuốc
+      </li>
+      <li
+        nz-menu-item
+        routerLink="/thong-ke"
+        routerLinkActive="ant-menu-item-selected"
+      >
+        <fa-icon [icon]="faChartPie"></fa-icon>Thống kê
+      </li>
+
+      <li
+        class="flex-end"
+        nz-menu-item
+        routerLink="/cai-dat"
+        routerLinkActive="ant-menu-item-selected"
+      >
+        <fa-icon [icon]="faCog"></fa-icon>Cài đặt
+      </li>
+      <li nz-menu-item><fa-icon [icon]="faSignOut"></fa-icon>Đăng xuất</li>
     </ul>
   </nz-header>
 </nz-layout>
 
-<router-outlet></router-outlet>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

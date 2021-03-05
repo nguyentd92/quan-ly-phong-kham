@@ -6,3 +6,16 @@ nz-header {
   display: fixed;
   top: 100px;
 }
+
+.header-menu {
+  display: flex;
+
+  .flex-end {
+    margin-left: auto;
+    justify-self: flex-end;
+  }
+
+  li {
+    outline: none;
+  }
+}
