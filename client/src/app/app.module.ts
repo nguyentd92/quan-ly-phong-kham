@@ -26,6 +26,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ApiInterceptor } from './shared/interceptors/api.interceptor';
 import { NgxCurrencyModule } from 'ngx-currency';
 import { VndCurrencyPipeModule } from './shared/pipes/vnd-currency-pipe/vnd-currency-pipe.module';
+import { NzMessageServiceModule } from 'ng-zorro-antd/message';
 
 registerLocaleData(vi);
 
@@ -54,7 +55,8 @@ registerLocaleData(vi);
     NzIconModule,
     NgxCurrencyModule,
     FontAwesomeModule,
-    VndCurrencyPipeModule
+    VndCurrencyPipeModule,
+    NzMessageServiceModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: vi_VN },

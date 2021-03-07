@@ -10,6 +10,7 @@ import { VndCurrencyPipe } from 'src/app/shared/pipes/vnd-currency-pipe/vnd-curr
 import { MedicinesService } from 'src/app/shared/services/states/medicines.service';
 import { StringUltility } from 'src/app/shared/ultilites/string.ultitity';
 import { PrescriptionService } from '../../prescription.service';
+import { CreatePrescriptionRequest } from '../../requests/create-prescription.request';
 import { CalculateMedicineResponse } from '../../responses/calculate-medicine.response';
 
 const ADD_MEDICINE_FORM = {
@@ -341,7 +342,9 @@ export class CreatePrescriptionComponent implements OnInit {
     });
   }
 
-
+  onSubmitCreatePrescription() {
+    this.presService.createPrescription({} as CreatePrescriptionRequest);
+  }
 
   // Formatter
   formatterVnd = (value: string) => this.vndCurrencyPipe.transform(value);

@@ -9,6 +9,8 @@ import { differenceInDays, differenceInMonths, differenceInYears, addMonths, add
 import { Patient } from '../shared/models/patient.model';
 import { GetPrescriptionsRequest } from './requests/get-prescriptions.request';
 import { GetPrescriptionsResponse } from './responses/get-prescriptions.response';
+import { CreatePrescriptionRequest } from './requests/create-prescription.request';
+import { UIMessageService } from '../shared/services/user-interfaces/ui-message.service';
 interface PrescriptionConfig {
   pres_wage: number;
 }
@@ -17,7 +19,7 @@ interface PrescriptionConfig {
 })
 export class PrescriptionService {
 
-  constructor() { }
+  constructor(private uiMessageService: UIMessageService) { }
 
   private configSj = new BehaviorSubject<PrescriptionConfig>({
     pres_wage: 100000
@@ -146,5 +148,11 @@ export class PrescriptionService {
 
     return of(response.data as Patient[])
       // .pipe(delay(2));
+  }
+
+  // Commands
+  createPrescription(req: CreatePrescriptionRequest): Observable<any> {
+    this.uiMessageService.success("Thêm mới thành công");
+    return of();
   }
 }

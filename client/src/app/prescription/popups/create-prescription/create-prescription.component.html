@@ -594,7 +594,7 @@
     <div nz-col nzOffset="2" nzSpan="20" style="padding-bottom: 1rem">
       <nz-space>
         <nz-space-item>
-          <button nz-button nzSize="large" nzType="primary" nzBlock>
+          <button nz-button nzSize="large" nzType="primary" nzBlock (click)="onSubmitCreatePrescription()">
             Lưu phiếu:
             {{
               predMedTotal + createPrescriptionForm.value.pres_price
@@ -605,6 +605,7 @@
 
         <nz-space-item>
           <button
+            type="submit"
             nz-button
             [disabled]="!createPrescriptionForm.valid"
             nzSize="large"
