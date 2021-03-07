@@ -1,9 +1,9 @@
 // This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
+// `ng build --watch` replaces `environment.ts` with `environment.watch.ts`.
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  devfs: false,
+  devfs: true,
   production: false,
   requestRetry: 2,
   domain: "http://quanlyphongkham.test"

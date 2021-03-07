@@ -5,9 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "nodemon -e ts,html,scss -w ./src -x 'ng build --deploy-url=client/ && gulp dist'",
-    "build-dev": "ng build --deploy-url=client/ && gulp dist",
-    "build-prod": "ng build --prod --deploy-url=client/ && gulp dist",
+    "watch": "nodemon -e ts,html,scss -w ./src -x 'ng build --configuration=devfs && gulp dist'",
+    "build-dev": "ng build --configuration=devfs && gulp dist",
+    "build-prod": "ng build --prod && gulp dist",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

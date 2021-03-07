@@ -39,6 +39,16 @@
             "scripts": []
           },
           "configurations": {
+            "devfs": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.devfs.ts"
+                }
+              ],
+              "optimization": false,
+              "deployUrl": "/client/"
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -53,6 +63,7 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "deployUrl": "/client/",
               "budgets": [
                 {
                   "type": "initial",
@@ -61,8 +72,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "150kB",
+                  "maximumError": "200kB"
                 }
               ]
             }
@@ -74,6 +85,9 @@
             "browserTarget": "client:build"
           },
           "configurations": {
+            "devfs": {
+              "browserTarget": "client:build:devfs"
+            },
             "production": {
               "browserTarget": "client:build:production"
             }

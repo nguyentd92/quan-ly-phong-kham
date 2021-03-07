@@ -1,4 +1,6 @@
 export const environment = {
+  devfs: false,
   production: true,
-  requestRetry: 2
+  requestRetry: 2,
+  domain: ""
 };
