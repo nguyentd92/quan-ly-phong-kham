@@ -1,3 +1,88 @@
-<p>
-  config works!
-</p>
+<div nz-row class="grid-container">
+  <div class="grid-container__left" nz-col nzSpan="6">
+    <ul nz-menu nzMode="inline">
+      <li nz-submenu nzTitle="Tài khoản" nzIcon="idcard">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['/', 'cai-dat', 'ca-nhan', 'thong-tin-ca-nhan']"
+              >Thông tin cá nhân</a
+            >
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['/', 'cai-dat', 'ca-nhan', 'doi-mat-khau']"
+              >Đổi mật khẩu</a
+            >
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['/', 'cai-dat', 'ca-nhan', 'quyen-han']"
+              >Quyền hạn</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Quản lý tài khoản" nzIcon="unordered-list">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a
+              [routerLink]="[
+                '/',
+                'cai-dat',
+                'tai-khoan-ung-dung',
+                'danh-sach-tai-khoan'
+              ]"
+            >
+              Danh sách tài khoản</a
+            >
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a
+              [routerLink]="[
+                '/',
+                'cai-dat',
+                'tai-khoan-ung-dung',
+                'danh-sach-vai-tro'
+              ]"
+              >Nhóm phân quyền</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Lịch sử hệ thống" nzIcon="history">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['/', 'cai-dat', 'lich-su-he-thong', 'truy-cap']"
+              >Truy cập</a
+            >
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['/', 'cai-dat', 'lich-su-he-thong', 'loi']"
+              >Ghi log</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Cài đặt Phòng khám" nzIcon="setting">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['/', 'cai-dat', 'phong-kham', 'thong-tin']"
+              >Thông tin phòng khám</a
+            >
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['/', 'cai-dat', 'phong-kham', 'kham-benh']"
+              >Cài đặt khám bệnh</a
+            >
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['/', 'cai-dat', 'phong-kham', 'kho-thuoc']"
+              >Cài đặt Quản lý kho thuốc</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="grid-container__right" nz-col nzSpan="18">
+    <router-outlet></router-outlet>
+  </div>
+</div>
