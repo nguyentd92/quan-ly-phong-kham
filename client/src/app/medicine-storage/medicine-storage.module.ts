@@ -1,20 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MedicineStorageDashboardComponent } from './pages/medicine-storage-dashboard/medicine-storage-dashboard.component';
 import {RouterModule, Routes} from "@angular/router";
+import { MedicineStorageComponent } from './medicine-storage.component';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 const MEDICINE_STORAGE_ROUTES: Routes = [
   {
     path: '',
-    component: MedicineStorageDashboardComponent
+    component: MedicineStorageComponent,
+    children: []
   }
 ];
 
 @NgModule({
-  declarations: [MedicineStorageDashboardComponent],
+  declarations: [MedicineStorageComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(MEDICINE_STORAGE_ROUTES)
+    RouterModule.forChild(MEDICINE_STORAGE_ROUTES),
+    NzMenuModule,
+    NzGridModule
   ]
 })
 export class MedicineStorageModule { }

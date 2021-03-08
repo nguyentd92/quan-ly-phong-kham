@@ -1,0 +1,50 @@
+<div nz-row class="grid-container">
+  <div class="grid-container__left" nz-col nzSpan="6">
+    <ul nz-menu nzMode="inline">
+      <li nz-menu-item nzIcon="idcard">
+        <a>Nhập thuốc</a>
+      </li>
+      <li nz-menu-item nzIcon="idcard">
+        <a>Giá nhập/Giá bán</a>
+      </li>
+      <li nz-menu-item nzIcon="idcard">
+        <a>Thuốc sắp hết</a>
+      </li>
+      <li nz-submenu nzTitle="Đầu thuốc" nzIcon="unordered-list">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a
+            >...</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Đơn vị thuốc" nzIcon="history">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a
+              >Đơn vị nhỏ</a
+            >
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a
+              >Đơn vị lớn</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Phân nhóm thuốc" nzIcon="setting">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a
+              >...</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="grid-container__right" nz-col nzSpan="18">
+    <router-outlet></router-outlet>
+  </div>
+</div>
