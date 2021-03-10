@@ -1,3 +1,56 @@
-<p>
-  create-medicine works!
-</p>
+<form nz-form>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="5" nzRequired>Tên thuốc</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzValidatingTip="Validating...">
+      <input nz-input formControlName="userName" placeholder="Nhập tên thuốc" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="5" nzRequired>Nhóm thuốc</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <nz-select nzShowSearch nzPlaceHolder="Chọn nhóm thuốc">
+        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="5" nzRequired>Đơn vị lớn</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <nz-select nzShowSearch nzPlaceHolder="Chọn đơn vị lớn">
+        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="5" nzRequired>Đơn vị nhỏ</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <nz-select nzShowSearch nzPlaceHolder="Chọn đơn vị nhỏ">
+        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="5" nzRequired>Giá bán (nhỏ)</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <input nz-input formControlName="mobile" placeholder="VND" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="5" nzRequired>Giá bán (lớn)</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <input nz-input formControlName="mobile" placeholder="VND" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <div nz-col [nzSpan]="5"></div>
+    <nz-form-control [nzSpan]="12">
+      <button nz-button nzType="primary" nzBlock>Lưu thuốc</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

@@ -4,6 +4,11 @@ import { MedicineComponent } from './medicine.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateMedicineComponent } from './create-medicine/create-medicine.component';
 import { ListMedicineComponent } from './list-medicine/list-medicine.component';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 const ROUTES: Routes = [
   {
@@ -24,8 +29,13 @@ const ROUTES: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(ROUTES)
+    RouterModule.forChild(ROUTES),
+    NzFormModule,
+    NzLayoutModule,
+    NzInputModule,
+    NzSelectModule,
+    NzButtonModule
   ],
-  declarations: [MedicineComponent]
+  declarations: [MedicineComponent, ListMedicineComponent, CreateMedicineComponent]
 })
 export class MedicineModule { }
