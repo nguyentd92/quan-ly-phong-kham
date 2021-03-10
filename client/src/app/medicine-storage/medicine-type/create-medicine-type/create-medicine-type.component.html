@@ -1,0 +1,21 @@
+<form nz-form>
+  <nz-form-item>
+    <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="email">Tên nhóm thuốc</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+      <input nz-input/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="password" nzRequired>Mô tả</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
+      <textarea nz-input></textarea>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <div nz-col [nzSm]="5" [nzXs]="24"></div>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <button nz-button nzType="primary" nzBlock>Lưu nhóm thuốc</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

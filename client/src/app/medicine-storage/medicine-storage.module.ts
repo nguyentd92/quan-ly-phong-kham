@@ -9,7 +9,12 @@ const MEDICINE_STORAGE_ROUTES: Routes = [
   {
     path: '',
     component: MedicineStorageComponent,
-    children: []
+    children: [
+      {
+        path: 'nhom-thuoc',
+        loadChildren: () => import('./medicine-type/medicine-type.module').then(m => m.MedicineTypeModule)
+      }
+    ]
   }
 ];
 
