@@ -26,12 +26,12 @@
       </li>
       <li nz-submenu nzTitle="Đơn vị thuốc" nzIcon="history">
         <ul>
-          <li nz-menu-item nzMatchRouter>
+          <li nz-menu-item nzMatchRouter [routerLink]="['/', 'kho-thuoc', 'don-vi-thuoc', 'don-vi-nho']">
             <a
               >Đơn vị nhỏ</a
             >
           </li>
-          <li nz-menu-item nzMatchRouter>
+          <li nz-menu-item nzMatchRouter [routerLink]="['/', 'kho-thuoc', 'don-vi-thuoc', 'don-vi-lon']">
             <a
               >Đơn vị lớn</a
             >

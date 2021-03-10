@@ -17,6 +17,10 @@ const MEDICINE_STORAGE_ROUTES: Routes = [
       {
         path: 'thuoc',
         loadChildren: () => import('./medicine/medicine.module').then(m => m.MedicineModule)
+      },
+      {
+        path: 'don-vi-thuoc',
+        loadChildren: () => import('./medicine-unit/medicine-unit.module').then(m => m.MedicineUnitModule)
       }
     ]
   }
