@@ -9,6 +9,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const ROUTES: Routes = [
   {
@@ -34,7 +35,8 @@ const ROUTES: Routes = [
     NzLayoutModule,
     NzInputModule,
     NzSelectModule,
-    NzButtonModule
+    NzButtonModule,
+    ReactiveFormsModule
   ],
   declarations: [MedicineComponent, ListMedicineComponent, CreateMedicineComponent]
 })
