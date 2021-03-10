@@ -1,4 +1,4 @@
-<nz-table #nzTable [nzData]="listOfData" nzTableLayout="fixed">
+<nz-table [nzLoading]="isLoading" #nzTable [nzData]="listOfData" nzTableLayout="fixed">
   <thead>
     <tr>
       <th nzWidth="60px"></th>
@@ -7,6 +7,7 @@
     </tr>
   </thead>
   <tbody>
+
     <ng-container *ngFor="let data of nzTable.data">
       <tr>
         <td *ngIf="data.description; else noExpand" [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)"></td>
