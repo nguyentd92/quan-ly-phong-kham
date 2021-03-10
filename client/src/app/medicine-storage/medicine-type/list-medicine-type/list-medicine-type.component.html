@@ -1,3 +1,28 @@
-<p>
-  list-medicine-type works!
-</p>
+<nz-table #nzTable [nzData]="listOfData" nzTableLayout="fixed">
+  <thead>
+    <tr>
+      <th nzWidth="60px"></th>
+      <th>Tên nhóm</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let data of nzTable.data">
+      <tr>
+        <td *ngIf="data.description; else noExpand" [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)"></td>
+        <ng-template #noExpand>
+          <td></td>
+        </ng-template>
+        <td>{{ data.name }}</td>
+        <td>
+          <a nzButton nzType="link">Sửa</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a nzButton nzType="link">Xóa</a>
+        </td>
+      </tr>
+      <tr [nzExpand]="expandSet.has(data.id)">
+        <span>{{ data.description }}</span>
+      </tr>
+    </ng-container>
+  </tbody>
+</nz-table>
