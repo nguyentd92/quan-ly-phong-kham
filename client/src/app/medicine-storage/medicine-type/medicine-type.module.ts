@@ -11,12 +11,17 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 
 const ROUTES: Routes = [
   {
-    path: "",
+    path: "danh-sach",
     component: ListMedicineTypeComponent
   },
   {
     path: "tao-nhom-thuoc",
-    component: CreateMedicineTypeComponent
+    component: CreateMedicineTypeComponent,
+  },
+  {
+    path: "",
+    redirectTo: "danh-sach",
+    pathMatch: "full"
   }
 ];
 
