@@ -38,7 +38,7 @@ function medicineFromListMedicineResponseItem(item: MedicineItem): Medicine {
   t.name = item.med_name;
   t.unit_sell_price = item.unit_sell_price;
   t.in_stocks = item.med_in_stocks;
-  t.unit_vol = item.unit_vol;
+  t.unit_vol_small = item.unit_vol;
   t.images = item.images;
 
   return t;
