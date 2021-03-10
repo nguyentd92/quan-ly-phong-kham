@@ -12,12 +12,12 @@
       </li>
       <li nz-submenu nzTitle="Đầu thuốc" nzIcon="unordered-list">
         <ul>
-          <li nz-menu-item nzMatchRouter>
+          <li nz-menu-item nzMatchRouter [routerLink]="['/', 'kho-thuoc', 'thuoc', 'them-thuoc']">
             <a
             >Thêm đầu thuốc</a
             >
           </li>
-          <li nz-menu-item nzMatchRouter>
+          <li nz-menu-item nzMatchRouter [routerLink]="['/', 'kho-thuoc', 'thuoc', 'danh-sach']">
             <a
             >Danh sách đầu thuốc</a
             >
