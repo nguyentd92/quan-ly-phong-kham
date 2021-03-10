@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MedicineUnitSmall } from 'src/app/shared/models/medicine-unit-small.model';
+import { MedicineUnitService } from '../medicine-unit.service';
 
 @Component({
   selector: 'app-unit-small',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UnitSmallComponent implements OnInit {
 
-  constructor() { }
+  listOfData!: MedicineUnitSmall[];
 
-  ngOnInit() {
+  isLoading = false;
+
+  constructor(private medicineUnitService: MedicineUnitService) {
+
   }
 
+  ngOnInit(): void {
+    this.fetchList();
+  }
+
+  fetchList() {
+    this.isLoading = true;
+    this.medicineUnitService.getMedicalUnitSmalls().subscribe(res => {
+      this.listOfData = res
+      this.isLoading = false
+    })
+  }
 }

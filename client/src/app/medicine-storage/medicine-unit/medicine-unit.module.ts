@@ -4,6 +4,8 @@ import { MedicineUnitComponent } from './medicine-unit.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UnitSmallComponent } from './unit-small/unit-small.component';
 import { UnitLargeComponent } from './unit-large/unit-large.component';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 const ROUTES: Routes = [
   {
@@ -24,8 +26,10 @@ const ROUTES: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(ROUTES)
+    RouterModule.forChild(ROUTES),
+    NzTableModule,
+    NzDividerModule
   ],
-  declarations: [MedicineUnitComponent]
+  declarations: [MedicineUnitComponent, UnitSmallComponent]
 })
 export class MedicineUnitModule { }
