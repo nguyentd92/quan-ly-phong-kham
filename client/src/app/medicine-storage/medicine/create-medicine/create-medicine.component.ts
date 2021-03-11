@@ -56,6 +56,11 @@ export class CreateMedicineComponent extends BaseComponent implements OnInit {
       this.form.controls[key].updateValueAndValidity();
     }
 
+    // Check if unit price is 0, show confirm
+    if(!this.form.value.unit_sell_price && !confirm("Giá bán là 0đ, Có chắc chắn tiếp tục lưu?")) {
+      return;
+    }
+
     if (this.form.invalid) return;
 
     const body = this.form.value;
