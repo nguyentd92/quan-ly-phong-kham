@@ -15,8 +15,8 @@ class Medicine extends Model
     protected $fillable = [
         'med_name',
         'unit_sell_price',
-        'unit_vol',
-        'med_unit_id',
+        'unit_sm_vol',
+        'unit_sm_id',
         'images',
         'medication_id',
     ];

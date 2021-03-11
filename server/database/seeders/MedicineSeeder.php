@@ -19,9 +19,9 @@ class MedicineSeeder extends Seeder
             'med_id' => 1,
             'med_name' => 'Amoxcillin',
             'unit_sell_price' => 1500,
-            'med_in_stocks' => 100,
-            'unit_vol' => '1 gam',
-            'med_unit_id' => 1,
+            'in_stocks' => 100,
+            'unit_sm_vol' => '1 gam',
+            'unit_sm_id' => 1,
             'medication_id' => 2
         ]);
 
@@ -29,9 +29,9 @@ class MedicineSeeder extends Seeder
             'med_id' => 2,
             'med_name' => 'Cephalexin',
             'unit_sell_price' => 2000,
-            'med_in_stocks' => 80,
-            'unit_vol' => '1 gam',
-            'med_unit_id' => 1,
+            'in_stocks' => 80,
+            'unit_sm_vol' => '1 gam',
+            'unit_sm_id' => 1,
             'medication_id' => 2
         ]);
 
@@ -39,9 +39,9 @@ class MedicineSeeder extends Seeder
             'med_id' => 3,
             'med_name' => 'Aspirin',
             'unit_sell_price' => 1800,
-            'med_in_stocks' => 90,
-            'unit_vol' => '1 gam',
-            'med_unit_id' => 1,
+            'in_stocks' => 90,
+            'unit_sm_vol' => '1 gam',
+            'unit_sm_id' => 1,
             'medication_id' => 3
         ]);
 
@@ -49,9 +49,9 @@ class MedicineSeeder extends Seeder
             'med_id' => 4,
             'med_name' => 'Paracetamol',
             'unit_sell_price' => 2000,
-            'med_in_stocks' => 150,
-            'unit_vol' => '500mg',
-            'med_unit_id' => 1,
+            'in_stocks' => 150,
+            'unit_sm_vol' => '500mg',
+            'unit_sm_id' => 1,
             'medication_id' => 1
         ]);
     }
