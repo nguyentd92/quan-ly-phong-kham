@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NzDrawerService } from "ng-zorro-antd/drawer";
 import { NzModalService } from "ng-zorro-antd/modal";
@@ -15,8 +14,7 @@ import { ViewPrescriptionComponent } from './popups/view-prescription/view-presc
 export class PrescriptionUIService {
   constructor(
     private nzModalService: NzModalService,
-    private nzDrawerService: NzDrawerService,
-    private http: HttpClient
+    private nzDrawerService: NzDrawerService
   ) { }
 
   openSearchPrescriptionsModal(): Observable<any> {
