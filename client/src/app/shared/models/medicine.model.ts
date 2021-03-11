@@ -8,11 +8,11 @@ export class Medicine {
   unit_sell_price: number;
   in_stocks: number;
 
-  unit_small_id: number;
-  unit_large_id: number;
+  unit_sm_id: number;
+  unit_lg_id: number;
 
-  unit_vol_small: string;
-  unit_vol_large: string;
+  unit_sm_vol: string;
+  unit_lg_vol: string;
 
   medication_id: number;
 
