@@ -11,6 +11,7 @@ use App\Http\Controllers\ApiControllers\AuthController;
 use App\Http\Controllers\ApiControllers\MedicationsController;
 
 use App\Enums\Permissions\AccountPermissions;
+use App\Http\Controllers\ApiControllers\PrescriptionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,18 @@ Route::name('prescriptions')->prefix('prescriptions')->group(function () {
     Route::name('.store')->post('store', function () {
         return response()->json("Stored");
     });
+
+    Route::name('.createForFamiliar')->post(
+        'create-for-familiar/{id}',
+        [PrescriptionsController::class, 'createForFamiliar']);
+
+    Route::name('.createForGuest')->post(
+        'create-for-guest',
+        [PrescriptionsController::class, 'createForGuest']);
+
+    Route::name('.createReExam')->post(
+        'create-reexam/{id}',
+        [PrescriptionsController::class, 'createReExam']);
 
     Route::name('.delete')->delete('{id}', function (string $id) {
         return response()->json([
