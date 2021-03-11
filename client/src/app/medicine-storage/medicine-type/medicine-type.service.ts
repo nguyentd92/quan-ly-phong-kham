@@ -1,8 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
+import { delay, map, tap } from 'rxjs/operators';
 import { Medication } from 'src/app/shared/models/medication.model';
 import { UIMessageService } from 'src/app/shared/services/user-interfaces/ui-message.service';
+import { environment } from 'src/environments/environment';
 import { CreateMedicineTypeRequest } from './requests/create-medicine-type.request';
 
 @Injectable({
@@ -10,7 +12,10 @@ import { CreateMedicineTypeRequest } from './requests/create-medicine-type.reque
 })
 export class MedicineTypeService {
 
-  constructor(private uiMessageService: UIMessageService) { }
+  constructor(
+    private uiMessageService: UIMessageService,
+    private http: HttpClient
+  ) { }
 
   public createMedicineType(req: CreateMedicineTypeRequest): Observable<Medication> {
     return of({
@@ -20,25 +25,29 @@ export class MedicineTypeService {
   }
 
   public getMedicineTypes(): Observable<Medication[]> {
-    return of([
-      {
-        id: 1,
-        name: "Medicine 1"
-      },
-      {
-        id: 2,
-        name: "Medicine 2",
-        description: "Description"
-      },
-      {
-        id: 3,
-        name: "Medicine 3",
-        description: "Description"
-      },
-      {
-        id: 4,
-        name: "Medicine 4"
-      },
-    ]).pipe(delay(1000))
+    if(!environment.devfs && !environment.production) {
+      return of([
+        {
+          id: 1,
+          name: "Medicine 1"
+        },
+        {
+          id: 2,
+          name: "Medicine 2",
+          description: "Description"
+        },
+        {
+          id: 3,
+          name: "Medicine 3",
+          description: "Description"
+        },
+        {
+          id: 4,
+          name: "Medicine 4"
+        },
+      ]).pipe(delay(1000))
+    }
+    
+    return this.http.get("medications").pipe(map(res => res as Medication[]));
   }
 }
