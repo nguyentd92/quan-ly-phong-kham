@@ -18,10 +18,14 @@ class CreateMedicinesTable extends Migration
             $table->string('med_name');
 
             $table->double('unit_sell_price');
-            $table->unsignedInteger('med_in_stocks')->default(0);
+            $table->unsignedInteger('in_stocks')->default(0);
 
-            $table->string('unit_vol');
-            $table->unsignedBigInteger('med_unit_id');
+            $table->string('unit_sm_vol')->nullable();
+            $table->string('unit_dz_vol')->nullable();
+
+            $table->unsignedBigInteger('unit_sm_id')->nullable();
+            $table->unsignedBigInteger('unit_dz_id')->nullable();
+            
             $table->text('images')->nullable();
 
             $table->unsignedBigInteger('medication_id')->nullable();
@@ -31,6 +35,11 @@ class CreateMedicinesTable extends Migration
             $table->foreign('medication_id')
                 ->references('medication_id')
                 ->on('medications');
+
+            $table->foreign('unit_sm_id')
+                ->references('unit_id')
+                ->on('units');
+            
         });
     }
 
@@ -43,6 +52,7 @@ class CreateMedicinesTable extends Migration
     {
         Schema::table('medicines', function (Blueprint $table) {
             $table->dropForeign('medicines_medication_id_foreign');
+            $table->dropForeign('medicines_unit_sm_id_foreign');
         });
 
         Schema::dropIfExists('medicines');
