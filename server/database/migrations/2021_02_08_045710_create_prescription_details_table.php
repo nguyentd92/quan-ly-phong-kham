@@ -24,8 +24,6 @@ class CreatePrescriptionDetailsTable extends Migration
             $table->unsignedDecimal('unit_sell_price');
             $table->unsignedDecimal('sell_price');
 
-            $table->timestamps();
-
             $table->unique(["pres_id", "med_id"], 'pres_med_unique');
 
             $table->foreign('pres_id')
