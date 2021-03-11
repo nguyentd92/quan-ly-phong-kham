@@ -75,7 +75,7 @@ class PrescriptionsController extends Controller
                 "symptoms" => $request->symptoms,
                 "diagnosis" => $request->pathology,
                 "pres_price" => $request->pres_price,
-                "bill_price" => $request->bill_total,
+                "bill_price" => $medication_price + $request->pres_price,
                 "medication_price" => $medication_price,
                 "patient_id" => $patient->patient_id,
                 "note" => $request->note
