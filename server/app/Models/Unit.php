@@ -12,15 +12,6 @@ class Unit extends Model
 
     protected $primaryKey = "unit_id";
 
-    /**
-     * @var mixed
-     */
-    public $display_sign;
-    /**
-     * @var mixed
-     */
-    public $display_name;
-
     protected $fillable = [
         'display_name',
         'display_sign'
