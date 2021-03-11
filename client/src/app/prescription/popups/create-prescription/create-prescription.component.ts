@@ -127,7 +127,7 @@ export class CreatePrescriptionComponent implements OnInit {
       symptomNote: [""],
       diagnosis: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       medicineList: this.fb.array([]),
-      prescriptionNote: [null],
+      note: [null],
       pres_price: [0],
       medicationPrice: [0],
       billPrice: [0],
@@ -389,7 +389,7 @@ export class CreatePrescriptionComponent implements OnInit {
     const {
       diagnosis,
       symptomList, symptomNote,
-      prescriptionNote,
+      note,
       pres_price, medicationPrice, billPrice } =
       this.createPrescriptionForm.value;
     const {
@@ -425,7 +425,7 @@ export class CreatePrescriptionComponent implements OnInit {
       })),
       bill_total: billPrice,
       pres_price,
-      note: prescriptionNote,
+      note,
       re_exam_to: this.fromPrescription?.id
     }
 
