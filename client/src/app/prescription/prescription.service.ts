@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
+import { addMonths, addYears, differenceInDays, differenceInMonths, differenceInYears } from 'date-fns';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { delay, pluck } from 'rxjs/operators';
+import { pluck } from 'rxjs/operators';
 import { DaySession } from '../shared/constants/day-session.constant';
+import { Patient } from '../shared/models/patient.model';
+import { UIMessageService } from '../shared/services/user-interfaces/ui-message.service';
 import { StringUltility } from '../shared/ultilites/string.ultitity';
 import { CalculateMedicineRequest } from './requests/calculate-medicine.request';
-import { CalculateMedicineResponse } from './responses/calculate-medicine.response';
-import { differenceInDays, differenceInMonths, differenceInYears, addMonths, addYears } from 'date-fns';
-import { Patient } from '../shared/models/patient.model';
-import { GetPrescriptionsRequest } from './requests/get-prescriptions.request';
-import { GetPrescriptionsResponse } from './responses/get-prescriptions.response';
 import { CreatePrescriptionRequest } from './requests/create-prescription.request';
-import { UIMessageService } from '../shared/services/user-interfaces/ui-message.service';
+import { GetPrescriptionsRequest } from './requests/get-prescriptions.request';
+import { CalculateMedicineResponse } from './responses/calculate-medicine.response';
+import { GetPrescriptionsResponse } from './responses/get-prescriptions.response';
 interface PrescriptionConfig {
   pres_wage: number;
 }
@@ -37,6 +37,8 @@ export class PrescriptionService {
       med_id: data.med_id,
       med_title: "Medicine " + data.med_id,
 
+      days: data.days,
+      amount: data.amount,
       amount_str: `${data.amount} v / ${data.days} ngày`,
       u_price: data.u_price,
       s_price: data.amount * data.u_price,
