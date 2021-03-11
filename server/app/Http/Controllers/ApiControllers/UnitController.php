@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ApiControllers;
 
+use App\Dtos\MedicineUnitSmallDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Units\UpsertUnitRequest;
 use App\Repositories\Contracts\UnitRepository;
@@ -21,7 +22,11 @@ class UnitController extends Controller
 
     public function getList(): JsonResponse
     {
-        $result = $this->unitRepository->getList();
+        $data = $this->unitRepository->getList();
+
+        $result = $data->map(function($t) {
+            return MedicineUnitSmallDto::fromUnit($t);
+        });
 
         return response()->json($result);
     }

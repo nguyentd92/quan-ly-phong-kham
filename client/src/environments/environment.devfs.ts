@@ -6,7 +6,7 @@ export const environment = {
   devfs: true,
   production: false,
   requestRetry: 2,
-  domain: "http://quanlyphongkham.test"
+  domain: ""
 };
 
 /*

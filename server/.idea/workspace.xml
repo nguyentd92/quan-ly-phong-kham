@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="525ef056-6f2c-4819-b80a-a57feb88caf1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/medicine-storage/medicine-storage.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/medicine-storage/medicine-storage.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/environments/environment.devfs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/environments/environment.devfs.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/client.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/client.blade.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1paeyXDIXj0yFFmxOOQrR96TQ0i" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="525ef056-6f2c-4819-b80a-a57feb88caf1" name="Default Changelist" comment="" />
+      <created>1615425889371</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615425889371</updated>
+      <workItem from="1615425894321" duration="3000" />
+    </task>
+    <servers />
+  </component>
+</project>
