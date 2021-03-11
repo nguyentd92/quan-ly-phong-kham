@@ -400,6 +400,7 @@ export class CreatePrescriptionComponent implements OnInit {
       bill_total: billPrice,
       pres_price,
       note: prescriptionNote,
+      re_exam_to: this.fromPrescription?.id
     }
 
     this.presService.createPrescription(req).subscribe();
