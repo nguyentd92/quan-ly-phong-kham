@@ -6,6 +6,7 @@ use App\Repositories\Contracts\AccountRepository;
 use App\Repositories\Contracts\MedicationRepository;
 use App\Repositories\Contracts\MedicineRepository;
 use App\Repositories\Contracts\PatientRepository;
+use App\Repositories\Contracts\PrescriptionRepository;
 use App\Repositories\Contracts\SettingRepository;
 use App\Repositories\Contracts\SymptomRepository;
 use App\Repositories\Contracts\UnitRepository;
@@ -13,6 +14,7 @@ use App\Repositories\EloquentRepositories\AccountEloquentRepository;
 use App\Repositories\EloquentRepositories\MedicationEloquentRepository;
 use App\Repositories\EloquentRepositories\MedicineEloquentRepository;
 use App\Repositories\EloquentRepositories\PatientEloquentRepository;
+use App\Repositories\EloquentRepositories\PrescriptionEloquentRepository;
 use App\Repositories\EloquentRepositories\SettingEloquentRepository;
 use App\Repositories\EloquentRepositories\SymptomEloquentRepository;
 use App\Repositories\EloquentRepositories\UnitEloquentRepository;
@@ -34,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(MedicineRepository::class, MedicineEloquentRepository::class);
         $this->app->bind(MedicationRepository::class, MedicationEloquentRepository::class);
         $this->app->bind(PatientRepository::class, PatientEloquentRepository::class);
+        $this->app->bind(PrescriptionRepository::class, PrescriptionEloquentRepository::class);
     }
 
     /**
