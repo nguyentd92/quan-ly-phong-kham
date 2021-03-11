@@ -25,15 +25,19 @@ class CreatePrescriptionsTable extends Migration
             $table->double('bill_price');
 
             $table->unsignedBigInteger('patient_id');
-            $table->unsignedBigInteger('re_exam_to');
+            $table->unsignedBigInteger('re_exam_to')->nullable();
 
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('patient_id')
                 ->references('patient_id')
                 ->on('patients');
+
+            $table->foreign('re_exam_to')
+                ->references('pres_id')
+                ->on('prescriptions');
         });
     }
 
