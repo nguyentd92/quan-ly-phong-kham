@@ -25,37 +25,9 @@ export class MedicinesService {
   private reloadMedicines(): void {
     this.http.get("medicines").pipe(retry(environment.requestRetry))
       .subscribe(
-        (res: ListMedicineResponse) => this.medicinesSubject.next(
-          res.map(e => medicineFromListMedicineResponseItem(e))
+        (res: Medicine[]) => this.medicinesSubject.next(
+          res
         )
       )
   }
-}
-
-function medicineFromListMedicineResponseItem(item: MedicineItem): Medicine {
-  const t = new Medicine();
-  t.id = item.med_id;
-  t.name = item.med_name;
-  t.unit_sell_price = item.unit_sell_price;
-  t.in_stocks = item.med_in_stocks;
-  t.unit_vol_small = item.unit_vol;
-  t.images = item.images;
-
-  return t;
-}
-
-type ListMedicineResponse = MedicineItem[];
-
-interface MedicineItem {
-  med_id: number,
-  med_name: string,
-  unit_sell_price: number,
-  med_in_stocks: number,
-  unit_vol: string,
-  med_unit_id: number,
-  images: string[],
-  medication_id: number,
-  created_at: Date,
-  updated_at: Date,
-  deleted_at: Date
 }
