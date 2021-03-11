@@ -16,11 +16,8 @@ export class MedicinesService {
   }
 
   public get medicines$(): Observable<Medicine[]> {
-    // reload medicines data from server
-    // this.reloadMedicines();
     return this.medicinesSubject.asObservable();
   }
-
 
   private reloadMedicines(): void {
     this.http.get("medicines").pipe(retry(environment.requestRetry))
