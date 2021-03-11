@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ApiControllers;
 
+use App\Dtos\MedicineDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Medicines\UpsertMedicineRequest;
 use App\Repositories\Contracts\MedicineRepository;
@@ -16,11 +17,19 @@ class MedicineController extends Controller
         $this->medicineRepository = $medicineRepository;
     }
 
-    public function getAll(): JsonResponse {
-        return response()->json($this->medicineRepository->getList());
+    public function getAll(): JsonResponse
+    {
+        $data = $this->medicineRepository->getList();
+
+        $list = $data->map(function ($t) {
+            return MedicineDto::fromMedicine($t);
+        });
+
+        return response()->json($list, JsonResponse::HTTP_OK);
     }
 
-    public function store(UpsertMedicineRequest $request): JsonResponse {
+    public function store(UpsertMedicineRequest $request): JsonResponse
+    {
         $entity = $this->medicineRepository->store([
             'med_name' => $request->name,
             'unit_sell_price' => $request->unit_sell_price,
