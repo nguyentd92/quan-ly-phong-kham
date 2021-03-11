@@ -6,7 +6,9 @@ import { DaySession } from 'src/app/shared/constants/day-session.constant';
 import { Medicine } from 'src/app/shared/models/medicine.model';
 import { Patient } from 'src/app/shared/models/patient.model';
 import { Prescription } from 'src/app/shared/models/prescription.model';
+import { Symptom } from 'src/app/shared/models/symptom.model';
 import { VndCurrencyPipe } from 'src/app/shared/pipes/vnd-currency-pipe/vnd-currency.pipe';
+import { SymptomsService } from 'src/app/shared/services/https/symptoms.service';
 import { MedicinesService } from 'src/app/shared/services/states/medicines.service';
 import { StringUltility } from 'src/app/shared/ultilites/string.ultitity';
 import { PrescriptionService } from '../../prescription.service';
@@ -83,12 +85,15 @@ export class CreatePrescriptionComponent implements OnInit {
     med_note: string;
   }[] = []
 
+  symptoms!: Symptom[];
+
 
   constructor(
     private fb: FormBuilder,
     private medicinesService: MedicinesService,
     private presService: PrescriptionService,
-    private vndCurrencyPipe: VndCurrencyPipe
+    private vndCurrencyPipe: VndCurrencyPipe,
+    private symptomsService: SymptomsService
   ) { }
 
   daySessionVi(enKey: string): string {
@@ -122,8 +127,8 @@ export class CreatePrescriptionComponent implements OnInit {
         guardian: []
       }),
 
-      symptomList: [[]],
-      symptomNote: [null],
+      symptomList: [""],
+      symptomNote: [""],
       diagnosis: [null],
       medicineList: this.fb.array([]),
       prescriptionNote: [null],
@@ -182,6 +187,16 @@ export class CreatePrescriptionComponent implements OnInit {
 
     // Patch Default Pres Wage
     this.presService.presWage$.subscribe(res => this.createPrescriptionForm.patchValue({ pres_price: res })).unsubscribe();
+
+    this.fetchSymptoms();
+  }
+  // End ngOnInit
+
+  onChangeSymptoms($event) {
+    let symptomList = $event.join(", ");
+    this.createPrescriptionForm.patchValue({
+      symptomList
+    })
   }
 
   onChange($event: Event): void {
@@ -343,7 +358,15 @@ export class CreatePrescriptionComponent implements OnInit {
   }
 
   onSubmitCreatePrescription() {
-    this.presService.createPrescription({} as CreatePrescriptionRequest);
+    console.log(this.createPrescriptionForm.value)
+    this.presService.createPrescription(this.createPrescriptionForm.value);
+  }
+
+  protected fetchSymptoms() {
+    this.symptomsService.fetchSymptoms().subscribe(res => {
+      this.symptoms = res
+      console.log(this.symptoms)
+    })
   }
 
   // Formatter

@@ -131,12 +131,20 @@
 
     <div nz-col nzSpan="24">
       <div nz-col nzOffset="2">
-        <div nz-row nzOffset="3">
-          <label nz-col nzSpan="4" nz-checkbox>Ho</label>
-          <label nz-col nzSpan="4" nz-checkbox>Sốt</label>
-          <label nz-col nzSpan="4" nz-checkbox>Tiêu chảy</label>
-          <label nz-col nzSpan="4" nz-checkbox>Phát ban</label>
-        </div>
+        <nz-checkbox-wrapper
+          style="width: 100%"
+          (nzOnChange)="onChangeSymptoms($event)"
+        >
+          <div nz-row nzOffset="3">
+            <div nz-col nzSpan="6" *ngFor="let symptom of symptoms">
+              <label
+                nz-checkbox
+                [nzValue]="symptom.name"
+                >{{ symptom.name }}</label
+              >
+            </div>
+          </div>
+        </nz-checkbox-wrapper>
 
         <nz-form-item style="margin-top: 1rem">
           <textarea
@@ -594,7 +602,13 @@
     <div nz-col nzOffset="2" nzSpan="20" style="padding-bottom: 1rem">
       <nz-space>
         <nz-space-item>
-          <button nz-button nzSize="large" nzType="primary" nzBlock (click)="onSubmitCreatePrescription()">
+          <button
+            nz-button
+            nzSize="large"
+            nzType="primary"
+            nzBlock
+            (click)="onSubmitCreatePrescription()"
+          >
             Lưu phiếu:
             {{
               predMedTotal + createPrescriptionForm.value.pres_price
