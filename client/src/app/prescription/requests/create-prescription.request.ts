@@ -1,15 +1,13 @@
 export interface CreatePrescriptionRequest {
-  patient: {
-    id: number | null;
-    full_name: string;
-    dob: string;
-    gender: boolean;
-    guardian: string;
-    phone: string;
-    address: string;
-  };
 
-  symptom_ids: number[];
+  p_id: number | null;
+  p_full_name: string;
+  p_dob: string;
+  p_gender: boolean;
+  p_guardian: string;
+  p_phone: string;
+  p_address: string;
+
   symptoms: string;
   pathology: string;
 
@@ -23,12 +21,6 @@ interface MedItem {
   id: number;
   days: number;
   amount: number;
-  med_times: {
-    morning: MedTime | null;
-    noon: MedTime | null;
-    afternoon: MedTime | null;
-    night: MedTime | null;
-  },
   unit_price: number;
   total_price: number;
 }
