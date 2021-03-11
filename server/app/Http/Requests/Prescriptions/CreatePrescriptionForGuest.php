@@ -31,7 +31,7 @@ class CreatePrescriptionForGuest extends ApiRequest
             "p_phone" => "required",
             "p_address" => "required",
 
-            "symptoms" => "required|min:5|max:200",
+            "symptoms" => "",
             "pathology" => "required|min:3|max:250",
 
             "med_list" => "",

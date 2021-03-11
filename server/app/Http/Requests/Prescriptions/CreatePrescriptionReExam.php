@@ -25,7 +25,7 @@ class CreatePrescriptionReExam extends ApiRequest
     {
         return [
             "p_id" => "required",
-            "symptoms" => "required|min:5|max:200",
+            "symptoms" => "",
             "pathology" => "required|min:3|max:250",
 
             "med_list" => "",
