@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BaseComponent } from 'src/app/shared/components/app-layout/base-component';
 import { Medication } from 'src/app/shared/models/medication.model';
 import { MedicineUnitSmall } from 'src/app/shared/models/medicine-unit-small.model';
 import { Medicine } from 'src/app/shared/models/medicine.model';
@@ -12,27 +13,31 @@ import { MedicineService } from '../medicine.service';
   templateUrl: './create-medicine.component.html',
   styleUrls: ['./create-medicine.component.scss']
 })
-export class CreateMedicineComponent implements OnInit {
+export class CreateMedicineComponent extends BaseComponent implements OnInit {
   form: FormGroup
 
   unitSmalls!: MedicineUnitSmall[];
   medications!: Medication[];
-
-  isRequesting = false;
 
   constructor(
     private medicineService: MedicineService,
     private medicineUnitService: MedicineUnitService,
     private medicationService: MedicineTypeService,
     private fb: FormBuilder
-  ) { }
+  ) {
+    super();
+  }
+
+  get currentUnit() {
+    return this.unitSmalls.find(e => e.id == this.form.value.unit_sm_id);
+  }
 
   ngOnInit() {
     this.form = this.fb.group({
       name: ["", [Validators.required, Validators.minLength(3)]],
       unit_sell_price: [0, [Validators.required]],
 
-      unit_sm_id: [1],
+      unit_sm_id: [null, [Validators.required]],
       unit_lg_id: [1],
 
       unit_sm_vol: [0],
@@ -51,19 +56,25 @@ export class CreateMedicineComponent implements OnInit {
       this.form.controls[key].updateValueAndValidity();
     }
 
-    if(this.form.invalid) return;
+    if (this.form.invalid) return;
 
     const body = this.form.value;
 
-    this.isRequesting = true;
+    this.startRequest();
     this.medicineService.createMedicine(body).subscribe(
-      _ => this.isRequesting = false
+      _ => this.form.reset(),
+      _ => this.endRequest(),
+      () => this.endRequest()
     );
 
   }
 
   protected fetchSuggestions() {
     this.medicineUnitService.getMedicalUnitSmalls().subscribe(res => this.unitSmalls = res)
-    this.medicationService.getMedicineTypes().subscribe(res => this.medications = res)
+    this.medicationService.getMedicineTypes().subscribe(
+      res => this.medications = res,
+      _ => this.endRequest(),
+      () => this.endRequest()
+    )
   }
 }

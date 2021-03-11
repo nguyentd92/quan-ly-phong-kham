@@ -24,15 +24,15 @@
     </nz-form-control>
   </nz-form-item> -->
   <nz-form-item>
-    <nz-form-label [nzSpan]="5" nzRequired>Đơn vị nhỏ</nz-form-label>
-    <nz-form-control [nzSpan]="12">
+    <nz-form-label nzRequired [nzSpan]="5">Đơn vị nhỏ</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzErrorTip="Phải chọn đơn vị">
       <nz-select formControlName="unit_sm_id" nzShowSearch nzPlaceHolder="Chọn đơn vị nhỏ">
         <nz-option *ngFor="let item of unitSmalls" [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="5" nzRequired>Giá bán</nz-form-label>
+  <nz-form-item *ngIf="currentUnit">
+    <nz-form-label [nzSpan]="5" nzRequired>Giá bán {{ currentUnit?.name}} </nz-form-label>
     <nz-form-control [nzSpan]="12">
       <input nz-input formControlName="unit_sm_vol" placeholder="VND" />
     </nz-form-control>
