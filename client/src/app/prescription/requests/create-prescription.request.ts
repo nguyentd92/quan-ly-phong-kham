@@ -14,6 +14,8 @@ export interface CreatePrescriptionRequest {
   med_list: MedItem[];
 
   bill_total: number;
+  pres_price: number;
+
   note: string;
 }
 
@@ -23,9 +25,4 @@ interface MedItem {
   amount: number;
   unit_price: number;
   total_price: number;
-}
-
-interface MedTime {
-  amount: number;
-  note: string;
 }
