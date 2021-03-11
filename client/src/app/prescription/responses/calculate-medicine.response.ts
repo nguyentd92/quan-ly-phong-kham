@@ -2,6 +2,7 @@ export interface CalculateMedicineResponse {
   med_id: number;
   med_title: string;
 
+  amount: number;
   amount_str: string;
   u_price: number;
   s_price: number;
