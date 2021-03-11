@@ -9,10 +9,13 @@ class MedicineUnitSmallDto {
     public $name;
     public $sign;
     
-    public function __construct($id, $name, $sign)
+    static function fromUnit(Unit $unit)
     {
-        $this->id = $id;
-        $this->name = $name;
-        $this->sign = $sign;
+        $smallUnit = new MedicineUnitSmallDto();
+        $smallUnit->id = $unit->unit_id;
+        $smallUnit->name = $unit->display_name;
+        $smallUnit->sign = $unit->display_sign;
+
+        return $smallUnit;
     }
 }
