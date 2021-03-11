@@ -54,6 +54,11 @@ abstract class AbstractEloquentBaseRepository implements BaseRepositoryInterface
         return $this->model->create($attributes);
     }
 
+    function insertBulk(array $listAttributes)
+    {
+        return $this->model->insert($listAttributes);
+    }
+
     /**
      * Update
      * @param $id
