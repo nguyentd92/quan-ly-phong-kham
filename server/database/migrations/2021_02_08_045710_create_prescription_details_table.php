@@ -17,23 +17,12 @@ class CreatePrescriptionDetailsTable extends Migration
             $table->unsignedBigInteger('pres_id');
             $table->unsignedBigInteger('med_id');
 
-            $table->unsignedFloat('qty_morning')->default(0);
-            $table->unsignedFloat('qty_noon')->default(0);
-            $table->unsignedFloat('qty_afternoon')->default(0);
-            $table->unsignedFloat('qty_night')->default(0);
+            $table->string('formulea')->nullable();
 
-            $table->string('note_morning');
-            $table->string('note_noon');
-            $table->string('note_afternoon');
-            $table->string('note_night');
+            $table->unsignedInteger('amounts');
 
-            $table->unsignedFloat('total_day');
-
-            $table->unsignedDouble('unit_sell_price_default');
-            $table->unsignedDouble('unit_sell_price_fixed');
-            $table->unsignedDouble('pres_med_total');
-
-            $table->boolean('is_fixed_total')->default(false);
+            $table->unsignedDecimal('unit_sell_price');
+            $table->unsignedDecimal('sell_price');
 
             $table->timestamps();
 
