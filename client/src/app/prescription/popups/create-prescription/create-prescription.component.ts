@@ -80,6 +80,8 @@ export class CreatePrescriptionComponent implements OnInit {
     med_id: number;
     med_title: string;
     med_amount_str: string;
+    med_amount: number;
+    med_days: number;
     med_u_price: number;
     med_s_price: number;
     med_note: string;
@@ -135,8 +137,6 @@ export class CreatePrescriptionComponent implements OnInit {
       pres_price: [0],
       medicationPrice: [0],
       billPrice: [0],
-      reExamTo: [null],
-
       is_c_pres_price: [false]
     });
 
@@ -238,10 +238,12 @@ export class CreatePrescriptionComponent implements OnInit {
 
     this.presService.sendCalculateMedicine(data).subscribe(
       (res: CalculateMedicineResponse) => {
-        const { med_id, med_title, amount_str, u_price, note_str } = res;
+        const { med_id, med_title, amount, days, amount_str, u_price, note_str } = res;
         this.presMedList.push({
           med_id,
           med_title,
+          med_amount: amount,
+          med_days: days,
           med_amount_str: amount_str,
           med_u_price: u_price,
           med_s_price: s_price,
@@ -310,7 +312,7 @@ export class CreatePrescriptionComponent implements OnInit {
   // Edit Sell Price
   onEditSellPrice() {
     const { is_c_s_price, s_price } = this.addMedicineForm.value;
-    this.oldValue = {...this.oldValue, s_price};
+    this.oldValue = { ...this.oldValue, s_price };
     this.addMedicineForm.patchValue({ is_c_s_price: !is_c_s_price })
   }
 
@@ -358,8 +360,49 @@ export class CreatePrescriptionComponent implements OnInit {
   }
 
   onSubmitCreatePrescription() {
-    console.log(this.createPrescriptionForm.value)
-    this.presService.createPrescription(this.createPrescriptionForm.value);
+    const {
+      patient, diagnosis,
+      symptomList, symptomNote,
+      prescriptionNote,
+      pres_price, medicationPrice, billPrice } =
+      this.createPrescriptionForm.value;
+    const {
+      name,
+      dob,
+      gender,
+      phone,
+      address,
+      guardian
+    } = patient;
+
+    const symptoms = [symptomList, symptomNote].filter(e => !!e).join(", ");
+
+    const req: CreatePrescriptionRequest = {
+      p_id: this.patient?.id,
+      p_full_name: name,
+      p_dob: dob,
+      p_gender: gender,
+      p_phone: phone,
+      p_address: address,
+      p_guardian: guardian,
+
+      symptoms,
+      pathology: diagnosis,
+
+      med_list: this.presMedList.map(e => ({
+        id: e.med_id,
+        total_price: e.med_s_price,
+        days: e.med_days,
+        formulea: e.med_note,
+        amount: e.med_amount,
+        unit_price: e.med_u_price
+      })),
+      bill_total: billPrice,
+      pres_price,
+      note: prescriptionNote,
+    }
+
+    this.presService.createPrescription(req).subscribe();
   }
 
   protected fetchSymptoms() {
