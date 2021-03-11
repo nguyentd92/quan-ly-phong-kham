@@ -384,6 +384,8 @@ export class CreatePrescriptionComponent implements OnInit {
       return;
     };
 
+    if(!this.presMedList.length && confirm("Bạn chưa kê thuốc, có muốn lưu phiếu khám này?")) return;
+
     const {
       diagnosis,
       symptomList, symptomNote,
