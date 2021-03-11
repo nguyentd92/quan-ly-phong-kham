@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ApiControllers;
 
 use App\Http\Controllers\Controller;
+use App\Dtos\MedicationDto;
 use App\Http\Requests\Medications\UpsertMedicationRequest;
 use App\Repositories\Contracts\MedicationRepository;
 use Illuminate\Http\JsonResponse;
@@ -18,7 +19,12 @@ class MedicationsController extends Controller
     }
 
     public function getAll(): JsonResponse {
-        return response()->json($this->medicationRepository->getList());
+        $data = $this->medicationRepository->getList();
+
+        $listDto = $data->map(function($t) {
+            return new MedicationDto($t->medication_name, $t->medication_des);
+        });
+        return response()->json($listDto, JsonResponse::HTTP_OK);
     }
 
     public function store(UpsertMedicationRequest $request): JsonResponse {
