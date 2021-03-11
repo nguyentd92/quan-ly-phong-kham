@@ -19,7 +19,7 @@ class CreatePrescriptionDetailsTable extends Migration
 
             $table->string('formulea')->nullable();
 
-            $table->unsignedInteger('amounts');
+            $table->unsignedInteger('amount');
 
             $table->unsignedDecimal('unit_sell_price');
             $table->unsignedDecimal('sell_price');
