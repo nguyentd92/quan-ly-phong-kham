@@ -24,6 +24,7 @@ class MedicationsController extends Controller
         $listDto = $data->map(function($t) {
             return new MedicationDto($t->medication_id, $t->medication_name, $t->medication_des);
         });
+        
         return response()->json($listDto, JsonResponse::HTTP_OK);
     }
 
