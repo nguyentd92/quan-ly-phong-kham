@@ -10,9 +10,6 @@ class Medication extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public $name;
-    public $description;
-
     protected $fillable = [
         'medication_name',
         'medication_des'
