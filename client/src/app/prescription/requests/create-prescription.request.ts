@@ -21,7 +21,7 @@ export interface CreatePrescriptionRequest {
 
 interface MedItem {
   id: number;
-  days: number;
+  formulea: string;
   amount: number;
   unit_price: number;
   total_price: number;
