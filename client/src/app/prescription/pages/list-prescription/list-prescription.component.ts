@@ -69,7 +69,6 @@ export class ListPrescriptionComponent implements OnInit {
     const { pageIndex, pageSize } = this.queryPrescriptionsParams;
     const { name, dob, phone, address } = this.queryPrescriptionsParams.queryParams;
     this.activatedRoute.queryParams.subscribe(params => {
-      console.log(params)
       this.queryPrescriptionsParams = {
         pageIndex: params.pageIndex || pageIndex,
         pageSize: params.pageSize || pageSize,
