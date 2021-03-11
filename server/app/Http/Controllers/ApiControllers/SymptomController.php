@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ApiControllers;
 
+use App\Dtos\SymptomDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Symptoms\UpsertSymptomRequest;
 use App\Http\Responses\Common\RequestErrorDetails;
@@ -23,7 +24,13 @@ class SymptomController extends Controller
     }
 
     public function getAll(): JsonResponse {
-        return response()->json($this->symptomRepository->getList());
+        $data = $this->symptomRepository->getList();
+
+        $list = $data->map(function($t) {
+            return SymptomDto::fromSymptom($t);
+        });
+
+        return response()->json($list, JsonResponse::HTTP_OK);
     }
 
     public function store(UpsertSymptomRequest $request): JsonResponse {
