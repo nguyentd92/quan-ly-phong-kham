@@ -32,11 +32,11 @@ export class CreateMedicineComponent implements OnInit {
       name: ["", [Validators.required, Validators.minLength(3)]],
       unit_sell_price: [0, [Validators.required]],
 
-      unit_small_id: [1],
-      unit_large_id: [1],
+      unit_sm_id: [1],
+      unit_lg_id: [1],
 
-      unit_vol_small: [0],
-      unit_vol_large: [0],
+      unit_sm_vol: [0],
+      unit_lg_vol: [0],
 
       medication_id: [null, [Validators.required]]
     })
