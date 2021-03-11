@@ -3,13 +3,13 @@
 
 namespace App\Repositories\EloquentRepositories;
 
-use App\Models\PrescriptionDetails;
+use App\Models\PrescriptionDetail;
 use App\Repositories\Contracts\PrescriptionDetailRepository;
 
 class PrescriptionDetailEloquentRepository extends AbstractEloquentBaseRepository implements PrescriptionDetailRepository
 {
     public function getModel(): string
     {
-        return PrescriptionDetails::class;
+        return PrescriptionDetail::class;
     }
 }
