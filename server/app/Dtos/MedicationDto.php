@@ -1,4 +1,5 @@
 <?php
+namespace App\Dtos;
 
 class MedicationDto {
     public $name;
