@@ -1,20 +1,16 @@
-<nz-form [formGroup]="createPrescriptionForm" nz-col nzGutter="20">
+<nz-form nz-col nzGutter="20">
   <!-- Form Patient Info -->
   <div
     class="form-combine"
     nz-row
-    formGroupName="patient"
+    [formGroup]="patientForm"
     *ngIf="!this.patient"
   >
     <div class="form-combine__title">Thông tin bệnh nhân</div>
     <div nz-col nzSpan="12">
       <nz-form-item>
-        <nz-form-label [nzSpan]="5">Họ và tên</nz-form-label>
-        <nz-form-control
-          nzHasFeedback
-          [nzSpan]="14"
-          nzErrorTip="Tên phải hơn 3 ký tự"
-        >
+        <nz-form-label nzRequired [nzSpan]="5">Họ và tên</nz-form-label>
+        <nz-form-control [nzSpan]="14" nzErrorTip="Tên phải hơn 3 ký tự">
           <input
             nz-input
             name="maxlength"
@@ -27,8 +23,8 @@
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSpan]="5">Ngày sinh</nz-form-label>
-        <nz-form-control [nzSpan]="14">
+        <nz-form-label nzRequired [nzSpan]="5">Ngày sinh</nz-form-label>
+        <nz-form-control [nzSpan]="14" nzErrorTip="Yêu cầu chọn ngày sinh">
           <nz-date-picker
             nzShowToday="false"
             nzMax="2021-03-01"
@@ -44,7 +40,7 @@
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSpan]="5">Giới tính</nz-form-label>
+        <nz-form-label nzRequired [nzSpan]="5">Giới tính</nz-form-label>
         <nz-form-control [nzSpan]="14">
           <nz-radio-group formControlName="gender">
             <label nz-radio [nzValue]="true">Nam</label>
@@ -56,42 +52,38 @@
 
     <div nz-col nzSpan="12">
       <nz-form-item>
-        <nz-form-label [nzSpan]="5">Người giám hộ</nz-form-label>
-        <nz-form-control nzHasFeedback [nzSpan]="14">
-          <input
-            formControlName="guardian"
-            nz-input
-            name="maxlength"
-            maxlength="6"
-          />
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item>
-        <nz-form-label [nzSpan]="5">Số điện thoại</nz-form-label>
-        <nz-form-control nzHasFeedback [nzSpan]="14">
+        <nz-form-label nzRequired [nzSpan]="5">Số điện thoại</nz-form-label>
+        <nz-form-control [nzSpan]="14">
           <input
             formControlName="phone"
             nz-input
             name="maxlength"
-            maxlength="6"
+            maxlength="20"
           />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-label [nzSpan]="5">Địa chỉ</nz-form-label>
-        <nz-form-control
-          nzHasFeedback
-          [nzSpan]="14"
-          nzErrorTip="Tối thiểu 3 ký tự"
-        >
+        <nz-form-label nzRequired [nzSpan]="5">Địa chỉ</nz-form-label>
+        <nz-form-control [nzSpan]="14" nzErrorTip="Tối thiểu 3 ký tự">
           <input
             formControlName="address"
             nz-input
             name="maxlength"
-            maxlength="50"
+            maxlength="100"
             minlength="3"
+          />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">Người giám hộ</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input
+            formControlName="guardian"
+            nz-input
+            name="maxlength"
+            maxlength="50"
           />
         </nz-form-control>
       </nz-form-item>
@@ -109,391 +101,476 @@
   </div>
   <!-- End Patient Details -->
 
-  <!-- Symptoms & Diagnosis -->
-  <div class="form-combine symptoms-diagnosis" nz-row>
-    <div class="form-combine__title">Triệu chứng & Chuẩn đoán</div>
-
-    <div
-      class="symptoms-diagnosis__last-pathology"
-      nz-col
-      nzSpan="24"
-      *ngIf="fromPrescription"
-    >
-      <div nz-col nzOffset="2" nzSpan="19">
-        <span
-          >Chuẩn đoán lần khám trước:
-          <b>{{ fromPrescription?.diagnosis }}</b></span
-        >
-
-        <nz-divider></nz-divider>
-      </div>
-    </div>
-
-    <div nz-col nzSpan="24">
-      <div nz-col nzOffset="2">
-        <nz-checkbox-wrapper
-          style="width: 100%"
-          (nzOnChange)="onChangeSymptoms($event)"
-        >
-          <div nz-row nzOffset="3">
-            <div nz-col nzSpan="6" *ngFor="let symptom of symptoms">
-              <label
-                nz-checkbox
-                [nzValue]="symptom.name"
-                >{{ symptom.name }}</label
-              >
-            </div>
-          </div>
-        </nz-checkbox-wrapper>
-
-        <nz-form-item style="margin-top: 1rem">
-          <textarea
-            nz-input
-            nz-col
-            nzSpan="21"
-            placeholder="Triệu chứng lâm sàng"
-            formControlName="symptomNote"
-            [nzAutosize]="{ minRows: 3, maxRows: 5 }"
-          ></textarea>
-        </nz-form-item>
-
-        <nz-form-item nz-col style="margin-top: 1rem; flex-direction: column">
-          <nz-form-label>Chuẩn đoán bệnh</nz-form-label>
-
-          <nz-form-control nz-col nzSpan="21">
-            <textarea
-              nz-input
-              placeholder="Bệnh lý"
-              formControlName="diagnosis"
-              [nzAutosize]="{ minRows: 3, maxRows: 5 }"
-            ></textarea>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
-  </div>
-  <!-- End Symptoms & Diagnosis -->
-
-  <div class="form-combine" nz-row>
-    <div class="form-combine__title">Kê toa thuốc</div>
-
-    <!-- PRES MEDICINE LIST -->
-    <div nz-col nzOffset="2" nzSpan="22" class="medicine-list">
-      <!-- Show if empty list -->
-      <nz-alert
-        nz-col
-        nzSpan="21"
-        *ngIf="!presMedList.length"
-        nzType="warning"
-        nzMessage="Chưa có thuốc trong toa"
-      ></nz-alert>
-      <!-- End Show if empty list -->
-
-      <div class="medicine" *ngFor="let item of presMedList; index as idx">
-        <div class="medicine__title">
-          <span class="medicine__no">{{ idx + 1 }}.</span>
-          <span class="medicine__name">{{ item.med_title }}</span> __
-          {{ item.med_amount_str }}
-        </div>
-
-        <div class="medicine__take">
-          {{ item.med_note }}
-        </div>
-
-        <div class="medicine__price">
-          {{ item.med_s_price | currency: "VND" }}
-        </div>
-
-        <button class="medicine__remove" (click)="onRemoveMedicine(idx)">
-          Xóa
-        </button>
-      </div>
-
-      <div class="medicine-list-total" *ngIf="presMedList.length">
-        {{ predMedTotal | vndCurrency }}
-      </div>
-    </div>
-    <!-- END PRES MEDICINE LIST -->
-
-    <div nz-col nzOffset="2" nzSpan="20" style="margin-top: 1rem">
-      <button
-        (click)="isFormMedicineCollapsed = !isFormMedicineCollapsed"
-        class="btn-add-medicine"
-      >
-        <span class="btn-add-medicine__icon">
-          <i
-            nz-icon
-            nzType="{{ isFormMedicineCollapsed ? 'plus' : 'minus' }}"
-            nzTheme="outline"
-          ></i>
-        </span>
-
-        Thêm thuốc vào toa
-      </button>
-    </div>
-
-    <!--    Begin Form Add Medicine-->
-    <form
-      class="add-medicine-form"
-      [hidden]="isFormMedicineCollapsed"
-      nz-col
-      nzOffset="2"
-      nzSpan="20"
-      [formGroup]="addMedicineForm"
-    >
-      <div nz-row>
-        <div nz-col nzSpan="16">
-          <nz-form-item nz-col>
-            <nz-form-label nz-col nzSpan="3">Tên thuốc</nz-form-label>
-
-            <!-- Seach Medicine Control -->
-            <nz-form-control nz-col nzSpan="13">
-              <nz-input-group
-                nzSearch
-                nzSize="default"
-                [nzAddOnAfter]="suffixIconButton"
-              >
-                <input
-                  placeholder="Nhập để chọn tên thuốc"
-                  [(ngModel)]="medKeyword"
-                  [ngModelOptions]="{ standalone: true }"
-                  nz-input
-                  [nzAutocomplete]="auto"
-                />
-              </nz-input-group>
-
-              <ng-template #suffixIconButton>
-                <button
-                  (click)="onCancelMedicine()"
-                  type="button"
-                  *ngIf="addMedicineForm.value.med_id"
-                  nz-button
-                  nzType="primary"
-                  nzSize="default"
-                >
-                  <i nz-icon nzType="close" nzTheme="outline"></i>
-                </button>
-              </ng-template>
-
-              <nz-autocomplete #auto>
-                <nz-auto-option
-                  [nzValue]="option.name"
-                  class="global-search-item"
-                  *ngFor="let option of medicines$ | async"
-                  (click)="onSelectMedicine(option)"
-                >
-                  {{ option.name }}
-                  <span *ngIf="!!option.unit_vol">({{ option.unit_vol }})</span>
-                </nz-auto-option>
-              </nz-autocomplete>
-            </nz-form-control>
-            <!-- End Search Mecicine Control -->
-          </nz-form-item>
-        </div>
-
-        <!-- DAYS AMOUNT -->
-        <div nz-col nzSpan="8">
-          <nz-form-item>
-            <nz-form-label>Số ngày</nz-form-label>
-
-            <nz-form-control nzHasFeedback nzErrorTip="Tối thiểu 1 ngày">
-              <nz-input-number
-                nzPlaceHolder="Min 0.5"
-                [nzMin]="0.5"
-                [nzStep]="0.5"
-                formControlName="days"
-              ></nz-input-number>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-      </div>
+  <ng-container [formGroup]="createPrescriptionForm">
+    <!-- Symptoms & Diagnosis -->
+    <div class="form-combine symptoms-diagnosis" nz-row>
+      <div class="form-combine__title">Triệu chứng & Chuẩn đoán</div>
 
       <div
-        class="medicine-take-container"
-        *ngFor="let daySession of medDaySessions"
+        class="symptoms-diagnosis__last-pathology"
+        nz-col
+        nzSpan="24"
+        *ngIf="fromPrescription"
       >
-        <!-- DAY SESSIONS -->
-        <div nz-row class="medicine-take">
-          <div nz-col nzSpan="2">{{ daySessionVi(daySession) }}</div>
+        <div nz-col nzOffset="2" nzSpan="19">
+          <span
+            >Chuẩn đoán lần khám trước:
+            <b>{{ fromPrescription?.diagnosis }}</b></span
+          >
 
-          <!-- Check in Session -->
-          <div nz-col nzSpan="1">
-            <label
-              formControlName="{{ 'c_' + daySession }}"
-              nz-checkbox
-            ></label>
-          </div>
-
-          <!-- Amount in Session -->
-          <div nz-col nzSpan="3">
-            <nz-input-number
-              class="medicine-take-amount"
-              nzSize="small"
-              [nzMin]="0.5"
-              [nzMax]="5"
-              [nzStep]="0.5"
-              formControlName="{{ 'a_' + daySession }}"
-            ></nz-input-number>
-            viên
-          </div>
-
-          <div nz-col nzSpan="8">
-            <input
-              formControlName="{{ 'n_' + daySession }}"
-              nzSize="small"
-              nz-input
-              placeholder="* Lưu ý"
-            />
-          </div>
+          <nz-divider></nz-divider>
         </div>
-        <!-- END DAY SESSIONS -->
       </div>
 
       <div nz-col nzSpan="24">
-        <div nz-col nzSpan="12">
-          <nz-form-item>
-            <nz-form-label nz-col nzSpan="5">Số lượng</nz-form-label>
+        <div nz-col nzOffset="2">
+          <nz-checkbox-wrapper
+            style="width: 100%"
+            (nzOnChange)="onChangeSymptoms($event)"
+          >
+            <div nz-row nzOffset="3">
+              <div nz-col nzSpan="6" *ngFor="let symptom of symptoms">
+                <label nz-checkbox [nzValue]="symptom.name">{{
+                  symptom.name
+                }}</label>
+              </div>
+            </div>
+          </nz-checkbox-wrapper>
 
-            <nz-form-control>
-              <!-- Amount & Unit Price Value -->
-              <span
-                *ngIf="!addMedicineForm.value.is_c_u_price"
-                style="font-weight: 500"
-                >{{ addMedicineForm.value.amount }}</span
-              >
-              <nz-input-number
-                *ngIf="addMedicineForm.value.is_c_u_price"
-                formControlName="amount"
-                [nzMin]="1"
-                nzPlaceHolder="Số lượng"
-                [nzStep]="1"
-              ></nz-input-number>
-              viên x
-              <span *ngIf="!addMedicineForm.value.is_c_u_price">{{
-                addMedicineForm.value.u_price | vndCurrency
-              }}</span>
-              <nz-input-number
-                formControlName="u_price"
-                nzPlaceHolder="Đơn giá"
-                [nzMin]="0"
-                [nzStep]="100"
-                [nzFormatter]="formatterVnd"
-                [nzParser]="parserVnd"
-                *ngIf="addMedicineForm.value.is_c_u_price"
-              ></nz-input-number>
-              <!-- End Amount & Unit Price Value -->
+          <nz-form-item style="margin-top: 1rem">
+            <textarea
+              nz-input
+              nz-col
+              nzSpan="21"
+              placeholder="Triệu chứng lâm sàng"
+              formControlName="symptomNote"
+              [nzAutosize]="{ minRows: 3, maxRows: 5 }"
+            ></textarea>
+          </nz-form-item>
 
-              <ng-container *ngIf="addMedicineForm.enabled">
-                <!-- Button Edit Unit Price -->
+          <nz-form-item nz-col style="margin-top: 1rem; flex-direction: column">
+            <nz-form-label>Chuẩn đoán bệnh</nz-form-label>
+
+            <nz-form-control nz-col nzSpan="21">
+              <textarea
+                nz-input
+                placeholder="Bệnh lý"
+                formControlName="diagnosis"
+                [nzAutosize]="{ minRows: 3, maxRows: 5 }"
+              ></textarea>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+    </div>
+    <!-- End Symptoms & Diagnosis -->
+
+    <div class="form-combine" nz-row>
+      <div class="form-combine__title">Kê toa thuốc</div>
+
+      <!-- PRES MEDICINE LIST -->
+      <div nz-col nzOffset="2" nzSpan="22" class="medicine-list">
+        <!-- Show if empty list -->
+        <nz-alert
+          nz-col
+          nzSpan="21"
+          *ngIf="!presMedList.length"
+          nzType="warning"
+          nzMessage="Chưa kê thuốc"
+        ></nz-alert>
+        <!-- End Show if empty list -->
+
+        <div class="medicine" *ngFor="let item of presMedList; index as idx">
+          <div class="medicine__title">
+            <span class="medicine__no">{{ idx + 1 }}.</span>
+            <span class="medicine__name">{{ item.med_title }}</span> __
+            {{ item.med_amount_str }}
+          </div>
+
+          <div class="medicine__take">
+            {{ item.med_note }}
+          </div>
+
+          <div class="medicine__price">
+            {{ item.med_s_price | currency: "VND" }}
+          </div>
+
+          <button class="medicine__remove" (click)="onRemoveMedicine(idx)">
+            Xóa
+          </button>
+        </div>
+
+        <div class="medicine-list-total" *ngIf="presMedList.length">
+          {{ predMedTotal | vndCurrency }}
+        </div>
+      </div>
+      <!-- END PRES MEDICINE LIST -->
+
+      <div nz-col nzOffset="2" nzSpan="20" style="margin-top: 1rem">
+        <button
+          (click)="isFormMedicineCollapsed = !isFormMedicineCollapsed"
+          class="btn-add-medicine"
+        >
+          <span class="btn-add-medicine__icon">
+            <i
+              nz-icon
+              nzType="{{ isFormMedicineCollapsed ? 'plus' : 'minus' }}"
+              nzTheme="outline"
+            ></i>
+          </span>
+
+          Thêm thuốc vào toa
+        </button>
+      </div>
+
+      <!--    Begin Form Add Medicine-->
+      <form
+        class="add-medicine-form"
+        [hidden]="isFormMedicineCollapsed"
+        nz-col
+        nzOffset="2"
+        nzSpan="20"
+        [formGroup]="addMedicineForm"
+      >
+        <div nz-row>
+          <div nz-col nzSpan="16">
+            <nz-form-item nz-col>
+              <nz-form-label nz-col nzSpan="3">Tên thuốc</nz-form-label>
+
+              <!-- Seach Medicine Control -->
+              <nz-form-control nz-col nzSpan="13">
+                <nz-input-group
+                  nzSearch
+                  nzSize="default"
+                  [nzAddOnAfter]="suffixIconButton"
+                >
+                  <input
+                    placeholder="Nhập để chọn tên thuốc"
+                    [(ngModel)]="medKeyword"
+                    [ngModelOptions]="{ standalone: true }"
+                    nz-input
+                    [nzAutocomplete]="auto"
+                  />
+                </nz-input-group>
+
+                <ng-template #suffixIconButton>
+                  <button
+                    (click)="onCancelMedicine()"
+                    type="button"
+                    *ngIf="addMedicineForm.value.med_id"
+                    nz-button
+                    nzType="primary"
+                    nzSize="default"
+                  >
+                    <i nz-icon nzType="close" nzTheme="outline"></i>
+                  </button>
+                </ng-template>
+
+                <nz-autocomplete #auto>
+                  <nz-auto-option
+                    [nzValue]="option.name"
+                    class="global-search-item"
+                    *ngFor="let option of medicines$ | async"
+                    (click)="onSelectMedicine(option)"
+                  >
+                    {{ option.name }}
+                    <span *ngIf="!!option.unit_vol"
+                      >({{ option.unit_vol }})</span
+                    >
+                  </nz-auto-option>
+                </nz-autocomplete>
+              </nz-form-control>
+              <!-- End Search Mecicine Control -->
+            </nz-form-item>
+          </div>
+
+          <!-- DAYS AMOUNT -->
+          <div nz-col nzSpan="8">
+            <nz-form-item>
+              <nz-form-label>Số ngày</nz-form-label>
+
+              <nz-form-control nzErrorTip="Tối thiểu 1 ngày">
+                <nz-input-number
+                  nzPlaceHolder="Min 0.5"
+                  [nzMin]="0.5"
+                  [nzStep]="0.5"
+                  formControlName="days"
+                ></nz-input-number>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+
+        <div
+          class="medicine-take-container"
+          *ngFor="let daySession of medDaySessions"
+        >
+          <!-- DAY SESSIONS -->
+          <div nz-row class="medicine-take">
+            <div nz-col nzSpan="2">{{ daySessionVi(daySession) }}</div>
+
+            <!-- Check in Session -->
+            <div nz-col nzSpan="1">
+              <label
+                formControlName="{{ 'c_' + daySession }}"
+                nz-checkbox
+              ></label>
+            </div>
+
+            <!-- Amount in Session -->
+            <div nz-col nzSpan="3">
+              <nz-input-number
+                class="medicine-take-amount"
+                nzSize="small"
+                [nzMin]="0.5"
+                [nzMax]="5"
+                [nzStep]="0.5"
+                formControlName="{{ 'a_' + daySession }}"
+              ></nz-input-number>
+              viên
+            </div>
+
+            <div nz-col nzSpan="8">
+              <input
+                formControlName="{{ 'n_' + daySession }}"
+                nzSize="small"
+                nz-input
+                placeholder="* Lưu ý"
+              />
+            </div>
+          </div>
+          <!-- END DAY SESSIONS -->
+        </div>
+
+        <div nz-col nzSpan="24">
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nz-col nzSpan="5">Số lượng</nz-form-label>
+
+              <nz-form-control>
+                <!-- Amount & Unit Price Value -->
+                <span
+                  *ngIf="!addMedicineForm.value.is_c_u_price"
+                  style="font-weight: 500"
+                  >{{ addMedicineForm.value.amount }}</span
+                >
+                <nz-input-number
+                  *ngIf="addMedicineForm.value.is_c_u_price"
+                  formControlName="amount"
+                  [nzMin]="1"
+                  nzPlaceHolder="Số lượng"
+                  [nzStep]="1"
+                ></nz-input-number>
+                viên x
+                <span *ngIf="!addMedicineForm.value.is_c_u_price">{{
+                  addMedicineForm.value.u_price | vndCurrency
+                }}</span>
+                <nz-input-number
+                  formControlName="u_price"
+                  nzPlaceHolder="Đơn giá"
+                  [nzMin]="0"
+                  [nzStep]="100"
+                  [nzFormatter]="formatterVnd"
+                  [nzParser]="parserVnd"
+                  *ngIf="addMedicineForm.value.is_c_u_price"
+                ></nz-input-number>
+                <!-- End Amount & Unit Price Value -->
+
+                <ng-container *ngIf="addMedicineForm.enabled">
+                  <!-- Button Edit Unit Price -->
+                  <button
+                    type="button"
+                    *ngIf="
+                      !addMedicineForm.value.is_c_u_price;
+                      else changeUnitPriceActions
+                    "
+                    style="margin-left: 0.5rem"
+                    nz-button
+                    nzType="link"
+                    (click)="onEditUnitPriceAndAmount()"
+                  >
+                    <i nz-icon nzType="edit" nzTheme="outline"></i>
+                  </button>
+                  <!-- End Button Edit Unit Price -->
+
+                  <ng-template #changeUnitPriceActions>
+                    <!-- Button Accept Change Unit Price -->
+                    <button
+                      type="button"
+                      nz-button
+                      nzType="link"
+                      (click)="onChangeUnitPriceAndAmount()"
+                    >
+                      <i nz-icon nzType="check" nzTheme="outline"></i>
+                    </button>
+                    <!-- End Accept Change Edit Unit Price -->
+
+                    <!-- Button Cancel Change Edit Unit Price -->
+                    <button
+                      type="button"
+                      nz-button
+                      nzType="link"
+                      (click)="onCancelEditUnitPriceAndAmount()"
+                    >
+                      <i nz-icon nzType="close" nzTheme="outline"></i>
+                    </button>
+                    <!-- End Button Cancel Change Edit Unit Price -->
+                  </ng-template>
+                </ng-container>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col nzSpan="12">
+            <div nz-col nzSpan="3"></div>
+          </div>
+        </div>
+
+        <div nz-col nzSpan="24">
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nz-col nzSpan="5">Thành tiền</nz-form-label>
+
+              <nz-form-control>
+                <!-- Sell Price Value -->
+                <span
+                  *ngIf="!addMedicineForm.value.is_c_s_price"
+                  style="font-weight: 500"
+                  >{{ addMedicineForm.value.s_price | vndCurrency }}</span
+                >
+                <nz-input-number
+                  *ngIf="addMedicineForm.value.is_c_s_price"
+                  formControlName="s_price"
+                  [nzMin]="0"
+                  [nzStep]="100"
+                  [nzFormatter]="formatterVnd"
+                  [nzParser]="parserVnd"
+                ></nz-input-number>
+                <!-- End Sell Price Value -->
+
+                <ng-container *ngIf="addMedicineForm.enabled">
+                  <!-- Button Edit Sell Price -->
+                  <button
+                    *ngIf="
+                      !addMedicineForm.value.is_c_s_price;
+                      else changeSellPriceActions
+                    "
+                    type="button"
+                    style="margin-left: 0.5rem"
+                    nz-button
+                    nzType="link"
+                    (click)="onEditSellPrice()"
+                  >
+                    <i nz-icon nzType="edit" nzTheme="outline"></i>
+                  </button>
+                  <!-- End Button Edit Sell Price -->
+
+                  <ng-template #changeSellPriceActions>
+                    <!-- Button Accept Change Sell Price -->
+                    <button
+                      type="button"
+                      nz-button
+                      nzType="link"
+                      (click)="onChangeSellPrice()"
+                    >
+                      <i nz-icon nzType="check" nzTheme="outline"></i>
+                    </button>
+                    <!-- End Button Accept Change Sell Price -->
+
+                    <!-- Button Cancel Change Sell Price -->
+                    <button
+                      type="button"
+                      nz-button
+                      nzType="link"
+                      (click)="onCancelEditSellPrice()"
+                    >
+                      <i nz-icon nzType="close" nzTheme="outline"></i>
+                    </button>
+                    <!-- End Button Cancel Change Sell Price -->
+                  </ng-template>
+                </ng-container>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+
+        <div nz-col nzSpan="24">
+          <button
+            (click)="onAddMedicine()"
+            [disabled]="addMedicineForm.invalid || addMedicineForm.disabled"
+            nz-button
+            nzType="primary"
+            nzSize="small"
+          >
+            + Thêm vào toa thuốc
+          </button>
+        </div>
+      </form>
+      <!--    End Form Add Medicine-->
+    </div>
+
+    <div class="form-combine" nz-row>
+      <div class="form-combine__title">Hoàn tất phiếu khám bệnh</div>
+
+      <div nz-col nzSpan="24">
+        <div nz-col nzOffset="2">
+          <nz-form-item nz-col style="flex-direction: column">
+            <nz-form-label>Tiền khám</nz-form-label>
+
+            <nz-form-control nz-col nzSpan="21">
+              <!-- Pres value -->
+              <ng-container>
+                <span
+                  style="font-weight: 500"
+                  *ngIf="!createPrescriptionForm.value.is_c_pres_price"
+                  >{{
+                    createPrescriptionForm.value.pres_price | vndCurrency
+                  }}</span
+                >
+                <nz-input-number
+                  *ngIf="createPrescriptionForm.value.is_c_pres_price"
+                  style="width: 200px"
+                  [nzMin]="0"
+                  [nzStep]="10000"
+                  [nzFormatter]="formatterVnd"
+                  [nzParser]="parserVnd"
+                  formControlName="pres_price"
+                ></nz-input-number>
+              </ng-container>
+              <!-- End Pres Value -->
+
+              <ng-container>
+                <!-- Edit Pres Price -->
                 <button
-                  type="button"
                   *ngIf="
-                    !addMedicineForm.value.is_c_u_price;
+                    !createPrescriptionForm.value.is_c_pres_price;
                     else changeUnitPriceActions
                   "
                   style="margin-left: 0.5rem"
                   nz-button
                   nzType="link"
-                  (click)="onEditUnitPriceAndAmount()"
+                  (click)="onEditPresPrice()"
                 >
                   <i nz-icon nzType="edit" nzTheme="outline"></i>
                 </button>
-                <!-- End Button Edit Unit Price -->
+                <!-- End Edit Pres Price -->
 
                 <ng-template #changeUnitPriceActions>
-                  <!-- Button Accept Change Unit Price -->
-                  <button
-                    type="button"
-                    nz-button
-                    nzType="link"
-                    (click)="onChangeUnitPriceAndAmount()"
-                  >
+                  <!-- Accept Change Pres Price Button -->
+                  <button nz-button nzType="link" (click)="onChangePresPrice()">
                     <i nz-icon nzType="check" nzTheme="outline"></i>
                   </button>
-                  <!-- End Accept Change Edit Unit Price -->
+                  <!-- End Accept Change Pres Price Button -->
 
-                  <!-- Button Cancel Change Edit Unit Price -->
+                  <!-- Cancel Change Pres Price Button -->
                   <button
-                    type="button"
                     nz-button
                     nzType="link"
-                    (click)="onCancelEditUnitPriceAndAmount()"
+                    (click)="onCancelChangePresPrice()"
                   >
                     <i nz-icon nzType="close" nzTheme="outline"></i>
                   </button>
-                  <!-- End Button Cancel Change Edit Unit Price -->
-                </ng-template>
-              </ng-container>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-
-        <div nz-col nzSpan="12">
-          <div nz-col nzSpan="3"></div>
-        </div>
-      </div>
-
-      <div nz-col nzSpan="24">
-        <div nz-col nzSpan="12">
-          <nz-form-item>
-            <nz-form-label nz-col nzSpan="5">Thành tiền</nz-form-label>
-
-            <nz-form-control>
-              <!-- Sell Price Value -->
-              <span
-                *ngIf="!addMedicineForm.value.is_c_s_price"
-                style="font-weight: 500"
-                >{{ addMedicineForm.value.s_price | vndCurrency }}</span
-              >
-              <nz-input-number
-                *ngIf="addMedicineForm.value.is_c_s_price"
-                formControlName="s_price"
-                [nzMin]="0"
-                [nzStep]="100"
-                [nzFormatter]="formatterVnd"
-                [nzParser]="parserVnd"
-              ></nz-input-number>
-              <!-- End Sell Price Value -->
-
-              <ng-container *ngIf="addMedicineForm.enabled">
-                <!-- Button Edit Sell Price -->
-                <button
-                  *ngIf="
-                    !addMedicineForm.value.is_c_s_price;
-                    else changeSellPriceActions
-                  "
-                  type="button"
-                  style="margin-left: 0.5rem"
-                  nz-button
-                  nzType="link"
-                  (click)="onEditSellPrice()"
-                >
-                  <i nz-icon nzType="edit" nzTheme="outline"></i>
-                </button>
-                <!-- End Button Edit Sell Price -->
-
-                <ng-template #changeSellPriceActions>
-                  <!-- Button Accept Change Sell Price -->
-                  <button
-                    type="button"
-                    nz-button
-                    nzType="link"
-                    (click)="onChangeSellPrice()"
-                  >
-                    <i nz-icon nzType="check" nzTheme="outline"></i>
-                  </button>
-                  <!-- End Button Accept Change Sell Price -->
-
-                  <!-- Button Cancel Change Sell Price -->
-                  <button
-                    type="button"
-                    nz-button
-                    nzType="link"
-                    (click)="onCancelEditSellPrice()"
-                  >
-                    <i nz-icon nzType="close" nzTheme="outline"></i>
-                  </button>
-                  <!-- End Button Cancel Change Sell Price -->
+                  <!-- End Cancel Change Pres Price Button -->
                 </ng-template>
               </ng-container>
             </nz-form-control>
@@ -502,138 +579,55 @@
       </div>
 
       <div nz-col nzSpan="24">
-        <button
-          (click)="onAddMedicine()"
-          [disabled]="addMedicineForm.invalid || addMedicineForm.disabled"
-          nz-button
-          nzType="primary"
-          nzSize="small"
-        >
-          + Thêm vào toa thuốc
-        </button>
+        <div nz-col nzOffset="2">
+          <nz-form-item nz-col style="flex-direction: column">
+            <nz-form-label>Lưu ý cho bệnh nhân</nz-form-label>
+
+            <nz-form-control nz-col nzSpan="21">
+              <textarea
+                nz-input
+                placeholder="..."
+                [nzAutosize]="{ minRows: 3, maxRows: 5 }"
+              ></textarea>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
       </div>
-    </form>
-    <!--    End Form Add Medicine-->
-  </div>
 
-  <div class="form-combine" nz-row>
-    <div class="form-combine__title">Hoàn tất phiếu khám bệnh</div>
+      <div nz-col nzOffset="2" nzSpan="20" style="padding-bottom: 1rem">
+        <nz-space>
+          <nz-space-item>
+            <button
+              nz-button
+              nzSize="large"
+              nzType="primary"
+              nzBlock
+              (click)="onSubmitCreatePrescription()"
+            >
+              Lưu phiếu:
+              {{
+                predMedTotal + createPrescriptionForm.value.pres_price
+                  | currency: "VND"
+              }}
+            </button>
+          </nz-space-item>
 
-    <div nz-col nzSpan="24">
-      <div nz-col nzOffset="2">
-        <nz-form-item nz-col style="flex-direction: column">
-          <nz-form-label>Tiền khám</nz-form-label>
-
-          <nz-form-control nz-col nzSpan="21">
-            <!-- Pres value -->
-            <ng-container>
-              <span
-                style="font-weight: 500"
-                *ngIf="!createPrescriptionForm.value.is_c_pres_price"
-                >{{
-                  createPrescriptionForm.value.pres_price | vndCurrency
-                }}</span
-              >
-              <nz-input-number
-                *ngIf="createPrescriptionForm.value.is_c_pres_price"
-                style="width: 200px"
-                [nzMin]="0"
-                [nzStep]="10000"
-                [nzFormatter]="formatterVnd"
-                [nzParser]="parserVnd"
-                formControlName="pres_price"
-              ></nz-input-number>
-            </ng-container>
-            <!-- End Pres Value -->
-
-            <ng-container>
-              <!-- Edit Pres Price -->
-              <button
-                *ngIf="
-                  !createPrescriptionForm.value.is_c_pres_price;
-                  else changeUnitPriceActions
-                "
-                style="margin-left: 0.5rem"
-                nz-button
-                nzType="link"
-                (click)="onEditPresPrice()"
-              >
-                <i nz-icon nzType="edit" nzTheme="outline"></i>
-              </button>
-              <!-- End Edit Pres Price -->
-
-              <ng-template #changeUnitPriceActions>
-                <!-- Accept Change Pres Price Button -->
-                <button nz-button nzType="link" (click)="onChangePresPrice()">
-                  <i nz-icon nzType="check" nzTheme="outline"></i>
-                </button>
-                <!-- End Accept Change Pres Price Button -->
-
-                <!-- Cancel Change Pres Price Button -->
-                <button
-                  nz-button
-                  nzType="link"
-                  (click)="onCancelChangePresPrice()"
-                >
-                  <i nz-icon nzType="close" nzTheme="outline"></i>
-                </button>
-                <!-- End Cancel Change Pres Price Button -->
-              </ng-template>
-            </ng-container>
-          </nz-form-control>
-        </nz-form-item>
+          <nz-space-item>
+            <button
+              type="submit"
+              nz-button
+              [disabled]="!createPrescriptionForm.valid"
+              nzSize="large"
+              nzType="default"
+              nzBlock
+            >
+              Lưu phiếu & In toa
+            </button>
+          </nz-space-item>
+        </nz-space>
       </div>
     </div>
-
-    <div nz-col nzSpan="24">
-      <div nz-col nzOffset="2">
-        <nz-form-item nz-col style="flex-direction: column">
-          <nz-form-label>Lưu ý cho bệnh nhân</nz-form-label>
-
-          <nz-form-control nz-col nzSpan="21">
-            <textarea
-              nz-input
-              placeholder="..."
-              [nzAutosize]="{ minRows: 3, maxRows: 5 }"
-            ></textarea>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
-
-    <div nz-col nzOffset="2" nzSpan="20" style="padding-bottom: 1rem">
-      <nz-space>
-        <nz-space-item>
-          <button
-            nz-button
-            nzSize="large"
-            nzType="primary"
-            nzBlock
-            (click)="onSubmitCreatePrescription()"
-          >
-            Lưu phiếu:
-            {{
-              predMedTotal + createPrescriptionForm.value.pres_price
-                | currency: "VND"
-            }}
-          </button>
-        </nz-space-item>
-
-        <nz-space-item>
-          <button
-            type="submit"
-            nz-button
-            [disabled]="!createPrescriptionForm.valid"
-            nzSize="large"
-            nzType="default"
-            nzBlock
-          >
-            Lưu phiếu & In toa
-          </button>
-        </nz-space-item>
-      </nz-space>
-    </div>
-  </div>
+  </ng-container>
 
   <!-- <pre>
     {{ createPrescriptionForm.value | json }}

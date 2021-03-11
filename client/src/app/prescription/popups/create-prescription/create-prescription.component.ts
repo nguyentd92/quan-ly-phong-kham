@@ -10,6 +10,7 @@ import { Symptom } from 'src/app/shared/models/symptom.model';
 import { VndCurrencyPipe } from 'src/app/shared/pipes/vnd-currency-pipe/vnd-currency.pipe';
 import { SymptomsService } from 'src/app/shared/services/https/symptoms.service';
 import { MedicinesService } from 'src/app/shared/services/states/medicines.service';
+import { UIMessageService } from 'src/app/shared/services/user-interfaces/ui-message.service';
 import { StringUltility } from 'src/app/shared/ultilites/string.ultitity';
 import { PrescriptionService } from '../../prescription.service';
 import { CreatePrescriptionRequest } from '../../requests/create-prescription.request';
@@ -61,6 +62,7 @@ export class CreatePrescriptionComponent implements OnInit {
   @Input() fromPrescription: Partial<Prescription>
 
   createPrescriptionForm: FormGroup;
+  patientForm: FormGroup;
   addMedicineForm: FormGroup;
 
   isFormMedicineCollapsed = true;
@@ -95,7 +97,8 @@ export class CreatePrescriptionComponent implements OnInit {
     private medicinesService: MedicinesService,
     private presService: PrescriptionService,
     private vndCurrencyPipe: VndCurrencyPipe,
-    private symptomsService: SymptomsService
+    private symptomsService: SymptomsService,
+    private uiMessageService: UIMessageService
   ) { }
 
   daySessionVi(enKey: string): string {
@@ -113,25 +116,16 @@ export class CreatePrescriptionComponent implements OnInit {
   }
 
   get ageStr$(): Observable<string> {
-    return this.presService.sendCalculateAge(this.createPrescriptionForm.value.patient.dob);
+    return this.presService.sendCalculateAge(this.patientForm.value.dob);
   }
 
   ngOnInit(): void {
     // Init Form
     this.addMedicineForm = this.fb.group(ADD_MEDICINE_FORM, { validators: medAnyTimeValidator });
     this.createPrescriptionForm = this.fb.group({
-      patient: this.fb.group({
-        name: [],
-        dob: [],
-        gender: [true],
-        phone: [],
-        address: [],
-        guardian: []
-      }),
-
       symptomList: [""],
       symptomNote: [""],
-      diagnosis: [null],
+      diagnosis: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       medicineList: this.fb.array([]),
       prescriptionNote: [null],
       pres_price: [0],
@@ -139,6 +133,15 @@ export class CreatePrescriptionComponent implements OnInit {
       billPrice: [0],
       is_c_pres_price: [false]
     });
+
+    this.patientForm = this.fb.group({
+      name: ["", [Validators.required, Validators.minLength(3)]],
+      dob: [null, [Validators.required]],
+      gender: [true],
+      phone: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
+      address: ["", [Validators.required, Validators.maxLength(255)]],
+      guardian: [""]
+    })
 
     // Cancel select medicine in form medicine
     this.onCancelMedicine();
@@ -360,8 +363,29 @@ export class CreatePrescriptionComponent implements OnInit {
   }
 
   onSubmitCreatePrescription() {
+    for (const key in this.createPrescriptionForm.controls) {
+      this.createPrescriptionForm.controls[key].markAsDirty();
+      this.createPrescriptionForm.controls[key].updateValueAndValidity();
+    }
+
+    if(!this.patient) {
+      for (const key in this.patientForm.controls) {
+        this.patientForm.controls[key].markAsDirty();
+        this.patientForm.controls[key].updateValueAndValidity();
+      }
+
+      if(this.patientForm.invalid) {
+        this.uiMessageService.warning("Chưa hoàn tất điền thông tin bệnh nhân")
+        return;
+      };
+    }
+
+    if (this.createPrescriptionForm.invalid) {
+      return;
+    };
+
     const {
-      patient, diagnosis,
+      diagnosis,
       symptomList, symptomNote,
       prescriptionNote,
       pres_price, medicationPrice, billPrice } =
@@ -373,7 +397,7 @@ export class CreatePrescriptionComponent implements OnInit {
       phone,
       address,
       guardian
-    } = patient;
+    } = this.patientForm.value;
 
     const symptoms = [symptomList, symptomNote].filter(e => !!e).join(", ");
 
@@ -408,8 +432,7 @@ export class CreatePrescriptionComponent implements OnInit {
 
   protected fetchSymptoms() {
     this.symptomsService.fetchSymptoms().subscribe(res => {
-      this.symptoms = res
-      console.log(this.symptoms)
+      this.symptoms = res;
     })
   }
 
