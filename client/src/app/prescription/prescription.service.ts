@@ -1,8 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { addMonths, addYears, differenceInDays, differenceInMonths, differenceInYears } from 'date-fns';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { pluck } from 'rxjs/operators';
+import { delay, pluck } from 'rxjs/operators';
 import { DaySession } from '../shared/constants/day-session.constant';
+import { isDependToBackEnd } from '../shared/functions/is-depend-to-backend';
 import { Patient } from '../shared/models/patient.model';
 import { UIMessageService } from '../shared/services/user-interfaces/ui-message.service';
 import { StringUltility } from '../shared/ultilites/string.ultitity';
@@ -19,7 +21,10 @@ interface PrescriptionConfig {
 })
 export class PrescriptionService {
 
-  constructor(private uiMessageService: UIMessageService) { }
+  constructor(
+    private uiMessageService: UIMessageService,
+    private http: HttpClient
+  ) { }
 
   private configSj = new BehaviorSubject<PrescriptionConfig>({
     pres_wage: 100000
@@ -154,7 +159,19 @@ export class PrescriptionService {
 
   // Commands
   createPrescription(req: CreatePrescriptionRequest): Observable<any> {
-    this.uiMessageService.success("Thêm mới thành công");
-    return of();
+    // Check if has not exam id, this create for re exam
+    // else if has patient id, this create for old patient
+    // Otherwise, Create Prescription for new Patient
+    let url = req.re_exam_to ? "prescriptions/create-reexam/" + req.re_exam_to
+      : req.p_id ? "prescriptions/create-for-familiar/" + req.p_id
+      : "prescriptions/create-for-guest";
+
+    console.log(url);
+
+    if(!isDependToBackEnd()) {
+      return of({}).pipe(delay(1000))
+    }
+
+    return this.http.post(url, req);
   }
 }
