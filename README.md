@@ -16,7 +16,9 @@ This project requires several global NodeJS Modules: Nodemon, GulpJS, Angular CL
 This project use GulpJS config tasks for building client project and copy dist files to public/client, rewrite client.blade.php
 
 ## Tutorials
-- In development, run `npm run build-dev` at dir `client`, then run php server, client app will build and copy to server with dev config.
+- For front-end independent dev mode, run `ng serve`.
+- For full stack dev, run `npm run watch` at dir `client`, then run php server, client app source will be watched and auto build & copy to server with configuration devfs.
+- For building and copying to server, run `npm run build-dev` at dir `client`, then run php server, client app will build and copy to server with dev config.
 - For deploying, run `npm run build-prod` at dir `client`, then run php server, client app will build and copy to server with prod config
 
 ## Thank for
