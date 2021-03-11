@@ -8,6 +8,7 @@ use App\Http\Controllers\ApiControllers\SettingController;
 use App\Http\Controllers\ApiControllers\MedicineController;
 use App\Http\Controllers\ApiControllers\SymptomController;
 use App\Http\Controllers\ApiControllers\AuthController;
+use App\Http\Controllers\ApiControllers\MedicationsController;
 
 use App\Enums\Permissions\AccountPermissions;
 
@@ -163,4 +164,19 @@ Route::name('symptoms')->prefix('symptoms')->group(function () {
 
     // Delete symptom
     Route::name('.delete')->delete('{id}', [SymptomController::class, 'delete']);
+});
+
+// Medicines Management Routes
+Route::name('medications')->prefix('medications')->group(function () {
+    // Get List Settings
+    Route::name('.list')->get('/', [MedicationsController::class, 'getAll']);
+
+    // Create value
+    Route::name('.create')->post('/', [MedicationsController::class, 'store']);
+
+    // Update value
+    Route::name('.update')->put('{id}', [MedicationsController::class, 'update']);
+
+    // Get Medicine Details
+    Route::name('.update')->put('{id}', [MedicationsController::class, 'getDetails']);
 });
