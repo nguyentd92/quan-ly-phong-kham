@@ -9,4 +9,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Patient extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $primaryKey = "patient_id";
+
+    protected $fillable = [
+        "full_name",
+        "gender",
+        "dob",
+        "phone",
+        "address",
+        "guardian_name"
+    ];
 }
