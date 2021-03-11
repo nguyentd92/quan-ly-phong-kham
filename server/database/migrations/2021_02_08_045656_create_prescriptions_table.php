@@ -16,7 +16,7 @@ class CreatePrescriptionsTable extends Migration
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->id('pres_id');
 
-            $table->text('symptoms');
+            $table->text('symptoms')->nullable();
             $table->text('diagnosis');
 
 
