@@ -22,7 +22,7 @@ class MedicationsController extends Controller
         $data = $this->medicationRepository->getList();
 
         $listDto = $data->map(function($t) {
-            return new MedicationDto($t->medication_name, $t->medication_des);
+            return new MedicationDto($t->medication_id, $t->medication_name, $t->medication_des);
         });
         return response()->json($listDto, JsonResponse::HTTP_OK);
     }
