@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { addMonths, addYears, differenceInDays, differenceInMonths, differenceInYears } from 'date-fns';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { delay, pluck } from 'rxjs/operators';
+import { catchError, delay, pluck, tap } from 'rxjs/operators';
 import { DaySession } from '../shared/constants/day-session.constant';
 import { isDependToBackEnd } from '../shared/functions/is-depend-to-backend';
 import { Patient } from '../shared/models/patient.model';
@@ -166,12 +166,18 @@ export class PrescriptionService {
       : req.p_id ? "prescriptions/create-for-familiar/" + req.p_id
       : "prescriptions/create-for-guest";
 
-    console.log(url);
-
     if(!isDependToBackEnd()) {
       return of({}).pipe(delay(1000))
     }
 
-    return this.http.post(url, req);
+    return this.http.post(url, req).pipe(
+      tap((res: any) => {
+        this.uiMessageService.success(res.message)
+      }),
+      catchError((error: any) => {
+        this.uiMessageService.error(error.message)
+        throw error;
+      })
+    );
   }
 }
