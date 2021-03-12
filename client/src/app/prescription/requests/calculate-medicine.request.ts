@@ -1,5 +1,6 @@
 export interface CalculateMedicineRequest {
   med_id: number;
+  name: string;
 
   a_morning: number;
   a_noon: number;

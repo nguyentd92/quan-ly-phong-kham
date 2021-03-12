@@ -221,6 +221,7 @@ export class CreatePrescriptionComponent implements OnInit {
     const data: any = {
       med_id,
 
+      name: med_name,
       amount,
       days,
 

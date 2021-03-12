@@ -40,7 +40,7 @@ export class PrescriptionService {
 
     return of({
       med_id: data.med_id,
-      med_title: "Medicine " + data.med_id,
+      med_title: data.name,
 
       days: data.days,
       amount: data.amount,
