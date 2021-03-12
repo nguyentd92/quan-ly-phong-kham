@@ -160,7 +160,7 @@ class PrescriptionsController extends Controller
                 return $total + $val["total_price"];
             }, 0);
 
-            DB::transaction();
+            DB::beginTransaction();
 
             $prescription = $this->prescriptionRepository->store([
                 "symptoms" => $request->symptoms,
@@ -193,7 +193,7 @@ class PrescriptionsController extends Controller
             );
             DB::commit();
 
-            response()->json(["message" => "Thêm phiếu tái khám thành công"], JsonResponse::HTTP_OK);
+            return response()->json(["message" => "Đã lưu phiếu tái khám"], JsonResponse::HTTP_OK);
         } catch(Exception $e) {
             DB::rollBack();
             return response()->json(["message" => "Xảy ra lỗi khi lưu phiếu khám bệnh"], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
