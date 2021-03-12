@@ -11,6 +11,7 @@ use App\Http\Controllers\ApiControllers\AuthController;
 use App\Http\Controllers\ApiControllers\MedicationsController;
 
 use App\Enums\Permissions\AccountPermissions;
+use App\Http\Controllers\ApiControllers\PatientsController;
 use App\Http\Controllers\ApiControllers\PrescriptionsController;
 
 /*
@@ -51,15 +52,18 @@ Route::name('prescriptions')->prefix('prescriptions')->group(function () {
 
     Route::name('.createForFamiliar')->post(
         'create-for-familiar/{id}',
-        [PrescriptionsController::class, 'createForFamiliar']);
+        [PrescriptionsController::class, 'createForFamiliar']
+    );
 
     Route::name('.createForGuest')->post(
         'create-for-guest',
-        [PrescriptionsController::class, 'createForGuest']);
+        [PrescriptionsController::class, 'createForGuest']
+    );
 
     Route::name('.createReExam')->post(
         'create-reexam/{id}',
-        [PrescriptionsController::class, 'createReExam']);
+        [PrescriptionsController::class, 'createReExam']
+    );
 
     Route::name('.delete')->delete('{id}', function (string $id) {
         return response()->json([
@@ -192,4 +196,16 @@ Route::name('medications')->prefix('medications')->group(function () {
 
     // Get Medicine Details
     Route::name('.update')->put('{id}', [MedicationsController::class, 'getDetails']);
+});
+
+// Patients Management Routes
+Route::name('patients')->prefix('patients')->group(function () {
+    // Get List
+    Route::name('.list')->get('/', [PatientsController::class, 'getList']);
+
+    // Get Single
+    Route::name('.single')->get('{id}', [PatientsController::class, 'getById']);
+
+    // Get Exams List
+    Route::name('.getExams')->get('{id}/exams', [PatientsController::class, 'getPatientExams']);
 });
