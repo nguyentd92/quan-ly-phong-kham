@@ -103,6 +103,9 @@ Route::name('accounts')
 
         // Delete Employees
         Route::name('.delete')->delete('{id}', [AccountController::class, 'delete']);
+
+        //Change password
+        Route::name('.changePassword')->post('change-password', [AccountController::class,'changePassword']);
     });
 
 // Units Management Routes
