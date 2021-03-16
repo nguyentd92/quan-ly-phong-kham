@@ -8,11 +8,8 @@ use App\Http\Requests\Accounts\CreateAccountRequest;
 use App\Models\Account;
 use App\Repositories\Contracts\AccountRepository;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class AccountController extends Controller
 {
