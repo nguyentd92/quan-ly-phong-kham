@@ -2,13 +2,14 @@
 
 namespace App\Dtos;
 
+use App\Models\Prescription;
 use App\Models\Unit;
 
 class MedicineUnitSmallDto {
     public $id;
     public $name;
     public $sign;
-    
+
     static function fromUnit(Unit $unit)
     {
         $smallUnit = new MedicineUnitSmallDto();

@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\ApiControllers;
 
+use App\Dtos\MedicineInBillDto;
+use App\Dtos\PatientDto;
+use App\Dtos\PrescriptionDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Prescriptions\CreatePrescriptionForFamiliar;
 use App\Http\Requests\Prescriptions\CreatePrescriptionForGuest;
 use App\Http\Requests\Prescriptions\CreatePrescriptionReExam;
+use App\Http\Responses\Prescriptions\GetPrescriptionDetailsResponse;
 use App\Repositories\Contracts\PatientRepository;
 use App\Repositories\Contracts\PrescriptionDetailRepository;
 use App\Repositories\Contracts\PrescriptionRepository;
@@ -199,5 +203,36 @@ class PrescriptionsController extends Controller
             return response()->json(["message" => "Xảy ra lỗi khi lưu phiếu khám bệnh"], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
 
+    }
+
+    public function getBill($id) {
+        // Get Bill Detail
+        $prescription = $this->prescriptionRepository->getSingle($id);
+
+        if(!$prescription) {
+            throw new NotFoundHttpException("Không tìm thấy phiếu khám với mã là $id");
+        }
+
+        $patient = $this->patientRepository->getSingle($prescription->patient_id);
+
+        if(!$patient) {
+            throw new NotFoundHttpException("Không tìm thấy thông tin bệnh nhân");
+        }
+
+        $response = new GetPrescriptionDetailsResponse();
+
+        $presMeds = DB::table('prescription_details')
+            ->select('prescription_details.formulea', 'prescription_details.amount', 'medicines.med_name')
+            ->leftJoin('medicines', 'prescription_details.med_id', '=', 'medicines.med_id')
+            ->where('pres_id', '=', $prescription->pres_id)
+            ->get();
+
+        $response->patient = PatientDto::fromPatient($patient);
+        $response->prescription = PrescriptionDto::fromPrescription($prescription);
+        $response->medicines = $presMeds->map(function ($presMed) {
+            return new MedicineInBillDto($presMed->med_name, $presMed->formulea, $presMed->amount);
+        });
+
+        return response()->json($response);
     }
 }

@@ -71,9 +71,7 @@ Route::name('prescriptions')->prefix('prescriptions')->group(function () {
         ]);
     });
 
-    Route::name('.bill')->get('{id}/bill', function (string $id) {
-        return $id;
-    });
+    Route::name('.bill')->get('{id}/bill', [PrescriptionsController::class, 'getBill']);
 });
 
 

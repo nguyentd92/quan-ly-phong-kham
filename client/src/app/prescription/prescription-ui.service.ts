@@ -58,7 +58,7 @@ export class PrescriptionUIService {
       nzPlacement: 'bottom',
       nzHeight: '100vn',
       nzContentParams: {
-        value: 'Hello'
+        billId: id
       }
     });
 

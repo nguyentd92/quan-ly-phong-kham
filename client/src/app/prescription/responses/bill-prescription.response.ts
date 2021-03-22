@@ -1,28 +1,22 @@
+import {Prescription} from "../../shared/models/prescription.model";
+
 export interface BillPrescriptionResponse {
-  id: number;
-  p_name: string;
-  p_dob: string;
-  p_gender: string;
-  p_age_str: string;
-  p_guardian: string;
-  p_phone: string;
-  p_address: string;
-
-  symptoms: string;
-  pathology: string;
-
-  bill_total: number;
-  note: string;
-
-  m_list: MedicineInPrescription[]
-
-  exam_at: Date;
-  exam_at_str: string;
-  signer: string;
-}
-
-export interface MedicineInPrescription {
-  m_name: string;
-  m_amount: string;
-  m_note: string;
+  patient: {
+    id: number;
+    full_name: string;
+    gender_str: string;
+    gender: boolean;
+    dob: Date;
+    age: number;
+    age_str: string;
+    phone: string;
+    address: string;
+    guardian: string;
+  };
+  prescription: Prescription;
+  medicines: Array<{
+    med_name: string;
+    formulea: string;
+    amount: number;
+  }>;
 }

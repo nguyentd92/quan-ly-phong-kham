@@ -10,5 +10,5 @@ export interface GetPrescriptionsResponse {
     phone: string;
     address: string;
   };
-  data: Partial<Patient>[]
+  data: Partial<Patient>[];
 }

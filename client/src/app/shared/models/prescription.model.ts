@@ -12,4 +12,5 @@ export interface Prescription {
   note: string;
   details: PrescriptionDetails[];
   created_at: Date;
+  created_at_str: string;
 }

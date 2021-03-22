@@ -2,7 +2,7 @@ export interface ListPrescriptionResponse {
   pageIndex: number;
   pageSize: number;
   totalPage: number;
-  list: PrescriptionItem[]
+  list: PrescriptionItem[];
 }
 
 export interface PrescriptionItem {
