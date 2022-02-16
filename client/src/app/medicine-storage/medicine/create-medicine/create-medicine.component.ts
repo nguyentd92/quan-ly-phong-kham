@@ -29,7 +29,7 @@ export class CreateMedicineComponent extends BaseComponent implements OnInit {
   }
 
   get currentUnit() {
-    return this.unitSmalls.find(e => e.id == this.form.value.unit_sm_id);
+    return (this.unitSmalls || []).find(e => e.id == this.form.value.unit_sm_id);
   }
 
   ngOnInit() {

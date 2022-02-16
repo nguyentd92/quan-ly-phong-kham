@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\ApiControllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Accounts\ChangeAccountPasswordRequest;
 use App\Http\Requests\Accounts\CreateAccountRequest;
 use App\Models\Account;
 use App\Repositories\Contracts\AccountRepository;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
@@ -75,5 +77,16 @@ class AccountController extends Controller
         }
 
         return response()->json(null, JsonResponse::HTTP_NOT_FOUND);
+    }
+
+    public function changePassword(ChangeAccountPasswordRequest $request) {
+
+
+        $id = Auth::guard('api')->user()->account_id;
+        $account = Account::findOrFail($id);
+        $account->password = Hash::make($request->password);
+        $account->save();
+
+        return response()->json('Thay đổi mật khẩu thành công', JsonResponse::HTTP_OK);
     }
 }
