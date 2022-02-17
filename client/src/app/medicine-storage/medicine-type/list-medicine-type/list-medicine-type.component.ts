@@ -37,4 +37,8 @@ export class ListMedicineTypeComponent implements OnInit {
       this.expandSet.delete(id);
     }
   }
+
+  onDelete(id: number): void {
+    this.medicineTypeService.deleteMedicineType(id).subscribe(() => this.fetchMedicineTypes());
+  }
 }

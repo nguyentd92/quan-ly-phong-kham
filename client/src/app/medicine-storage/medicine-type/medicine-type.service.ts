@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, map, tap } from 'rxjs/operators';
@@ -35,12 +35,18 @@ export class MedicineTypeService {
 
   public updateMedicineType(req: UpdateMedicineTypeRequest): Observable<Medication> {
     return this.http.put(`medications/${req.id}`, req).pipe(
-      tap(_ => this.uiMessageService.success("Thêm nhóm thuốc thành công")),
+      tap(_ => this.uiMessageService.success("Sửa nhóm thuốc thành công")),
       map(res => res as Medication)
     );
   }
 
-  public getMedicineType(id): Observable<Medication> {
+  public deleteMedicineType(id: number): Observable<unknown> {
+    return this.http.delete(`medications/${id}`).pipe(
+      tap(_ => this.uiMessageService.success("Xóa nhóm thuốc thành công"))
+    );
+  }
+
+  public getMedicineType(id: string): Observable<Medication> {
     return this.http.get(`medications/${id}`).pipe(map(res => res as Medication));
   }
 

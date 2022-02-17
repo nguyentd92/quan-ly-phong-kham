@@ -3,10 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  devfs: false,
+  devfs: true,
   production: false,
   requestRetry: 2,
-  domain: "http://quanlyphongkham.test"
+  domain: "http://127.0.0.1:8000"
 };
 
 /*

@@ -20,7 +20,7 @@ export class CreateMedicineTypeComponent implements OnInit {
     this.form = this.fb.group({
       name: ["", [Validators.required, Validators.minLength(3)]],
       description: []
-    })
+    });
   }
 
   onSubmitCreate() {

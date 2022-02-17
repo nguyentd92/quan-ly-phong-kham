@@ -18,7 +18,7 @@
         <td>
           <a nzButton nzType="link" nzMatchRouter [routerLink]="['/', 'kho-thuoc', 'nhom-thuoc', 'sua-nhom-thuoc', data.id]">Sửa</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a nzButton nzType="link">Xóa</a>
+          <a nzButton nzType="link" (click)="onDelete(data.id)">Xóa</a>
         </td>
       </tr>
       <tr [nzExpand]="expandSet.has(data.id)">

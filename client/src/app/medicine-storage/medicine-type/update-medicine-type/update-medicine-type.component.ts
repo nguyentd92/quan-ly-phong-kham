@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MedicineTypeService } from '../medicine-type.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-update-medicine-type',
@@ -13,18 +14,24 @@ export class UpdateMedicineTypeComponent implements OnInit {
 
   constructor(
     private medicationService: MedicineTypeService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    console.log("123");
-    this.medicationService.getMedicineType(4).subscribe((res) => {
-      console.log(res);
+    const routeParams = this.route.snapshot.paramMap;
       this.form = this.fb.group({
-        name: [res.name, [Validators.required, Validators.minLength(3)]],
-        description: [res.description],
+        name: ["", [Validators.required, Validators.minLength(3)]],
+        description: [],
+        id: []
       });
-    });
+      this.medicationService.getMedicineType(routeParams.get('id')).subscribe((res) => {
+        this.form.setValue({
+          name: res.name,
+          description: res.description,
+          id: res.id,
+        });
+      });
   }
 
   onSubmitUpdate() {

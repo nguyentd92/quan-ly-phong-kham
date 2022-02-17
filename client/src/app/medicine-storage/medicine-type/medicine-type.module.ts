@@ -4,6 +4,7 @@ import { MedicineTypeComponent } from './medicine-type.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ListMedicineTypeComponent } from './list-medicine-type/list-medicine-type.component';
 import { CreateMedicineTypeComponent } from './create-medicine-type/create-medicine-type.component';
+import { UpdateMedicineTypeComponent } from './update-medicine-type/update-medicine-type.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -23,7 +24,7 @@ const ROUTES: Routes = [
   },
   {
     path: "sua-nhom-thuoc/:id",
-    component: CreateMedicineTypeComponent,
+    component: UpdateMedicineTypeComponent,
   },
   {
     path: "",
@@ -44,6 +45,6 @@ const ROUTES: Routes = [
     NzDividerModule,
     ReactiveFormsModule
   ],
-  declarations: [MedicineTypeComponent, ListMedicineTypeComponent, CreateMedicineTypeComponent]
+  declarations: [MedicineTypeComponent, ListMedicineTypeComponent, CreateMedicineTypeComponent, UpdateMedicineTypeComponent]
 })
 export class MedicineTypeModule { }
