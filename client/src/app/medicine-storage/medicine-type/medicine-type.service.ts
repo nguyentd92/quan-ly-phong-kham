@@ -7,6 +7,7 @@ import { Medication } from 'src/app/shared/models/medication.model';
 import { UIMessageService } from 'src/app/shared/services/user-interfaces/ui-message.service';
 import { environment } from 'src/environments/environment';
 import { CreateMedicineTypeRequest } from './requests/create-medicine-type.request';
+import { UpdateMedicineTypeRequest } from './requests/update-medicine-type.request';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,17 @@ export class MedicineTypeService {
       tap(_ => this.uiMessageService.success("Thêm nhóm thuốc thành công")),
       map(res => res as Medication)
     );
+  }
+
+  public updateMedicineType(req: UpdateMedicineTypeRequest): Observable<Medication> {
+    return this.http.put(`medications/${req.id}`, req).pipe(
+      tap(_ => this.uiMessageService.success("Thêm nhóm thuốc thành công")),
+      map(res => res as Medication)
+    );
+  }
+
+  public getMedicineType(id): Observable<Medication> {
+    return this.http.get(`medications/${id}`).pipe(map(res => res as Medication));
   }
 
   public getMedicineTypes(): Observable<Medication[]> {

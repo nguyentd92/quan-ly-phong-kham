@@ -31,6 +31,8 @@ class MedicationsController extends Controller
     public function getSingle($id): JsonResponse {
         $result = $this->medicationRepository->getSingle($id);
 
+        $result = new MedicationDto($result->medication_id, $result->medication_name, $result->medication_des);
+
         return response()->json($result);
     }
 

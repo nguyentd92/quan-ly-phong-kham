@@ -22,6 +22,10 @@ const ROUTES: Routes = [
     component: CreateMedicineTypeComponent,
   },
   {
+    path: "sua-nhom-thuoc/:id",
+    component: CreateMedicineTypeComponent,
+  },
+  {
     path: "",
     redirectTo: "danh-sach",
     pathMatch: "full"
