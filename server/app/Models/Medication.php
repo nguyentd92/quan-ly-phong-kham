@@ -10,8 +10,12 @@ class Medication extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $primaryKey = 'medication_id';
+
     protected $fillable = [
         'medication_name',
         'medication_des'
     ];
+    
+    protected $hidden = ['deleted_at', 'created_at', 'updated_at'];
 }

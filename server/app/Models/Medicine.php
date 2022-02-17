@@ -20,4 +20,6 @@ class Medicine extends Model
         'images',
         'medication_id',
     ];
+
+    protected $hidden = ['deleted_at', 'created_at', 'updated_at'];
 }

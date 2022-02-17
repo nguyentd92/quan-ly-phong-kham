@@ -17,6 +17,7 @@ class CreateUnitsTable extends Migration
             $table->id('unit_id');
             $table->string('display_sign', 10)->nullable(false);
             $table->string('display_name', 100)->nullable(false);
+            $table->boolean('is_small')->nullable(false);
             $table->timestamps();
             $table->softDeletes();
         });

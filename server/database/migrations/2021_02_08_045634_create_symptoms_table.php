@@ -16,6 +16,7 @@ class CreateSymptomsTable extends Migration
         Schema::create('symptoms', function (Blueprint $table) {
             $table->id('symptom_id');
             $table->string('symptom_name')->unique();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

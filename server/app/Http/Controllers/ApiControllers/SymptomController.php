@@ -33,6 +33,12 @@ class SymptomController extends Controller
         return response()->json($list, JsonResponse::HTTP_OK);
     }
 
+    public function getSingle($id): JsonResponse {
+        $result = $this->symptomRepository->getSingle($id);
+
+        return response()->json($result);
+    }
+
     public function store(UpsertSymptomRequest $request): JsonResponse {
         $entity = $this->symptomRepository->store([
             'symptom_name' => $request->post('name')

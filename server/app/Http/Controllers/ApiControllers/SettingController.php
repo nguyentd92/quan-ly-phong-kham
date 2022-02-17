@@ -35,6 +35,12 @@ class SettingController extends Controller
         ));
     }
 
+    public function getSingle($key): JsonResponse {
+        $result = $this->settingRepository->getSingle($key);
+
+        return response()->json($result);
+    }
+
     public function store(CreateSettingRequest $request) {
         // Check if setting key is existed, throw error
         $key = $request->post('key');
@@ -67,5 +73,15 @@ class SettingController extends Controller
         }
 
         return response()->json($entity, JsonResponse::HTTP_OK);
+    }
+
+    public function delete($key): JsonResponse {
+        $isDeleted = $this->settingRepository->delete($key);
+
+        if($isDeleted) {
+            return response()->json(null, JsonResponse::HTTP_NO_CONTENT);
+        }
+
+        return response()->json(null,JsonResponse::HTTP_NOT_FOUND);
     }
 }

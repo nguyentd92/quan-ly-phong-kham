@@ -9,6 +9,7 @@ use App\Http\Controllers\ApiControllers\MedicineController;
 use App\Http\Controllers\ApiControllers\SymptomController;
 use App\Http\Controllers\ApiControllers\AuthController;
 use App\Http\Controllers\ApiControllers\MedicationsController;
+use App\Http\Controllers\ApiControllers\PatientController;
 
 use App\Enums\Permissions\AccountPermissions;
 use App\Http\Controllers\ApiControllers\PrescriptionsController;
@@ -113,6 +114,9 @@ Route::name('units')->prefix('units')->group(function () {
     // List Units
     Route::name('.list')->get('/', [UnitController::class, 'getList']);
 
+    // List Units By Class 
+    Route::name('.listbyclass')->get('/byclass/{class}', [UnitController::class, 'getListByClass']);
+
     // Unit Details
     Route::name('.details')->get('{id}', [UnitController::class, 'getSingle']);
 
@@ -123,7 +127,7 @@ Route::name('units')->prefix('units')->group(function () {
     Route::name('.update')->put('{id}', [UnitController::class, 'update']);
 
     // Delete Unit
-    Route::name('.update')->delete('{id}', [UnitController::class, 'delete']);
+    Route::name('.delete')->delete('{id}', [UnitController::class, 'delete']);
 });
 
 // Application Settings Routes
@@ -131,17 +135,26 @@ Route::name('settings')->prefix('settings')->group(function () {
     // Get List Settings
     Route::name('.list')->get('/', [SettingController::class, 'list']);
 
+    // Settings Details
+    Route::name('.details')->get('{key}', [SettingController::class, 'getSingle']);
+
     // Create value
     Route::name('.create')->post('/', [SettingController::class, 'store']);
 
     // Update value
     Route::name('.update')->put('{key}', [SettingController::class, 'update']);
+
+    // Delete value
+    Route::name('.delete')->delete('{key}', [SettingController::class, 'delete']);
 });
 
 // Medicines Management Routes
 Route::name('medicines')->prefix('medicines')->group(function () {
-    // Get List Settings
+    // Get List Medicine
     Route::name('.list')->get('/', [MedicineController::class, 'getAll']);
+
+    // Get Medicine Details
+    Route::name('.details')->get('{id}', [MedicineController::class, 'getSingle']);
 
     // Create value
     Route::name('.create')->post('/', [MedicineController::class, 'store']);
@@ -149,8 +162,8 @@ Route::name('medicines')->prefix('medicines')->group(function () {
     // Update value
     Route::name('.update')->put('{id}', [MedicineController::class, 'update']);
 
-    // Get Medicine Details
-    Route::name('.update')->put('{id}', [MedicineController::class, 'getDetails']);
+    // Delete value
+    Route::name('.delete')->delete('{id}', [MedicineController::class, 'delete']);
 });
 
 // Storage Management Routes
@@ -175,6 +188,9 @@ Route::name('symptoms')->prefix('symptoms')->group(function () {
     // List symptom
     Route::name('.list')->get('/', [SymptomController::class, 'getAll']);
 
+    // Get Symptom Details
+    Route::name('.details')->get('{id}', [SymptomController::class, 'getSingle']);
+
     // Update symptom
     Route::name('.update')->put('{id}', [SymptomController::class, 'update']);
 
@@ -184,8 +200,11 @@ Route::name('symptoms')->prefix('symptoms')->group(function () {
 
 // Medicines Management Routes
 Route::name('medications')->prefix('medications')->group(function () {
-    // Get List Settings
+    // Get List Medication
     Route::name('.list')->get('/', [MedicationsController::class, 'getAll']);
+
+    // Get Medication Details
+    Route::name('.details')->get('{id}', [MedicationsController::class, 'getSingle']);
 
     // Create value
     Route::name('.create')->post('/', [MedicationsController::class, 'store']);
@@ -193,6 +212,24 @@ Route::name('medications')->prefix('medications')->group(function () {
     // Update value
     Route::name('.update')->put('{id}', [MedicationsController::class, 'update']);
 
-    // Get Medicine Details
-    Route::name('.update')->put('{id}', [MedicationsController::class, 'getDetails']);
+    // Delete Medication
+    Route::name('.delete')->delete('{id}', [MedicationsController::class, 'delete']);
+});
+
+// Patient Management Routes
+Route::name('patients')->prefix('patients')->group(function () {
+    // Get List Patient
+    Route::name('.list')->get('/', [PatientController::class, 'getList']);
+
+    // Get Patient Details
+    Route::name('.details')->get('{id}', [PatientController::class, 'getSingle']);
+
+    // Create value
+    Route::name('.create')->post('/', [PatientController::class, 'store']);
+
+    // Update value
+    Route::name('.update')->put('{id}', [PatientController::class, 'update']);
+
+    // Delete Medication
+    Route::name('.delete')->delete('{id}', [PatientController::class, 'delete']);
 });

@@ -20,4 +20,6 @@ class Patient extends Model
         "address",
         "guardian_name"
     ];
+
+    protected $hidden = ['deleted_at', 'created_at', 'updated_at'];
 }
