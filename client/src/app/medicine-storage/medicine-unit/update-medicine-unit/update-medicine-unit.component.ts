@@ -13,7 +13,7 @@ export class UpdateMedicineUnitComponent implements OnInit {
   isRequesting = false;
 
   constructor(
-    private medicationService: MedicineUnitService,
+    private medicineUnitService: MedicineUnitService,
     private fb: FormBuilder,
     private route: ActivatedRoute
   ) {}
@@ -26,7 +26,7 @@ export class UpdateMedicineUnitComponent implements OnInit {
         is_small: [],
         id: []
       });
-      this.medicationService.getMedicineUnit(routeParams.get('id')).subscribe((res) => {
+      this.medicineUnitService.getMedicineUnit(routeParams.get('id')).subscribe((res) => {
         this.form.setValue({
           name: res.name,
           sign: res.sign,
@@ -46,7 +46,7 @@ export class UpdateMedicineUnitComponent implements OnInit {
 
     this.startRequest();
 
-    this.medicationService
+    this.medicineUnitService
       .updateMedicineUnit(this.form.value)
       .subscribe((_) => (this.form.reset(), this.endRequest()));
   }

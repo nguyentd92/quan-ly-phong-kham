@@ -29,9 +29,9 @@ class MedicineController extends Controller
     }
 
     public function getSingle($id): JsonResponse {
-        $result = $this->medicineRepository->getSingle($id);
+        $data = $this->medicineRepository->getSingle($id);
 
-        return response()->json($result);
+        return response()->json(MedicineDto::fromMedicine($data));
     }
 
     public function store(UpsertMedicineRequest $request): JsonResponse

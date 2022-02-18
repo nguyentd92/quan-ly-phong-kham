@@ -1,0 +1,36 @@
+<form nz-form [formGroup]="form" (ngSubmit)="onSubmitUpdate()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="name">Tên thuốc</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Tên đơn vị tối thiểu 3 ký tự">
+      <input nz-input formControlName="name"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="medication_id">Nhóm thuốc</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <nz-select formControlName="medication_id">
+        <nz-option *ngFor="let medicineType of this.listOfMedicineType" nzValue="{{medicineType.id}}" nzLabel="{{medicineType.name}}"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="unit_sm_id">Đơn vị nhỏ</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <nz-select formControlName="unit_sm_id" (ngModelChange)="this.onChangeUnit()">
+        <nz-option *ngFor="let unit of this.listOfMedicineUnitSmall" nzValue="{{unit.id}}" nzLabel="{{unit.name}}"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="unit_sm_vol">Giá bán {{currentUnit?.name}}</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <input nz-input formControlName="unit_sm_vol"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <div nz-col [nzSm]="5" [nzXs]="24"></div>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <button [nzLoading]="isRequesting" type="submit" nz-button nzType="primary" nzBlock>Lưu thuốc</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

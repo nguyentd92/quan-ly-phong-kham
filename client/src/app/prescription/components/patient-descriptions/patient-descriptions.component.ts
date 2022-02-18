@@ -13,5 +13,4 @@ export class PatientDescriptionsComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }
