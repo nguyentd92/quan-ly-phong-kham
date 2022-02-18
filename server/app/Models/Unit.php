@@ -14,7 +14,8 @@ class Unit extends Model
 
     protected $fillable = [
         'display_name',
-        'display_sign'
+        'display_sign',
+        'is_small'
     ];
 
     protected $hidden = ['deleted_at', 'created_at', 'updated_at'];

@@ -36,16 +36,9 @@ class UnitController extends Controller
     {
         $data = $this->unitRepository->getList()->where('is_small', $class);
 
-        if($class == 1) {
-            $result = $data->map(function($t) {
-                return MedicineUnitSmallDto::fromUnit($t);
-            });
-        }
-        else {
-            $result = $data->map(function($t) {
-                return MedicineUnitBigDto::fromUnit($t);
-            });
-        }
+        $result = $data->map(function($t) {
+            return MedicineUnitSmallDto::fromUnit($t);
+        });
 
         return response()->json($result);
     }
@@ -53,13 +46,14 @@ class UnitController extends Controller
     public function getSingle($id): JsonResponse {
         $result = $this->unitRepository->getSingle($id);
 
-        return response()->json($result);
+        return response()->json(MedicineUnitSmallDto::fromSingleUnit($result));
     }
 
     public function store(UpsertUnitRequest $request): JsonResponse {
         $unit = $this->unitRepository->store([
             'display_name' => $request->post('name'),
-            'display_sign' => $request->post('sign')
+            'display_sign' => $request->post('sign'),
+            'is_small' => $request->post('is_small')
         ]);
 
         return response()->json($unit, JsonResponse::HTTP_CREATED);
@@ -68,9 +62,10 @@ class UnitController extends Controller
     public function update($id, UpsertUnitRequest $request): JsonResponse {
         $unit = $this->unitRepository->update($id, [
             'display_name' => $request->post('name'),
-            'display_sign' => $request->post('sign')
+            'display_sign' => $request->post('sign'),
+            'is_small' => $request->post('is_small')
         ]);
-
+        
         if($unit == false) {
             return response()->json($unit, JsonResponse::HTTP_OK);
         }

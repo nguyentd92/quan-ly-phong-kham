@@ -14,7 +14,7 @@
         <td>{{ data.name }}</td>
         <td>{{ data.sign }}</td>
         <td>
-          <a nzButton nzType="link">Sửa</a>
+          <a nzButton nzType="link" nzMatchRouter [routerLink]="['/', 'kho-thuoc', 'don-vi-thuoc', 'sua-don-vi', data.id]">Sửa</a>
           <nz-divider nzType="vertical"></nz-divider>
           <a nzButton nzType="link">Xóa</a>
         </td>
