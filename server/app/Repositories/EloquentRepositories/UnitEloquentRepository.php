@@ -14,4 +14,9 @@ class UnitEloquentRepository extends AbstractEloquentBaseRepository implements U
     {
         return Unit::class;
     }
+
+    public function getByClass($class)
+    {
+        return $this->model->where("is_small", $class)->get();
+    }
 }

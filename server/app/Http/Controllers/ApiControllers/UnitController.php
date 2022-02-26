@@ -34,7 +34,7 @@ class UnitController extends Controller
 
     public function getListByClass($class): JsonResponse
     {
-        $data = $this->unitRepository->getList()->where('is_small', $class);
+        $data = $this->unitRepository->getByClass($class);
 
         $result = $data->map(function($t) {
             return MedicineUnitSmallDto::fromUnit($t);
