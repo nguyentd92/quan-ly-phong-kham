@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\ApiControllers;
 
 use App\Http\Controllers\Controller;
+use App\Dtos\PatientDto;
 use App\Http\Requests\Patients\UpsertPatientRequest;
 use App\Repositories\Contracts\PatientRepository;
+use App\Repositories\Contracts\PrescriptionRepository;
 use Illuminate\Http\JsonResponse;
 
 class PatientController extends Controller
@@ -13,17 +15,22 @@ class PatientController extends Controller
      * @var PatientRepository
      */
     protected $patientRepository;
+    protected $prescriptionRepository;
 
-    public function __construct(PatientRepository $patientRepository)
+    public function __construct(PatientRepository $patientRepository, PrescriptionRepository $prescriptionRepository)
     {
         $this->patientRepository = $patientRepository;
+        $this->prescriptionRepository = $prescriptionRepository;
     }
 
     public function getList(): JsonResponse
     {
         $data = $this->patientRepository->getList();
-
-        return response()->json($data);
+        $result = $data->map(function($t) {
+            // $prescription = $this->prescriptionRepository->getList()->where('patient_id', $t.id);
+            return PatientDto::fromPatient($t);
+        });
+        return response()->json($result);
     }
 
     public function getSingle($id): JsonResponse {
