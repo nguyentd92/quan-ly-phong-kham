@@ -9,7 +9,7 @@ use DateTime;
 class PatientDto {
     public $id;
     public $full_name;
-    public $age;
+    public $age_int;
     public $phone;
     public $address;
     public $last_exam_at;
@@ -19,7 +19,7 @@ class PatientDto {
         $patientDto = new PatientDto();
         $patientDto->id = $patient->patient_id;
         $patientDto->full_name = $patient->full_name;
-        $patientDto->age = $patientDto::getAgeFromDoB($patient->dob);
+        $patientDto->age_int = $patientDto::getAgeFromDoB($patient->dob);
         $patientDto->phone = $patient->phone;
         $patientDto->address = $patient->address;
 
@@ -29,7 +29,6 @@ class PatientDto {
     static function getAgeFromDoB($dob) {
         $dateNow = new DateTime();
         $dateOfBirth = new DateTime($dob);
-        return (int)($dateNow->diff($dateOfBirth)->days / 365);
-        // return (int)((date("Y-m-d") - $dob) / 365);
+        return (int)($dateNow->diff($dateOfBirth)->days/365);
     }
 }

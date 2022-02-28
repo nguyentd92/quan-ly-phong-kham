@@ -8,6 +8,7 @@ use App\Http\Requests\Patients\UpsertPatientRequest;
 use App\Repositories\Contracts\PatientRepository;
 use App\Repositories\Contracts\PrescriptionRepository;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
@@ -23,11 +24,10 @@ class PatientController extends Controller
         $this->prescriptionRepository = $prescriptionRepository;
     }
 
-    public function getList(): JsonResponse
+    public function getList(Request $request): JsonResponse
     {
-        $data = $this->patientRepository->getList();
+        $data = $this->patientRepository->getListPatient($request->pageSize);
         $result = $data->map(function($t) {
-            // $prescription = $this->prescriptionRepository->getList()->where('patient_id', $t.id);
             return PatientDto::fromPatient($t);
         });
         return response()->json($result);

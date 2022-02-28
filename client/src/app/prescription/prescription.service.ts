@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { addMonths, addYears, differenceInDays, differenceInMonths, differenceInYears } from 'date-fns';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, delay, pluck, tap } from 'rxjs/operators';
+import { catchError, delay, pluck, tap, map } from 'rxjs/operators';
 import { DaySession } from '../shared/constants/day-session.constant';
 import { isDependToBackEnd } from '../shared/functions/is-depend-to-backend';
 import { Patient } from '../shared/models/patient.model';
@@ -105,7 +105,7 @@ export class PrescriptionService {
   }
 
   getPatients(request: GetPrescriptionsRequest): Observable<Patient[]> {
-    const response: GetPrescriptionsResponse = {
+    let response: GetPrescriptionsResponse = {
       pageIndex: request.pageIndex,
       pageSize: request.pageSize,
       queryParams: request.queryParams,
@@ -152,8 +152,8 @@ export class PrescriptionService {
         }
       ]
     }
-
-    return of(response.data as Patient[])
+    
+    return of(response.data as Patient[]);
       // .pipe(delay(2));
   }
 

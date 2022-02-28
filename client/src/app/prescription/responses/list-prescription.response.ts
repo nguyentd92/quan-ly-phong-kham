@@ -1,3 +1,5 @@
+import { Patient } from "src/app/shared/models/patient.model";
+
 export interface ListPrescriptionResponse {
   pageIndex: number;
   pageSize: number;

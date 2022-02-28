@@ -12,4 +12,9 @@ class PatientEloquentRepository extends AbstractEloquentBaseRepository implement
     {
         return Patient::class;
     }
+
+    public function getListPatient($pageSize) {
+        if(is_null($pageSize)) $pageSize = 10;
+        return $this->model->paginate($pageSize, ['*'], 'pageIndex');
+    }
 }
